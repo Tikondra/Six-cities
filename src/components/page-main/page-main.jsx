@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Place from "./place.jsx";
-import {PLACES} from "../constants";
+import Place from "../place/place.jsx";
 
 const getPlaces = (places) => places.map((it, i) => <Place title = {it} key = {i}/>);
 
@@ -105,7 +104,7 @@ const PageMain = (props) => {
 
 PageMain.propTypes = {
   placesCount: PropTypes.number.isRequired,
-  places: PropTypes.oneOf([PLACES]).isRequired
+  places: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default PageMain;

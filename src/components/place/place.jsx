@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {PLACES} from "../constants";
 
 const Place = (props) => {
   const {title} = props;
@@ -46,7 +45,7 @@ const Place = (props) => {
 };
 
 Place.propTypes = {
-  title: PropTypes.oneOf([PLACES]).isRequired
+  title: PropTypes.string.isRequired
 };
 
 export default Place;
