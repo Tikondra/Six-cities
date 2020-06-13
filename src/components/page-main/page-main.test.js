@@ -6,6 +6,7 @@ it(`should render Page-main`, function () {
   const tree = renderer
     .create(
         <PageMain
+          onClickByHeader={() => {}}
           placesCount={512}
           places={[`Wood and stone place`]}/>
     )
