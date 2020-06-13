@@ -1,12 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Place from "./place.jsx";
-import {PLACES} from "../constants";
+import Place from "../place/place.jsx";
 
-const getPlaces = (places) => places.map((it, i) => <Place title = {it} key = {i}/>);
+const getPlaces = (places, onClickByHeader) => places.map((it, i) => {
+  return <Place
+    onClickByHeader={onClickByHeader}
+    title = {it}
+    key = {i + it}
+  />;
+});
 
 const PageMain = (props) => {
-  const {placesCount, places} = props;
+  const {placesCount, places, onClickByHeader} = props;
 
   return <div className="page page--gray page--main">
     <header className="header">
@@ -91,7 +96,7 @@ const PageMain = (props) => {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              {getPlaces(places)}
+              {getPlaces(places, onClickByHeader)}
             </div>
           </section>
           <div className="cities__right-section">
@@ -105,7 +110,8 @@ const PageMain = (props) => {
 
 PageMain.propTypes = {
   placesCount: PropTypes.number.isRequired,
-  places: PropTypes.oneOf([PLACES]).isRequired
+  places: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClickByHeader: PropTypes.func.isRequired
 };
 
 export default PageMain;
