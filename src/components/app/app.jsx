@@ -5,18 +5,16 @@ import PageMain from "../page-main/page-main.jsx";
 const placeHeaderHandler = () => {};
 
 const App = (props) => {
-  const {placesCount, places} = props;
+  const {offers} = props;
 
   return <PageMain
-    placesCount = {placesCount}
-    places = {places}
+    offers = {offers}
     onClickByHeader = {placeHeaderHandler}
   />;
 };
 
 App.propTypes = {
-  placesCount: PropTypes.number.isRequired,
-  places: PropTypes.arrayOf(PropTypes.string).isRequired
+  offers: PropTypes.array.isRequired,
 };
 
 export default App;

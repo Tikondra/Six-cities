@@ -1,17 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Place from "../place/place.jsx";
-
-const getPlaces = (places, onClickByHeader) => places.map((it, i) => {
-  return <Place
-    onClickByHeader={onClickByHeader}
-    title = {it}
-    key = {i + it}
-  />;
-});
+import PlacesList from "../places-list/places-list.jsx";
 
 const PageMain = (props) => {
-  const {placesCount, places, onClickByHeader} = props;
+  const {offers, onClickByHeader} = props;
 
   return <div className="page page--gray page--main">
     <header className="header">
@@ -79,7 +71,7 @@ const PageMain = (props) => {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+            <b className="places__found">{offers.length} places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -95,9 +87,10 @@ const PageMain = (props) => {
                 <li className="places__option" tabIndex="0">Top rated first</li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {getPlaces(places, onClickByHeader)}
-            </div>
+            <PlacesList
+              offers={offers}
+              onClickByHeader={onClickByHeader}
+            />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"/>
@@ -109,9 +102,8 @@ const PageMain = (props) => {
 };
 
 PageMain.propTypes = {
-  placesCount: PropTypes.number.isRequired,
-  places: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onClickByHeader: PropTypes.func.isRequired
+  offers: PropTypes.array.isRequired,
+  onClickByHeader: PropTypes.func.isRequired,
 };
 
 export default PageMain;
