@@ -1,10 +1,8 @@
-export const PLACES = [
-  `Beautiful & luxurious apartment at great location`,
-  `Wood and stone place`,
-  `Canal View Prinsengracht`,
-  `Nice, cozy, warm big bed apartment`,
-];
+export const STAR_WIDTH = 15;
 
-export const Settings = {
-  COUNT_PLACES: 512,
+export const TypePlace = {
+  APARTMENT: `Apartment`,
+  ROOM: `Room`,
+  HOUSE: `House`,
+  HOTEL: `Hotel`
 };
