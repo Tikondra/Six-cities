@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Options 1`] = `
+<div
+  className="property__inside"
+>
+  <h2
+    className="property__inside-title"
+  >
+    What's inside
+  </h2>
+  <ul
+    className="property__inside-list"
+  >
+    <li
+      className="property__inside-item"
+    >
+      Wi-Fi
+    </li>
+    <li
+      className="property__inside-item"
+    >
+      Heating
+    </li>
+    <li
+      className="property__inside-item"
+    >
+      Kitchen
+    </li>
+    <li
+      className="property__inside-item"
+    >
+      Fridge
+    </li>
+  </ul>
+</div>
+`;

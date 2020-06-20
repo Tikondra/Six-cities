@@ -1,16 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app";
+import Offer from "./offer";
 import {offers} from "../../mocks/forTest";
 
-it(`should render App`, function () {
+it(`should render Offer`, function () {
   const tree = renderer
     .create(
-        <App
-          offers={offers}
+        <Offer
+          offer={offers[0]}
         />
-    )
-    .toJSON();
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

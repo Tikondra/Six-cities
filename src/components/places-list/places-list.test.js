@@ -1,16 +1,16 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app";
+import PlacesList from "./places-list";
 import {offers} from "../../mocks/forTest";
 
-it(`should render App`, function () {
+it(`should render PlacesList`, function () {
   const tree = renderer
     .create(
-        <App
+        <PlacesList
           offers={offers}
-        />
-    )
-    .toJSON();
+          onClickByHeader={jest.fn()}
+          onHoverPlace={jest.fn()}/>
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
