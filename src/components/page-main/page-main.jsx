@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import PlacesList from "../places-list/places-list.jsx";
 
 const PageMain = (props) => {
-  const {offers, onClickByHeader} = props;
+  const {offers, onClickByHeader, onHoverPlace} = props;
 
   return <div className="page page--gray page--main">
     <header className="header">
@@ -90,6 +90,7 @@ const PageMain = (props) => {
             <PlacesList
               offers={offers}
               onClickByHeader={onClickByHeader}
+              onHoverPlace = {onHoverPlace}
             />
           </section>
           <div className="cities__right-section">
@@ -104,6 +105,7 @@ const PageMain = (props) => {
 PageMain.propTypes = {
   offers: PropTypes.array.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
+  onHoverPlace: PropTypes.func.isRequired,
 };
 
 export default PageMain;

@@ -1,16 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {STAR_WIDTH, TypePlace} from "../../constants";
+import {TypePlace} from "../../constants";
+import {getRating} from "../../utils";
 
 const getPremium = (isPremium) => isPremium ?
   <div className="place-card__mark">
     <span>Premium</span>
   </div> :
   ``;
-
-const getRating = (rating) => {
-  return Math.floor(rating) * STAR_WIDTH;
-};
 
 const Place = (props) => {
   const {offer, onClickByHeader, onHoverPlace} = props;

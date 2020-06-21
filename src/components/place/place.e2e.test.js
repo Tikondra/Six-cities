@@ -2,21 +2,11 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Place from "./place";
-import {TypePlace} from "../../constants";
+import {offers} from "../../mocks/forTest";
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
-
-const offer = {
-  id: `sdgdhhjh`,
-  isPremium: true,
-  price: 35,
-  title: `Beautiful & luxurious apartment at great location`,
-  type: TypePlace.APARTMENT,
-  rating: 1.3,
-  picture: `img/apartment-02.jpg`,
-};
 
 describe(`PlaceComponent`, () => {
   it(`should click by header`, function () {
@@ -25,8 +15,8 @@ describe(`PlaceComponent`, () => {
     const place = shallow(
         <Place
           onClickByHeader = {onClickByHeader}
-          onHoverPlace={() => {}}
-          offer = {offer}
+          onHoverPlace={jest.fn()}
+          offer = {offers[0]}
         />
     );
 
@@ -38,17 +28,17 @@ describe(`PlaceComponent`, () => {
   });
 
   it(`should hover place`, function () {
-    const onHoverPlace = jest.fn();
+    const placeHoverHandler = jest.fn();
 
     const place = shallow(
         <Place
-          onHoverPlace={onHoverPlace}
-          offer = {offer}
-          onClickByHeader={() => {}}/>
+          onHoverPlace={placeHoverHandler}
+          offer = {offers[0]}
+          onClickByHeader={jest.fn()}/>
     );
 
     place.simulate(`mouseover`);
 
-    expect(onHoverPlace.mock.calls.length).toBe(1);
+    expect(placeHoverHandler.mock.calls.length).toBe(1);
   });
 });
