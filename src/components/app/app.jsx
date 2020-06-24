@@ -16,17 +16,16 @@ class App extends PureComponent {
 
     this.offers = props.offers;
     this.placeHoverHandler = this.placeHoverHandler.bind(this);
-    this.placeHeaderHandler = this.placeHeaderHandler.bind(this);
+    this.placeClickHeaderHandler = this.placeClickHeaderHandler.bind(this);
   }
 
-  placeHoverHandler(evt) {
-    const offerId = evt.currentTarget.id;
+  placeHoverHandler({currentTarget: {id: offerId}}) {
     this.setState({
       activeOffer: this.offers.find((it) => it.id === offerId)
     });
   }
 
-  placeHeaderHandler() {
+  placeClickHeaderHandler() {
     this.setState({
       activePage: Page.OFFER
     });
@@ -35,21 +34,20 @@ class App extends PureComponent {
   _renderScreen() {
     const {activePage} = this.state;
 
-    if (activePage === Page.MAIN) {
-      return <PageMain
-        offers = {this.offers}
-        onClickByHeader = {this.placeHeaderHandler}
-        onHoverPlace = {this.placeHoverHandler}
-      />;
+    switch (activePage) {
+      case Page.MAIN:
+        return <PageMain
+          offers = {this.offers}
+          onClickByHeader = {this.placeClickHeaderHandler}
+          onHoverPlace = {this.placeHoverHandler}
+        />;
+      case Page.OFFER:
+        return <Offer
+          offer = {this.state.activeOffer}
+        />;
+      default:
+        return null;
     }
-
-    if (activePage === Page.OFFER) {
-      return <Offer
-        offer = {this.state.activeOffer}
-      />;
-    }
-
-    return null;
   }
 
   render() {
