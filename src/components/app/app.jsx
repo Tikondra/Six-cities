@@ -1,9 +1,10 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
-import PageMain from "../page-main/page-main.jsx";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import PropTypes from "prop-types";
+import {PageType} from "../../constants";
+import PageMain from "../page-main/page-main.jsx";
+import Page from "../page/page.jsx";
 import Offer from "../offer/offer.jsx";
-import {Page} from "../../constants";
 
 class App extends PureComponent {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends PureComponent {
 
     this.state = {
       activeOffer: null,
-      activePage: Page.MAIN,
+      activePage: PageType.MAIN,
     };
 
     this.offers = props.offers;
@@ -27,7 +28,7 @@ class App extends PureComponent {
 
   placeClickHeaderHandler() {
     this.setState({
-      activePage: Page.OFFER
+      activePage: PageType.PROPERTY
     });
   }
 
@@ -35,16 +36,24 @@ class App extends PureComponent {
     const {activePage} = this.state;
 
     switch (activePage) {
-      case Page.MAIN:
-        return <PageMain
-          offers = {this.offers}
-          onClickByHeader = {this.placeClickHeaderHandler}
-          onHoverPlace = {this.placeHoverHandler}
-        />;
-      case Page.OFFER:
-        return <Offer
-          offer = {this.state.activeOffer}
-        />;
+      case PageType.MAIN:
+        return (
+          <Page type={activePage}>
+            <PageMain
+              offers = {this.offers}
+              onClickByHeader = {this.placeClickHeaderHandler}
+              onHoverPlace = {this.placeHoverHandler}
+            />
+          </Page>
+        );
+      case PageType.PROPERTY:
+        return (
+          <Page type={activePage}>
+            <Offer
+              offer = {this.state.activeOffer}
+            />;
+          </Page>
+        );
       default:
         return null;
     }

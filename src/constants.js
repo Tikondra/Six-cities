@@ -8,7 +8,7 @@ export const TypePlace = {
   HOTEL: `Hotel`
 };
 
-export const Page = {
+export const PageType = {
   MAIN: `main`,
-  OFFER: `offer`,
+  PROPERTY: `property`,
 };
