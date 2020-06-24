@@ -1,6 +1,3 @@
-export const STAR_WIDTH = 15;
-export const BIG_STAR_WIDTH = 30;
-
 export const TypePlace = {
   APARTMENT: `Apartment`,
   ROOM: `Room`,
@@ -11,4 +8,11 @@ export const TypePlace = {
 export const PageType = {
   MAIN: `main`,
   PROPERTY: `property`,
+};
+
+export const MapOption = {
+  START__COORDINATE: [52.38333, 4.9],
+  ICON_SIZE: [30, 30],
+  ICON_SRC: `img/pin.svg`,
+  ZOOM: 12,
 };
