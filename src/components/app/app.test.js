@@ -8,7 +8,10 @@ it(`should render App`, function () {
     .create(
         <App
           offers={offers}
-        />
+        />,
+        {createNodeMock: () => {
+          return document.createElement(`div`);
+        }}
     )
     .toJSON();
 

@@ -3,6 +3,7 @@ import {TypePlace} from "../constants";
 export const offers = [
   {
     id: `bkjnlkmlkms`,
+    coordinates: [52.3909553943508, 4.85309666406198],
     isPremium: true,
     price: 35,
     title: `Beautiful & luxurious apartment at great location`,
@@ -25,6 +26,7 @@ export const offers = [
   },
   {
     id: `jkbsdkjsjldk`,
+    coordinates: [52.369553943508, 4.85309666406198],
     isPremium: false,
     price: 25,
     title: `Wood and stone place`,

@@ -1,21 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import PageMain from "./page-main";
+import Map from "./map.jsx";
 import {offers} from "../../mocks/forTest";
 
-it(`should render Page-main`, function () {
+it(`should render Map`, function () {
   const tree = renderer
     .create(
-        <PageMain
-          onClickByHeader={jest.fn()}
-          onHoverPlace={jest.fn()}
-          offers = {offers}
+        <Map
+          offers={offers}
         />,
         {createNodeMock: () => {
           return document.createElement(`div`);
         }}
-    )
-    .toJSON();
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

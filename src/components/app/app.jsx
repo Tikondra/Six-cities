@@ -1,9 +1,10 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
-import PageMain from "../page-main/page-main.jsx";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import PropTypes from "prop-types";
+import {PageType} from "../../constants";
+import PageMain from "../page-main/page-main.jsx";
+import Page from "../page/page.jsx";
 import Offer from "../offer/offer.jsx";
-import {Page} from "../../constants";
 
 class App extends PureComponent {
   constructor(props) {
@@ -11,45 +12,51 @@ class App extends PureComponent {
 
     this.state = {
       activeOffer: null,
-      activePage: Page.MAIN,
+      activePage: PageType.MAIN,
     };
 
     this.offers = props.offers;
     this.placeHoverHandler = this.placeHoverHandler.bind(this);
-    this.placeHeaderHandler = this.placeHeaderHandler.bind(this);
+    this.placeClickHeaderHandler = this.placeClickHeaderHandler.bind(this);
   }
 
-  placeHoverHandler(evt) {
-    const offerId = evt.currentTarget.id;
+  placeHoverHandler({currentTarget: {id: offerId}}) {
     this.setState({
       activeOffer: this.offers.find((it) => it.id === offerId)
     });
   }
 
-  placeHeaderHandler() {
+  placeClickHeaderHandler() {
     this.setState({
-      activePage: Page.OFFER
+      activePage: PageType.PROPERTY
     });
   }
 
   _renderScreen() {
     const {activePage} = this.state;
 
-    if (activePage === Page.MAIN) {
-      return <PageMain
-        offers = {this.offers}
-        onClickByHeader = {this.placeHeaderHandler}
-        onHoverPlace = {this.placeHoverHandler}
-      />;
+    switch (activePage) {
+      case PageType.MAIN:
+        return (
+          <Page type={activePage}>
+            <PageMain
+              offers = {this.offers}
+              onClickByHeader = {this.placeClickHeaderHandler}
+              onHoverPlace = {this.placeHoverHandler}
+            />
+          </Page>
+        );
+      case PageType.PROPERTY:
+        return (
+          <Page type={activePage}>
+            <Offer
+              offer = {this.state.activeOffer}
+            />;
+          </Page>
+        );
+      default:
+        return null;
     }
-
-    if (activePage === Page.OFFER) {
-      return <Offer
-        offer = {this.state.activeOffer}
-      />;
-    }
-
-    return null;
   }
 
   render() {

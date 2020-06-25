@@ -8,8 +8,7 @@ const getOption = (options) => options.map((it) => {
   </li>;
 });
 
-const Options = (props) => {
-  const {options} = props;
+const Options = ({options}) => {
 
   return <div className="property__inside">
     <h2 className="property__inside-title">What&apos;s inside</h2>
