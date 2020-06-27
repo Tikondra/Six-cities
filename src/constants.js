@@ -10,6 +10,11 @@ export const PageType = {
   PROPERTY: `property`,
 };
 
+export const MapType = {
+  MAIN: `cities`,
+  PROPERTY: `property`
+};
+
 export const MapOption = {
   START_COORDINATE: [52.38333, 4.9],
   ICON_SIZE: [30, 30],

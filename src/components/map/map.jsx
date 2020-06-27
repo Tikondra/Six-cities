@@ -8,6 +8,7 @@ class Map extends PureComponent {
     super(props);
 
     this._divRef = React.createRef();
+    this._className = `${this.props.type}__map map`;
   }
 
   componentDidMount() {
@@ -48,7 +49,8 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <section className="cities__map map"
+      <section
+        className={this._className}
         ref={this._divRef}
       >
       </section>
@@ -58,6 +60,7 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   offers: PropTypes.array.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default Map;

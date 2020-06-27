@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
+import {MapType} from "../../constants";
 
 const PageMain = (props) => {
   const {offers, onClickByHeader, onHoverPlace} = props;
@@ -72,7 +73,10 @@ const PageMain = (props) => {
             />
           </section>
           <div className="cities__right-section">
-            <Map offers={offers}/>
+            <Map
+              type = {MapType.MAIN}
+              offers = {offers}
+            />
           </div>
         </div>
       </div>

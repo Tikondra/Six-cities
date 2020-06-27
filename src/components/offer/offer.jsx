@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {TypePlace} from "../../constants";
+import {MapType, TypePlace} from "../../constants";
 import OfferGallery from "../offer-gallery/offer-gallery.jsx";
 import {getRating} from "../../utils";
 import Options from "../options/options.jsx";
 import Host from "../host/host.jsx";
 import Reviews from "../reviews/reviews.jsx";
+import Map from "../map/map.jsx";
 
 const getPremium = (isPremium) => isPremium ?
   <div className="property__mark">
@@ -13,7 +14,7 @@ const getPremium = (isPremium) => isPremium ?
   </div> :
   ``;
 
-const Offer = (props) => {
+const Offer = ({offer, offers}) => {
   const {
     description,
     guests,
@@ -27,7 +28,7 @@ const Offer = (props) => {
     title,
     type,
     reviews,
-  } = props.offer;
+  } = offer;
 
   return (
     <main className="page__main page__main--property">
@@ -82,7 +83,10 @@ const Offer = (props) => {
             />
           </div>
         </div>
-        <section className="property__map map"/>
+        <Map
+          type = {MapType.PROPERTY}
+          offers = {offers}
+        />
       </section>
       <div className="container">
         <section className="near-places places">
@@ -211,7 +215,8 @@ Offer.propTypes = {
       isSuper: PropTypes.bool.isRequired,
     }).isRequired,
     reviews: PropTypes.array,
-  })
+  }),
+  offers: PropTypes.array.isRequired,
 };
 
 export default Offer;

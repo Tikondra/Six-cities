@@ -51,6 +51,7 @@ class App extends PureComponent {
           <Page type={activePage}>
             <Offer
               offer = {this.state.activeOffer}
+              offers = {this.offers}
             />;
           </Page>
         );
@@ -68,6 +69,7 @@ class App extends PureComponent {
         <Route exact path="/dev-offer">
           <Offer
             offer = {this.state.activeOffer}
+            offers = {this.offers}
           />
         </Route>
       </Switch>

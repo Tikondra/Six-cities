@@ -7,6 +7,7 @@ it(`should render Map`, function () {
   const tree = renderer
     .create(
         <Map
+          type = {`cities`}
           offers={offers}
         />,
         {createNodeMock: () => {
