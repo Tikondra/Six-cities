@@ -13,7 +13,7 @@ class Map extends PureComponent {
   componentDidMount() {
     const {offers} = this.props;
     const mapContainer = this._divRef.current;
-    const city = MapOption.START__COORDINATE;
+    const city = MapOption.START_COORDINATE;
 
     const icon = leaflet.icon({
       iconUrl: MapOption.ICON_SRC,

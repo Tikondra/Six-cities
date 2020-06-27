@@ -11,7 +11,7 @@ export const PageType = {
 };
 
 export const MapOption = {
-  START__COORDINATE: [52.38333, 4.9],
+  START_COORDINATE: [52.38333, 4.9],
   ICON_SIZE: [30, 30],
   ICON_SRC: `img/pin.svg`,
   ZOOM: 12,
