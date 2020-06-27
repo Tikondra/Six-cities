@@ -1,11 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
+import {getSortingReviews} from "../../utils";
+import {Format} from "../../constants";
 
-const Reviews = () => {
+const Reviews = ({reviews}) => {
+  const sortingReviews = getSortingReviews(reviews).splice(0, Format.MAX_REVIEWS);
+
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-      <ReviewsList/>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{sortingReviews.length}</span></h2>
+      <ReviewsList
+        reviews={sortingReviews}
+      />
       <form className="reviews__form form" action="#" method="post">
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
@@ -60,6 +67,10 @@ const Reviews = () => {
       </form>
     </section>
   );
+};
+
+Reviews.propTypes = {
+  reviews: PropTypes.array,
 };
 
 export default Reviews;

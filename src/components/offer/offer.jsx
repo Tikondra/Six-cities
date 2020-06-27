@@ -26,6 +26,7 @@ const Offer = (props) => {
     room,
     title,
     type,
+    reviews,
   } = props.offer;
 
   return (
@@ -76,7 +77,9 @@ const Offer = (props) => {
               host = {host}
               description = {description}
             />
-            <Reviews/>
+            <Reviews
+              reviews={reviews}
+            />
           </div>
         </div>
         <section className="property__map map"/>
@@ -206,7 +209,8 @@ Offer.propTypes = {
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
-    }).isRequired
+    }).isRequired,
+    reviews: PropTypes.array,
   })
 };
 

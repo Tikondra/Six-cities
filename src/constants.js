@@ -16,3 +16,9 @@ export const MapOption = {
   ICON_SRC: `img/pin.svg`,
   ZOOM: 12,
 };
+
+export const Format = {
+  DATE_TIME: `YYYY-MM-DD`,
+  REVIEW_DATE: `MMMM YYYY`,
+  MAX_REVIEWS: 10,
+};
