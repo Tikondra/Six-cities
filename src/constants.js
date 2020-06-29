@@ -27,3 +27,8 @@ export const Format = {
   REVIEW_DATE: `MMMM YYYY`,
   MAX_REVIEWS: 10,
 };
+
+export const PlacesListClass = {
+  PROPERTY: `near-places__list places__list`,
+  MAIN: `cities__places-list places__list tabs__content`,
+};

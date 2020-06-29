@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
-import {MapType} from "../../constants";
+import {MapType, PlacesListClass} from "../../constants";
 
 const PageMain = (props) => {
   const {offers, onClickByHeader, onHoverPlace} = props;
@@ -67,6 +67,7 @@ const PageMain = (props) => {
               </ul>
             </form>
             <PlacesList
+              className = {PlacesListClass.MAIN}
               offers={offers}
               onClickByHeader={onClickByHeader}
               onHoverPlace = {onHoverPlace}

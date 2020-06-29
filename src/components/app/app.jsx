@@ -52,6 +52,8 @@ class App extends PureComponent {
             <Offer
               offer = {this.state.activeOffer}
               offers = {this.offers}
+              onClickByHeader = {this.placeClickHeaderHandler}
+              onHoverPlace = {this.placeHoverHandler}
             />;
           </Page>
         );
@@ -70,6 +72,8 @@ class App extends PureComponent {
           <Offer
             offer = {this.state.activeOffer}
             offers = {this.offers}
+            onClickByHeader = {this.placeClickHeaderHandler}
+            onHoverPlace = {this.placeHoverHandler}
           />
         </Route>
       </Switch>
