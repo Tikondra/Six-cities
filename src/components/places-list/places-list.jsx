@@ -12,16 +12,17 @@ const getPlaces = (places, onClickByHeader, onHoverPlace) => places.map((it) => 
 });
 
 const PlacesList = (props) => {
-  const {offers, onClickByHeader, onHoverPlace} = props;
+  const {offers, onClickByHeader, onHoverPlace, className} = props;
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={className}>
       {getPlaces(offers, onClickByHeader, onHoverPlace)}
     </div>
   );
 };
 
 PlacesList.propTypes = {
+  className: PropTypes.string.isRequired,
   offers: PropTypes.array.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,

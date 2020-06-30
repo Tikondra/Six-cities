@@ -23,7 +23,30 @@ export default [
       avatar: `img/avatar-angelina.jpg`,
       name: `Clara`,
       isSuper: false,
-    }
+    },
+    reviews: [
+      {
+        author: `Wilfred`,
+        avatar: `img/avatar-max.jpg`,
+        rating: 4,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        date: new Date(2020, 2, 15),
+      },
+      {
+        author: `Alfred`,
+        avatar: `img/avatar-max.jpg`,
+        rating: 2,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        date: new Date(2020, 5, 23),
+      },
+      {
+        author: `Tom`,
+        avatar: `img/avatar-max.jpg`,
+        rating: 2,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        date: new Date(2020, 3, 23),
+      },
+    ]
   },
   {
     id: nanoid(),
@@ -46,7 +69,23 @@ export default [
       avatar: `img/avatar-angelina.jpg`,
       name: `Donna`,
       isSuper: false,
-    }
+    },
+    reviews: [
+      {
+        author: `Jon`,
+        avatar: `img/avatar-max.jpg`,
+        rating: 5,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        date: new Date(2020, 3, 25),
+      },
+      {
+        author: `Rory`,
+        avatar: `img/avatar-max.jpg`,
+        rating: 3,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        date: new Date(2020, 4, 5),
+      },
+    ]
   },
   {
     id: nanoid(),
@@ -69,7 +108,16 @@ export default [
       avatar: `img/avatar-angelina.jpg`,
       name: `Marta`,
       isSuper: false,
-    }
+    },
+    reviews: [
+      {
+        author: `Max`,
+        avatar: `img/avatar-max.jpg`,
+        rating: 4,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        date: new Date(2020, 1, 14),
+      }
+    ]
   },
   {
     id: nanoid(),
@@ -92,6 +140,15 @@ export default [
       avatar: `img/avatar-angelina.jpg`,
       name: `Rose`,
       isSuper: true,
-    }
+    },
+    reviews: [
+      {
+        author: `Kenny`,
+        avatar: `img/avatar-max.jpg`,
+        rating: 4,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        date: new Date(2020, 0, 15),
+      },
+    ]
   },
 ];

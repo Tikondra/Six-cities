@@ -8,7 +8,13 @@ it(`should render Offer`, function () {
     .create(
         <Offer
           offer={offers[0]}
-        />
+          offers = {offers}
+          onClickByHeader = {jest.fn()}
+          onHoverPlace = {jest.fn()}
+        />,
+        {createNodeMock: () => {
+          return document.createElement(`div`);
+        }}
     ).toJSON();
 
   expect(tree).toMatchSnapshot();
