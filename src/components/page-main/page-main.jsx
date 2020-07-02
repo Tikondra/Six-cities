@@ -6,7 +6,7 @@ import {MapType, PlacesListClass} from "../../constants";
 import CityList from "../city-list/city-list.jsx";
 
 const PageMain = (props) => {
-  const {offers, cities, onClickByHeader, onHoverPlace} = props;
+  const {offers, cities, activeCity, onClickByHeader, onHoverPlace} = props;
 
   return (
     <main className="page__main page__main--index">
@@ -18,7 +18,7 @@ const PageMain = (props) => {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+            <b className="places__found">{offers.length} places to stay in {activeCity.title}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -55,6 +55,10 @@ const PageMain = (props) => {
 
 PageMain.propTypes = {
   offers: PropTypes.array.isRequired,
+  cities: PropTypes.array.isRequired,
+  activeCity: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+  }),
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
 };

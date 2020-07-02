@@ -599,7 +599,7 @@ exports[`should render Offer 1`] = `
         <article
           className="cities__place-card place-card"
           id="bkjnlkmlkms"
-          onMouseOver={[MockFunction]}
+          onMouseOver={[Function]}
         >
           <div
             className="place-card__mark"
@@ -704,7 +704,7 @@ exports[`should render Offer 1`] = `
         <article
           className="cities__place-card place-card"
           id="jkbsdkjsjldk"
-          onMouseOver={[MockFunction]}
+          onMouseOver={[Function]}
         >
           
           <div

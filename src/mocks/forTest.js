@@ -87,3 +87,30 @@ export const offers = [
     ]
   },
 ];
+
+export const cities = [
+  {
+    title: `Paris`,
+    isActive: true,
+  },
+  {
+    title: `Cologne`,
+    isActive: false,
+  },
+  {
+    title: `Brussels`,
+    isActive: false,
+  },
+  {
+    title: `Amsterdam`,
+    isActive: false,
+  },
+  {
+    title: `Hamburg`,
+    isActive: false,
+  },
+  {
+    title: `Dusseldorf`,
+    isActive: false,
+  },
+];

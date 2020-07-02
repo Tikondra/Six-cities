@@ -21,4 +21,8 @@ const CityList = ({cities}) => {
   );
 };
 
+CityList.propTypes = {
+  cities: PropTypes.array.isRequired,
+};
+
 export default CityList;

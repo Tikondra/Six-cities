@@ -11,15 +11,16 @@ import offers from "../../mocks/offers";
 
 class App extends PureComponent {
   _renderScreen() {
-    const {activePage, activeCity, activeOffer, offers, cities, onHoverPlace, onClickByHeader} = this.props;
+    const {activePage, activeCity, activeOffer, places, cities, onHoverPlace, onClickByHeader} = this.props;
 
     switch (activePage) {
       case PageType.MAIN:
         return (
           <Page type={activePage}>
             <PageMain
-              offers = {offers}
+              offers = {places}
               cities = {cities}
+              activeCity = {activeCity}
               onClickByHeader = {onClickByHeader}
               onHoverPlace = {onHoverPlace}
             />
@@ -30,7 +31,7 @@ class App extends PureComponent {
           <Page type={activePage}>
             <Offer
               offer = {activeOffer}
-              offers = {offers}
+              offers = {places}
               onClickByHeader = {onClickByHeader}
               onHoverPlace = {onHoverPlace}
             />;
@@ -61,14 +62,20 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: PropTypes.array.isRequired,
+  places: PropTypes.array.isRequired,
+  activePage: PropTypes.string.isRequired,
+  activeCity: PropTypes.object.isRequired,
+  activeOffer: PropTypes.object,
+  cities: PropTypes.array.isRequired,
+  onHoverPlace: PropTypes.func.isRequired,
+  onClickByHeader: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   activePage: state.page,
   activeCity: state.city,
   activeOffer: state.activeOffer,
-  offers: state.offers,
+  places: state.offers,
   cities: state.cities,
 });
 

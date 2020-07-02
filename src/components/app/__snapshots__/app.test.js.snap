@@ -77,7 +77,7 @@ exports[`should render App 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
+              className="locations__item-link tabs__item tabs__item--active"
               href="#"
             >
               <span>
@@ -89,7 +89,7 @@ exports[`should render App 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
+              className="locations__item-link tabs__item "
               href="#"
             >
               <span>
@@ -101,7 +101,7 @@ exports[`should render App 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
+              className="locations__item-link tabs__item "
               href="#"
             >
               <span>
@@ -113,7 +113,8 @@ exports[`should render App 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item tabs__item--active"
+              className="locations__item-link tabs__item "
+              href="#"
             >
               <span>
                 Amsterdam
@@ -124,7 +125,7 @@ exports[`should render App 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
+              className="locations__item-link tabs__item "
               href="#"
             >
               <span>
@@ -136,7 +137,7 @@ exports[`should render App 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
+              className="locations__item-link tabs__item "
               href="#"
             >
               <span>
@@ -165,7 +166,8 @@ exports[`should render App 1`] = `
             className="places__found"
           >
             2
-             places to stay in Amsterdam
+             places to stay in 
+            Paris
           </b>
           <form
             action="#"

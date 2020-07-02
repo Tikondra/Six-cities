@@ -22,7 +22,7 @@ exports[`should render Page-main 1`] = `
           className="locations__item"
         >
           <a
-            className="locations__item-link tabs__item"
+            className="locations__item-link tabs__item tabs__item--active"
             href="#"
           >
             <span>
@@ -34,7 +34,7 @@ exports[`should render Page-main 1`] = `
           className="locations__item"
         >
           <a
-            className="locations__item-link tabs__item"
+            className="locations__item-link tabs__item "
             href="#"
           >
             <span>
@@ -46,7 +46,7 @@ exports[`should render Page-main 1`] = `
           className="locations__item"
         >
           <a
-            className="locations__item-link tabs__item"
+            className="locations__item-link tabs__item "
             href="#"
           >
             <span>
@@ -58,7 +58,8 @@ exports[`should render Page-main 1`] = `
           className="locations__item"
         >
           <a
-            className="locations__item-link tabs__item tabs__item--active"
+            className="locations__item-link tabs__item "
+            href="#"
           >
             <span>
               Amsterdam
@@ -69,7 +70,7 @@ exports[`should render Page-main 1`] = `
           className="locations__item"
         >
           <a
-            className="locations__item-link tabs__item"
+            className="locations__item-link tabs__item "
             href="#"
           >
             <span>
@@ -81,7 +82,7 @@ exports[`should render Page-main 1`] = `
           className="locations__item"
         >
           <a
-            className="locations__item-link tabs__item"
+            className="locations__item-link tabs__item "
             href="#"
           >
             <span>
@@ -110,7 +111,8 @@ exports[`should render Page-main 1`] = `
           className="places__found"
         >
           2
-           places to stay in Amsterdam
+           places to stay in 
+          Amsterdam
         </b>
         <form
           action="#"
@@ -172,7 +174,7 @@ exports[`should render Page-main 1`] = `
           <article
             className="cities__place-card place-card"
             id="bkjnlkmlkms"
-            onMouseOver={[MockFunction]}
+            onMouseOver={[Function]}
           >
             <div
               className="place-card__mark"
@@ -277,7 +279,7 @@ exports[`should render Page-main 1`] = `
           <article
             className="cities__place-card place-card"
             id="jkbsdkjsjldk"
-            onMouseOver={[MockFunction]}
+            onMouseOver={[Function]}
           >
             
             <div
