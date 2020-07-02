@@ -5,6 +5,7 @@ export default [
   {
     id: nanoid(),
     coordinates: [52.3909553943508, 4.85309666406198],
+    city: `Amsterdam`,
     isPremium: true,
     price: 35,
     title: `Beautiful & luxurious apartment at great location`,
@@ -51,6 +52,7 @@ export default [
   {
     id: nanoid(),
     coordinates: [52.369553943508, 4.85309666406198],
+    city: `Amsterdam`,
     isPremium: false,
     price: 25,
     title: `Wood and stone place`,
@@ -90,6 +92,7 @@ export default [
   {
     id: nanoid(),
     coordinates: [52.3909553943508, 4.929309666406198],
+    city: `Amsterdam`,
     isPremium: false,
     price: 30,
     title: `Nice, cozy, warm big bed apartment`,
@@ -122,6 +125,7 @@ export default [
   {
     id: nanoid(),
     coordinates: [52.3809553943508, 4.939309666406198],
+    city: `Amsterdam`,
     isPremium: true,
     price: 10,
     title: `Canal View Prinsengracht`,

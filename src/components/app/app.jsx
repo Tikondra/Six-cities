@@ -1,48 +1,27 @@
 import React, {PureComponent} from "react";
+import {connect} from "react-redux";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import {PageType} from "../../constants";
 import PageMain from "../page-main/page-main.jsx";
 import Page from "../page/page.jsx";
 import Offer from "../offer/offer.jsx";
+import {ActionCreator} from "../../reducer.js";
+import offers from "../../mocks/offers";
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeOffer: null,
-      activePage: PageType.MAIN,
-    };
-
-    this.offers = props.offers;
-    this.placeHoverHandler = this.placeHoverHandler.bind(this);
-    this.placeClickHeaderHandler = this.placeClickHeaderHandler.bind(this);
-  }
-
-  placeHoverHandler({currentTarget: {id: offerId}}) {
-    this.setState({
-      activeOffer: this.offers.find((it) => it.id === offerId)
-    });
-  }
-
-  placeClickHeaderHandler() {
-    this.setState({
-      activePage: PageType.PROPERTY
-    });
-  }
-
   _renderScreen() {
-    const {activePage} = this.state;
+    const {activePage, activeCity, activeOffer, offers, cities, onHoverPlace, onClickByHeader} = this.props;
 
     switch (activePage) {
       case PageType.MAIN:
         return (
           <Page type={activePage}>
             <PageMain
-              offers = {this.offers}
-              onClickByHeader = {this.placeClickHeaderHandler}
-              onHoverPlace = {this.placeHoverHandler}
+              offers = {offers}
+              cities = {cities}
+              onClickByHeader = {onClickByHeader}
+              onHoverPlace = {onHoverPlace}
             />
           </Page>
         );
@@ -50,10 +29,10 @@ class App extends PureComponent {
         return (
           <Page type={activePage}>
             <Offer
-              offer = {this.state.activeOffer}
-              offers = {this.offers}
-              onClickByHeader = {this.placeClickHeaderHandler}
-              onHoverPlace = {this.placeHoverHandler}
+              offer = {activeOffer}
+              offers = {offers}
+              onClickByHeader = {onClickByHeader}
+              onHoverPlace = {onHoverPlace}
             />;
           </Page>
         );
@@ -70,10 +49,10 @@ class App extends PureComponent {
         </Route>
         <Route exact path="/dev-offer">
           <Offer
-            offer = {this.state.activeOffer}
-            offers = {this.offers}
-            onClickByHeader = {this.placeClickHeaderHandler}
-            onHoverPlace = {this.placeHoverHandler}
+            offer = {offers[0]}
+            offers = {offers}
+            onClickByHeader = {() => {}}
+            onHoverPlace = {() => {}}
           />
         </Route>
       </Switch>
@@ -85,4 +64,23 @@ App.propTypes = {
   offers: PropTypes.array.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  activePage: state.page,
+  activeCity: state.city,
+  activeOffer: state.activeOffer,
+  offers: state.offers,
+  cities: state.cities,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onHoverPlace(offer) {
+    dispatch(ActionCreator.changeActiveOffer(offer));
+  },
+
+  onClickByHeader() {
+    dispatch(ActionCreator.changePage());
+  }
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
