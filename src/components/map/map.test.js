@@ -2,12 +2,13 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Map from "./map.jsx";
 import {offers} from "../../mocks/forTest";
+import {MapType} from "../../constants";
 
 it(`should render Map`, function () {
   const tree = renderer
     .create(
         <Map
-          type = {`cities`}
+          type = {MapType.MAIN}
           offers={offers}
         />,
         {createNodeMock: () => {

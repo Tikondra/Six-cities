@@ -4,8 +4,7 @@ import moment from "moment";
 import {getRating} from "../../utils";
 import {Format} from "../../constants";
 
-const ReviewsItem = ({review}) => {
-  const {author, avatar, rating, text, date} = review;
+const ReviewsItem = ({review: {author, avatar, rating, text, date}}) => {
   const reviewDate = moment(date).format(Format.REVIEW_DATE);
   const dateTime = moment(date).format(Format.DATE_TIME);
 

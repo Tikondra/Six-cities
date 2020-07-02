@@ -15,21 +15,8 @@ const getPremium = (isPremium) => isPremium ?
   </div> :
   ``;
 
-const Offer = ({offer, offers, onClickByHeader, onHoverPlace}) => {
-  const {
-    description,
-    guests,
-    host,
-    isPremium,
-    options,
-    pictures,
-    price,
-    rating,
-    room,
-    title,
-    type,
-    reviews,
-  } = offer;
+const Offer = ({offer: {description, guests, host, isPremium, options, pictures, price, rating, room, title, type,
+  reviews}, offers, onClickByHeader, onHoverPlace}) => {
 
   const nearbyPlaces = offers.slice(0, 3); // временно, пока нет поиска поблизости
 
