@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Offer from "./offer";
-import {offers} from "../../mocks/forTest";
+import {cities, offers} from "../../mocks/forTest";
 
 it(`should render Offer`, function () {
   const tree = renderer
@@ -9,6 +9,7 @@ it(`should render Offer`, function () {
         <Offer
           offer={offers[0]}
           offers = {offers}
+          activeCity={cities[0]}
           onClickByHeader = {jest.fn()}
           onHoverPlace = {jest.fn()}
         />,

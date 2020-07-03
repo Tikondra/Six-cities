@@ -6,13 +6,14 @@ import {MapType, PlacesListClass} from "../../constants";
 import CityList from "../city-list/city-list.jsx";
 
 const PageMain = (props) => {
-  const {offers, cities, activeCity, onClickByHeader, onHoverPlace} = props;
+  const {offers, cities, activeCity, onClickByHeader, onHoverPlace, onChangeCity} = props;
 
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <CityList
         cities = {cities}
+        onChangeCity = {onChangeCity}
       />
       <div className="cities">
         <div className="cities__places-container container">
@@ -45,6 +46,7 @@ const PageMain = (props) => {
             <Map
               type = {MapType.MAIN}
               offers = {offers}
+              city = {activeCity}
             />
           </div>
         </div>
@@ -61,6 +63,7 @@ PageMain.propTypes = {
   }),
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
+  onChangeCity: PropTypes.func.isRequired,
 };
 
 export default PageMain;

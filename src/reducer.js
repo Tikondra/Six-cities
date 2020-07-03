@@ -3,17 +3,29 @@ import {Cities} from "./mocks/const";
 import {extend} from "./utils";
 import {PageType} from "./constants";
 
+const someOffers = (activeCity) => offers.filter((offer) => offer.city === activeCity.title);
+const getCityList = (index) => Cities.map((it) => {
+  if (it.title === Cities[index].title) {
+    return extend(it, {
+      isActive: true,
+    });
+  }
+
+  return extend(it, {
+    isActive: false,
+  });
+});
+
 const initialState = {
   city: Cities[0],
-  offers,
-  cities: Cities,
+  offers: someOffers(Cities[0]),
+  cities: getCityList(0),
   page: PageType.MAIN,
   activeOffer: null,
 };
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  GET_OFFERS: `GET_OFFERS`,
   CHANGE_OFFER: `CHANGE_OFFER`,
   CHANGE_PAGE: `CHANGE_PAGE`,
 };
@@ -29,22 +41,20 @@ const ActionCreator = {
     payload: PageType.PROPERTY,
   }),
 
-  getOffers: () => ({
+  changeCity: (index) => ({
     type: ActionType.CHANGE_CITY,
-    payload: 1,
-  }),
-
-  changeCity: () => ({
-    type: ActionType.CHANGE_CITY,
-    payload: 1,
+    payload: index,
   }),
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
+      const cities = getCityList(action.payload);
       return extend(state, {
-        city: action.payload,
+        cities,
+        city: cities[action.payload],
+        offers: someOffers(cities[action.payload]),
       });
 
     case ActionType.CHANGE_OFFER:
@@ -55,11 +65,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_PAGE:
       return extend(state, {
         page: action.payload,
-      });
-
-    case ActionType.GET_OFFERS:
-      return extend(state, {
-        offers: action.payload,
       });
   }
 

@@ -196,7 +196,7 @@ exports[`should render Offer 1`] = `
                 alt="Clara"
                 className="property__avatar user__avatar"
                 height="74"
-                src=""
+                src="img/avatar-angelina.jpg"
                 width="74"
               />
             </div>

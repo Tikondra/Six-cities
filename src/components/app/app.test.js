@@ -28,6 +28,7 @@ it(`should render App`, function () {
             cities={cities}
             onHoverPlace={jest.fn}
             onClickByHeader={jest.fn}
+            onChangeCity={jest.fn}
           />
         </Provider>,
         {createNodeMock: () => {

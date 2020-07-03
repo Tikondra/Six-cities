@@ -3,7 +3,8 @@ import {TypePlace} from "../constants";
 export const offers = [
   {
     id: `bkjnlkmlkms`,
-    coordinates: [52.3909553943508, 4.85309666406198],
+    coordinates: [48.853438, 2.349984],
+    city: `Paris`,
     isPremium: true,
     price: 35,
     title: `Beautiful & luxurious apartment at great location`,
@@ -19,7 +20,7 @@ export const offers = [
     guests: 3,
     options: [`Wi-Fi`, `Heating`, `Kitchen`, `Fridge`],
     host: {
-      avatar: ``,
+      avatar: `img/avatar-angelina.jpg`,
       name: `Clara`,
       isSuper: false,
     },
@@ -49,7 +50,8 @@ export const offers = [
   },
   {
     id: `jkbsdkjsjldk`,
-    coordinates: [52.369553943508, 4.85309666406198],
+    coordinates: [52.3809553943508, 4.939309666406198],
+    city: `Amsterdam`,
     isPremium: false,
     price: 25,
     title: `Wood and stone place`,
@@ -65,7 +67,7 @@ export const offers = [
     guests: 3,
     options: [`Wi-Fi`, `Heating`, `Kitchen`, `Fridge`],
     host: {
-      avatar: ``,
+      avatar: `img/avatar-angelina.jpg`,
       name: `Clara`,
       isSuper: false,
     },
@@ -91,26 +93,32 @@ export const offers = [
 export const cities = [
   {
     title: `Paris`,
-    isActive: true,
+    isActive: false,
+    coordinates: [48.856663, 2.351556]
   },
   {
     title: `Cologne`,
     isActive: false,
+    coordinates: [47.010209, 2.320878]
   },
   {
     title: `Brussels`,
     isActive: false,
+    coordinates: [50.851309, 4.351718]
   },
   {
     title: `Amsterdam`,
     isActive: false,
+    coordinates: [52.38333, 4.9]
   },
   {
     title: `Hamburg`,
     isActive: false,
+    coordinates: [53.552645, 9.966287]
   },
   {
     title: `Dusseldorf`,
     isActive: false,
+    coordinates: [51.230569, 6.787428]
   },
 ];

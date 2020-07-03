@@ -12,6 +12,7 @@ it(`should render Page-main`, function () {
           activeCity={cities[3]}
           onClickByHeader={jest.fn()}
           onHoverPlace={jest.fn()}
+          onChangeCity={jest.fn}
         />,
         {createNodeMock: () => {
           return document.createElement(`div`);

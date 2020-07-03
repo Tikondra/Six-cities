@@ -22,8 +22,9 @@ exports[`should render Page-main 1`] = `
           className="locations__item"
         >
           <a
-            className="locations__item-link tabs__item tabs__item--active"
+            className="locations__item-link tabs__item "
             href="#"
+            onClick={[Function]}
           >
             <span>
               Paris
@@ -36,6 +37,7 @@ exports[`should render Page-main 1`] = `
           <a
             className="locations__item-link tabs__item "
             href="#"
+            onClick={[Function]}
           >
             <span>
               Cologne
@@ -48,6 +50,7 @@ exports[`should render Page-main 1`] = `
           <a
             className="locations__item-link tabs__item "
             href="#"
+            onClick={[Function]}
           >
             <span>
               Brussels
@@ -60,6 +63,7 @@ exports[`should render Page-main 1`] = `
           <a
             className="locations__item-link tabs__item "
             href="#"
+            onClick={[Function]}
           >
             <span>
               Amsterdam
@@ -72,6 +76,7 @@ exports[`should render Page-main 1`] = `
           <a
             className="locations__item-link tabs__item "
             href="#"
+            onClick={[Function]}
           >
             <span>
               Hamburg
@@ -84,6 +89,7 @@ exports[`should render Page-main 1`] = `
           <a
             className="locations__item-link tabs__item "
             href="#"
+            onClick={[Function]}
           >
             <span>
               Dusseldorf

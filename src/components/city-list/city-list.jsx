@@ -3,16 +3,17 @@ import PropTypes from "prop-types";
 import CityItem from "../city-item/city-item.jsx";
 import {nanoid} from "nanoid";
 
-const CityList = ({cities}) => {
+const CityList = ({cities, onChangeCity}) => {
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cities.map((city) => (
+          {cities.map((city, i) => (
             <CityItem
               key={nanoid()}
-              city = {city.title}
-              isActive = {city.isActive}
+              city = {city}
+              index = {i}
+              onChangeCity = {onChangeCity}
             />
           ))}
         </ul>
@@ -23,6 +24,7 @@ const CityList = ({cities}) => {
 
 CityList.propTypes = {
   cities: PropTypes.array.isRequired,
+  onChangeCity: PropTypes.func.isRequired,
 };
 
 export default CityList;

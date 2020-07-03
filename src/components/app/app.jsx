@@ -8,10 +8,11 @@ import Page from "../page/page.jsx";
 import Offer from "../offer/offer.jsx";
 import {ActionCreator} from "../../reducer.js";
 import offers from "../../mocks/offers";
+import {Cities} from "../../mocks/const";
 
 class App extends PureComponent {
   _renderScreen() {
-    const {activePage, activeCity, activeOffer, places, cities, onHoverPlace, onClickByHeader} = this.props;
+    const {activePage, activeCity, activeOffer, places, cities, onHoverPlace, onClickByHeader, onChangeCity} = this.props;
 
     switch (activePage) {
       case PageType.MAIN:
@@ -23,6 +24,7 @@ class App extends PureComponent {
               activeCity = {activeCity}
               onClickByHeader = {onClickByHeader}
               onHoverPlace = {onHoverPlace}
+              onChangeCity = {onChangeCity}
             />
           </Page>
         );
@@ -32,6 +34,7 @@ class App extends PureComponent {
             <Offer
               offer = {activeOffer}
               offers = {places}
+              activeCity = {activeCity}
               onClickByHeader = {onClickByHeader}
               onHoverPlace = {onHoverPlace}
             />;
@@ -52,6 +55,7 @@ class App extends PureComponent {
           <Offer
             offer = {offers[0]}
             offers = {offers}
+            activeCity = {Cities[0]}
             onClickByHeader = {() => {}}
             onHoverPlace = {() => {}}
           />
@@ -69,6 +73,7 @@ App.propTypes = {
   cities: PropTypes.array.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
+  onChangeCity: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -86,6 +91,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   onClickByHeader() {
     dispatch(ActionCreator.changePage());
+  },
+
+  onChangeCity(index) {
+    dispatch(ActionCreator.changeCity(index));
   }
 });
 
