@@ -1,9 +1,5 @@
-export const getRating = (rating) => {
-  return `${Math.round(rating) * 20}%`;
-};
+export const getRating = (rating) => `${Math.round(rating) * 20}%`;
 
-export const getSortingReviews = (reviews) => {
-  const reviewsCopy = reviews.slice();
+export const getSortingReviews = (reviews) => reviews.sort((a, b) => b.date - a.date);
 
-  return reviewsCopy.sort((a, b) => b.date - a.date);
-};
+export const extend = (a, b) => Object.assign({}, a, b);

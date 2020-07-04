@@ -15,7 +15,7 @@ const Place = (props) => {
 
   return <article
     className="cities__place-card place-card"
-    onMouseOver={onHoverPlace}
+    onMouseOver={() => onHoverPlace(offer)}
     id={id}>
     {getPremium(isPremium)}
     <div className="cities__image-wrapper place-card__image-wrapper">

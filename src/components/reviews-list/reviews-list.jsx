@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import ReviewsItem from "../reviews-item/reviews-item.jsx";
 import {nanoid} from "nanoid";
 
-const getReview = (reviews) => reviews.map((it) => {
+const getReview = (reviews) => reviews.map((reviewItem) => {
   return (
     <ReviewsItem
       key = {nanoid()}
-      review = {it}
+      review = {reviewItem}
     />
   );
 });

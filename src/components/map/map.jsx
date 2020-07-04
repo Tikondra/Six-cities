@@ -9,37 +9,58 @@ class Map extends PureComponent {
 
     this._divRef = React.createRef();
     this._className = `${this.props.type}__map map`;
+    this._map = null;
+    this._icon = null;
+    this._markers = [];
+    this._offers = this.props.offers;
+    this._city = this.props.city;
+  }
+
+  _addMarker() {
+    this._offers.map((offer) => {
+      const marker = leaflet
+        .marker(offer.coordinates, {icon: this._icon})
+        .addTo(this._map);
+      this._markers.push(marker);
+    });
   }
 
   componentDidMount() {
-    const {offers} = this.props;
     const mapContainer = this._divRef.current;
-    const city = MapOption.START_COORDINATE;
+    const cityCoordinate = this._city.coordinates;
 
-    const icon = leaflet.icon({
+    this._icon = leaflet.icon({
       iconUrl: MapOption.ICON_SRC,
       iconSize: MapOption.ICON_SIZE
     });
 
-    const map = leaflet.map(mapContainer, {
-      center: city,
+    this._map = leaflet.map(mapContainer, {
+      center: cityCoordinate,
       zoom: MapOption.ZOOM,
       zoomControl: false,
       marker: true
     });
-    map.setView(city, MapOption.ZOOM);
+    this._map.setView(cityCoordinate, MapOption.ZOOM);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(map);
+      .addTo(this._map);
 
-    offers.map((it) => {
-      leaflet
-        .marker(it.coordinates, {icon})
-        .addTo(map);
-    });
+    this._addMarker();
+  }
+
+  componentDidUpdate(prevProps) {
+    const {offers, city} = this.props;
+
+    if (prevProps.city !== city) {
+      this._city = city;
+      this._offers = offers;
+      this._map.flyTo(city.coordinates);
+      this._markers.forEach((marker) => this._map.removeLayer(marker));
+      this._addMarker();
+    }
   }
 
   componentWillUnmount() {
@@ -61,6 +82,9 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.array.isRequired,
   type: PropTypes.string.isRequired,
+  city: PropTypes.shape({
+    coordinates: PropTypes.array.isRequired,
+  }),
 };
 
 export default Map;

@@ -5,6 +5,7 @@ export default [
   {
     id: nanoid(),
     coordinates: [52.3909553943508, 4.85309666406198],
+    city: `Amsterdam`,
     isPremium: true,
     price: 35,
     title: `Beautiful & luxurious apartment at great location`,
@@ -51,6 +52,7 @@ export default [
   {
     id: nanoid(),
     coordinates: [52.369553943508, 4.85309666406198],
+    city: `Amsterdam`,
     isPremium: false,
     price: 25,
     title: `Wood and stone place`,
@@ -90,6 +92,7 @@ export default [
   {
     id: nanoid(),
     coordinates: [52.3909553943508, 4.929309666406198],
+    city: `Amsterdam`,
     isPremium: false,
     price: 30,
     title: `Nice, cozy, warm big bed apartment`,
@@ -122,6 +125,40 @@ export default [
   {
     id: nanoid(),
     coordinates: [52.3809553943508, 4.939309666406198],
+    city: `Amsterdam`,
+    isPremium: true,
+    price: 10,
+    title: `Canal View Prinsengracht`,
+    type: TypePlace.ROOM,
+    rating: 4.1,
+    picture: `img/room.jpg`,
+    pictures: [`img/apartment-02.jpg`, `img/apartment-01.jpg`, `img/apartment-03.jpg`, `img/studio-01.jpg`, `img/room.jpg`, `img/apartment-01.jpg`],
+    description: [
+      `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+      `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
+    ],
+    room: 4,
+    guests: 1,
+    options: [`Washing machine`, `Coffee machine`, `Dishwasher`, `Wi-Fi`, `Heating`, `Kitchen`, `Fridge`],
+    host: {
+      avatar: `img/avatar-angelina.jpg`,
+      name: `Rose`,
+      isSuper: true,
+    },
+    reviews: [
+      {
+        author: `Kenny`,
+        avatar: `img/avatar-max.jpg`,
+        rating: 4,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        date: new Date(2020, 0, 15),
+      },
+    ]
+  },
+  {
+    id: nanoid(),
+    coordinates: [48.853438, 2.349984],
+    city: `Paris`,
     isPremium: true,
     price: 10,
     title: `Canal View Prinsengracht`,
