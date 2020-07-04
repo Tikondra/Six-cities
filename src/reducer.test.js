@@ -1,6 +1,6 @@
 import {reducer, ActionType, ActionCreator} from "./reducer";
 import {PageType} from "./constants";
-import {offers as testOffers, cities} from "./mocks/forTest";
+import {offers as testOffers, cities, SORT_TYPES, SortType} from "./mocks/forTest";
 import {extend} from "./utils";
 import offers from "./mocks/offers";
 
@@ -21,8 +21,11 @@ const initialState = {
   city: cities[0],
   offers: someOffers(cities[0]),
   cities: getCityList(0),
+  sortTypes: SORT_TYPES,
   page: PageType.MAIN,
   activeOffer: null,
+  sortType: SortType.POPULAR,
+  sortIsOpen: false,
 };
 
 it(`Reducer without additional parameters should return initial state`, () => {
@@ -30,8 +33,11 @@ it(`Reducer without additional parameters should return initial state`, () => {
     city: cities[0],
     offers: [offers[4]],
     cities: getCityList(0),
+    sortTypes: SORT_TYPES,
     page: PageType.MAIN,
     activeOffer: null,
+    sortType: SortType.POPULAR,
+    sortIsOpen: false,
   });
 });
 
@@ -45,6 +51,9 @@ it(`Reducer should change page`, () => {
     cities: getCityList(0),
     page: PageType.PROPERTY,
     activeOffer: null,
+    sortTypes: SORT_TYPES,
+    sortType: SortType.POPULAR,
+    sortIsOpen: false,
   });
 });
 
@@ -58,6 +67,9 @@ it(`Reducer should change offer`, () => {
     cities: getCityList(0),
     page: PageType.MAIN,
     activeOffer: offers[0],
+    sortTypes: SORT_TYPES,
+    sortType: SortType.POPULAR,
+    sortIsOpen: false,
   });
 
   expect(reducer(initialState, {
@@ -69,6 +81,9 @@ it(`Reducer should change offer`, () => {
     cities: getCityList(0),
     page: PageType.MAIN,
     activeOffer: offers[1],
+    sortTypes: SORT_TYPES,
+    sortType: SortType.POPULAR,
+    sortIsOpen: false,
   });
 });
 
@@ -82,8 +97,11 @@ it(`Reducer should change city`, () => {
     city: citiesActive[1],
     offers: someOffers(cities[1]),
     cities: getCityList(1),
+    sortTypes: SORT_TYPES,
     page: PageType.MAIN,
     activeOffer: null,
+    sortType: SortType.POPULAR,
+    sortIsOpen: false,
   });
 });
 

@@ -32,3 +32,12 @@ export const PlacesListClass = {
   PROPERTY: `near-places__list places__list`,
   MAIN: `cities__places-list places__list tabs__content`,
 };
+
+export const SortType = {
+  POPULAR: `Popular`,
+  PRICE_UP: `Price: low to high`,
+  PRICE_DOWN: `Price: high to low`,
+  TOP_RATING: `Top rated first`
+};
+
+export const SORT_TYPES = Object.values(SortType);
