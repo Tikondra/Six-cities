@@ -1,10 +1,10 @@
 import {reducer, ActionType, ActionCreator} from "./reducer";
 import {PageType} from "./constants";
 import {offers as testOffers, cities, SORT_TYPES, SortType} from "./mocks/forTest";
-import {extend} from "./utils";
+import {extend, getOffersBySort} from "./utils";
 import offers from "./mocks/offers";
 
-const someOffers = (activeCity) => testOffers.filter((offer) => offer.city === activeCity.title);
+const someOffers = (activeCity) => offers.filter((offer) => offer.city === activeCity.title);
 const getCityList = (index) => cities.map((it) => {
   if (it.title === cities[index].title) {
     return extend(it, {
@@ -105,6 +105,38 @@ it(`Reducer should change city`, () => {
   });
 });
 
+it(`Reducer should open sort list`, function () {
+  expect(reducer(initialState, {
+    type: ActionType.OPEN_SORT_LIST,
+    payload: true,
+  })).toEqual({
+    city: cities[0],
+    offers: someOffers(cities[0]),
+    cities: getCityList(0),
+    sortTypes: SORT_TYPES,
+    page: PageType.MAIN,
+    activeOffer: null,
+    sortType: SortType.POPULAR,
+    sortIsOpen: true,
+  });
+});
+
+it(`Reducer should change sort type`, function () {
+  expect(reducer(initialState, {
+    type: ActionType.CHANGE_SORT_TYPE,
+    payload: SortType.PRICE_UP,
+  })).toEqual({
+    city: cities[0],
+    offers: getOffersBySort(someOffers(cities[0]), SortType.PRICE_UP),
+    cities: getCityList(0),
+    sortTypes: SORT_TYPES,
+    page: PageType.MAIN,
+    activeOffer: null,
+    sortType: SortType.PRICE_UP,
+    sortIsOpen: false,
+  });
+});
+
 describe(`Action creators work correctly`, () => {
   it(`Action creator for Change page`, function () {
     expect(ActionCreator.changePage()).toEqual({
@@ -124,6 +156,20 @@ describe(`Action creators work correctly`, () => {
     expect(ActionCreator.changeCity(0)).toEqual({
       type: ActionType.CHANGE_CITY,
       payload: 0,
+    });
+  });
+
+  it(`Action creator for open sort list`, function () {
+    expect(ActionCreator.openSortList()).toEqual({
+      type: ActionType.OPEN_SORT_LIST,
+      payload: true,
+    });
+  });
+
+  it(`Action creator for changeSortType`, function () {
+    expect(ActionCreator.changeSortType(SortType.PRICE_DOWN)).toEqual({
+      type: ActionType.CHANGE_SORT_TYPE,
+      payload: SortType.PRICE_DOWN,
     });
   });
 });

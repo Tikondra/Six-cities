@@ -19,6 +19,7 @@ export const MapOption = {
   START_COORDINATE: [52.38333, 4.9],
   ICON_SIZE: [30, 30],
   ICON_SRC: `img/pin.svg`,
+  ICON_ACTIVE_SRC: `img/pin-active.svg`,
   ZOOM: 12,
 };
 

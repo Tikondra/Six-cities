@@ -5,7 +5,7 @@ import Places from "../places/places.jsx";
 import NoPlaces from "../no-places/no-places.jsx";
 
 const PageMain = (props) => {
-  const {offers, cities, activeCity, sortTypes, sortType, sortIsOpen, onClickByHeader, onHoverPlace, onChangeCity,
+  const {offers, cities, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, onClickByHeader, onHoverPlace, onChangeCity,
     onClickBySort, onClickBySortType} = props;
   const emptyClass = offers.length === 0 ? `page__main--index-empty` : ``;
 
@@ -21,6 +21,7 @@ const PageMain = (props) => {
           <Places
             offers = {offers}
             activeCity = {activeCity}
+            activeOffer = {activeOffer}
             sortTypes = {sortTypes}
             sortType = {sortType}
             sortIsOpen = {sortIsOpen}
@@ -37,6 +38,7 @@ const PageMain = (props) => {
 
 PageMain.propTypes = {
   activeCity: PropTypes.object.isRequired,
+  activeOffer: PropTypes.object,
   sortTypes: PropTypes.array.isRequired,
   sortType: PropTypes.string.isRequired,
   sortIsOpen: PropTypes.bool.isRequired,

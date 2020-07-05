@@ -5,7 +5,7 @@ import Map from "../map/map.jsx";
 import {PlacesListClass, MapType} from "../../constants";
 import Sorting from "../sorting/sorting.jsx";
 
-const Places = ({offers, activeCity, sortTypes, sortType, sortIsOpen, onClickByHeader, onHoverPlace, onClickBySort,
+const Places = ({offers, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, onClickByHeader, onHoverPlace, onClickBySort,
   onClickBySortType}) => {
 
   return (
@@ -31,6 +31,7 @@ const Places = ({offers, activeCity, sortTypes, sortType, sortIsOpen, onClickByH
         <Map
           type = {MapType.MAIN}
           offers = {offers}
+          activeOffer = {activeOffer}
           city = {activeCity}
         />
       </div>
@@ -46,6 +47,7 @@ Places.propTypes = {
   activeCity: PropTypes.shape({
     title: PropTypes.string.isRequired,
   }).isRequired,
+  activeOffer: PropTypes.object,
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
   onClickBySort: PropTypes.func.isRequired,

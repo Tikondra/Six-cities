@@ -22,8 +22,9 @@ class App extends PureComponent {
             <PageMain
               offers = {places}
               cities = {cities}
-              sortTypes = {sortTypes}
+              activeOffer = {activeOffer}
               activeCity = {activeCity}
+              sortTypes = {sortTypes}
               sortType = {sortType}
               sortIsOpen = {sortIsOpen}
               onClickByHeader = {onClickByHeader}
