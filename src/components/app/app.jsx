@@ -12,7 +12,8 @@ import {Cities} from "../../mocks/const";
 
 class App extends PureComponent {
   _renderScreen() {
-    const {activePage, activeCity, activeOffer, places, cities, onHoverPlace, onClickByHeader, onChangeCity} = this.props;
+    const {activePage, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, places, cities, onHoverPlace, onClickByHeader,
+      onChangeCity, onClickBySort, onClickBySortType} = this.props;
 
     switch (activePage) {
       case PageType.MAIN:
@@ -21,10 +22,16 @@ class App extends PureComponent {
             <PageMain
               offers = {places}
               cities = {cities}
+              activeOffer = {activeOffer}
               activeCity = {activeCity}
+              sortTypes = {sortTypes}
+              sortType = {sortType}
+              sortIsOpen = {sortIsOpen}
               onClickByHeader = {onClickByHeader}
               onHoverPlace = {onHoverPlace}
               onChangeCity = {onChangeCity}
+              onClickBySort = {onClickBySort}
+              onClickBySortType = {onClickBySortType}
             />
           </Page>
         );
@@ -66,20 +73,28 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  places: PropTypes.array.isRequired,
   activePage: PropTypes.string.isRequired,
   activeCity: PropTypes.object.isRequired,
   activeOffer: PropTypes.object,
+  sortTypes: PropTypes.array.isRequired,
+  sortType: PropTypes.string.isRequired,
+  sortIsOpen: PropTypes.bool.isRequired,
+  places: PropTypes.array.isRequired,
   cities: PropTypes.array.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
   onChangeCity: PropTypes.func.isRequired,
+  onClickBySort: PropTypes.func.isRequired,
+  onClickBySortType: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   activePage: state.page,
   activeCity: state.city,
   activeOffer: state.activeOffer,
+  sortTypes: state.sortTypes,
+  sortType: state.sortType,
+  sortIsOpen: state.sortIsOpen,
   places: state.offers,
   cities: state.cities,
 });
@@ -95,7 +110,15 @@ const mapDispatchToProps = (dispatch) => ({
 
   onChangeCity(index) {
     dispatch(ActionCreator.changeCity(index));
-  }
+  },
+
+  onClickBySort() {
+    dispatch(ActionCreator.openSortList());
+  },
+
+  onClickBySortType(sortType) {
+    dispatch(ActionCreator.changeSortType(sortType));
+  },
 });
 
 export {App};

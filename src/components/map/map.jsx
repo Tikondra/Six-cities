@@ -11,17 +11,26 @@ class Map extends PureComponent {
     this._className = `${this.props.type}__map map`;
     this._map = null;
     this._icon = null;
+    this._iconActive = null;
     this._markers = [];
     this._offers = this.props.offers;
     this._city = this.props.city;
+    this._activeOffer = this.props.activeOffer;
   }
 
   _addMarker() {
     this._offers.map((offer) => {
-      const marker = leaflet
-        .marker(offer.coordinates, {icon: this._icon})
-        .addTo(this._map);
-      this._markers.push(marker);
+      if (this._activeOffer && offer.id === this._activeOffer.id) {
+        const marker = leaflet
+          .marker(offer.coordinates, {icon: this._iconActive})
+          .addTo(this._map);
+        this._markers.push(marker);
+      } else {
+        const marker = leaflet
+          .marker(offer.coordinates, {icon: this._icon})
+          .addTo(this._map);
+        this._markers.push(marker);
+      }
     });
   }
 
@@ -31,6 +40,11 @@ class Map extends PureComponent {
 
     this._icon = leaflet.icon({
       iconUrl: MapOption.ICON_SRC,
+      iconSize: MapOption.ICON_SIZE
+    });
+
+    this._iconActive = leaflet.icon({
+      iconUrl: MapOption.ICON_ACTIVE_SRC,
       iconSize: MapOption.ICON_SIZE
     });
 
@@ -52,12 +66,18 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {offers, city} = this.props;
+    const {offers, city, activeOffer} = this.props;
 
     if (prevProps.city !== city) {
       this._city = city;
       this._offers = offers;
       this._map.flyTo(city.coordinates);
+      this._markers.forEach((marker) => this._map.removeLayer(marker));
+      this._addMarker();
+    }
+
+    if (prevProps.activeOffer !== activeOffer) {
+      this._activeOffer = activeOffer;
       this._markers.forEach((marker) => this._map.removeLayer(marker));
       this._addMarker();
     }
@@ -85,6 +105,7 @@ Map.propTypes = {
   city: PropTypes.shape({
     coordinates: PropTypes.array.isRequired,
   }),
+  activeOffer: PropTypes.object,
 };
 
 export default Map;
