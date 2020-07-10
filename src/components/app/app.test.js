@@ -3,7 +3,9 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
-import {cities, offers, SORT_TYPES, SortType} from "../../mocks/forTest";
+import {SORT_TYPES, SortType} from "../../mocks/for-test/const";
+import {offers} from "../../mocks/for-test/offers";
+import {cities} from "../../mocks/for-test/cities";
 import {PageType} from "../../constants";
 
 const mockStore = configureStore([]);

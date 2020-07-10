@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {offers} from "../../mocks/forTest";
+import {offers} from "../../mocks/for-test/offers";
 import ReviewsItem from "./reviews-item";
 
 it(`should render Reviews`, function () {

@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import CityItem from "./city-item";
-import {cities} from "../../mocks/forTest";
+import {cities} from "../../mocks/for-test/cities";
 
 it(`should render CityItem`, function () {
   const tree = renderer

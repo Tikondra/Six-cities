@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Place from "./place";
-import {offers} from "../../mocks/forTest";
+import {offers} from "../../mocks/for-test/offers";
 
 Enzyme.configure({
   adapter: new Adapter(),

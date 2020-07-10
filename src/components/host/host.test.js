@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Host from "./host";
-import {offers} from "../../mocks/forTest";
+import {offers} from "../../mocks/for-test/offers";
 
 it(`should render Host`, function () {
   const tree = renderer

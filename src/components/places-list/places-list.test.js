@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import PlacesList from "./places-list";
-import {offers} from "../../mocks/forTest";
+import {offers} from "../../mocks/for-test/offers";
 import {PlacesListClass} from "../../constants";
 
 it(`should render PlacesList`, function () {

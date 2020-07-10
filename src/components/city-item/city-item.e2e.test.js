@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import CityItem from "./city-item";
-import {cities} from "../../mocks/forTest";
+import {cities} from "../../mocks/for-test/cities";
 
 Enzyme.configure({
   adapter: new Adapter(),

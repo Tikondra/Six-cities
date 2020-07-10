@@ -1,7 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Places from "./places";
-import {cities, offers, SORT_TYPES, SortType} from "../../mocks/forTest";
+import {SORT_TYPES, SortType} from "../../mocks/for-test/const";
+import {offers} from "../../mocks/for-test/offers";
+import {cities} from "../../mocks/for-test/cities";
 
 it(`should render Places`, function () {
   const tree = renderer

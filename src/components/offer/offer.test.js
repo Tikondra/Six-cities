@@ -1,7 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Offer from "./offer";
-import {cities, offers} from "../../mocks/forTest";
+import {offers} from "../../mocks/for-test/offers";
+import {cities} from "../../mocks/for-test/cities";
 
 it(`should render Offer`, function () {
   const tree = renderer
