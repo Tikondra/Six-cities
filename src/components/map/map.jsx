@@ -18,19 +18,16 @@ class Map extends PureComponent {
     this._activeOffer = this.props.activeOffer;
   }
 
+  _getIcon(offer) {
+    return this._activeOffer && offer.id === this._activeOffer.id ? {icon: this._iconActive} : {icon: this._icon};
+  }
+
   _addMarker() {
     this._offers.map((offer) => {
-      if (this._activeOffer && offer.id === this._activeOffer.id) {
-        const marker = leaflet
-          .marker(offer.coordinates, {icon: this._iconActive})
-          .addTo(this._map);
-        this._markers.push(marker);
-      } else {
-        const marker = leaflet
-          .marker(offer.coordinates, {icon: this._icon})
-          .addTo(this._map);
-        this._markers.push(marker);
-      }
+      const marker = leaflet
+      .marker(offer.coordinates, this._getIcon(offer))
+      .addTo(this._map);
+      this._markers.push(marker);
     });
   }
 
