@@ -6,7 +6,7 @@ import {PageType} from "../../constants";
 import PageMain from "../page-main/page-main.jsx";
 import Page from "../page/page.jsx";
 import Offer from "../offer/offer.jsx";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/reducer.js";
 import offers from "../../mocks/offers";
 import {Cities} from "../../mocks/const";
 
