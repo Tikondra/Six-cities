@@ -1,7 +1,7 @@
-import offers from "./mocks/offers";
-import {Cities} from "./mocks/const";
-import {extend, getOffersBySort} from "./utils";
-import {PageType, SORT_TYPES, SortType} from "./constants";
+import offers from "../mocks/offers";
+import {Cities} from "../mocks/const";
+import {extend, getOffersBySort} from "../utils";
+import {PageType, SORT_TYPES, SortType} from "../constants";
 
 const someOffers = (activeCity) => offers.filter((offer) => offer.city === activeCity.title);
 const getCityList = (index) => Cities.map((city) => {

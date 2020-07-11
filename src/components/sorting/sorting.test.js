@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Sorting from "./sorting";
-import {SORT_TYPES, SortType} from "../../mocks/forTest";
+import {SORT_TYPES, SortType} from "../../mocks/for-test/const";
 
 it(`should render Sorting`, function () {
   const tree = renderer

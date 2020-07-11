@@ -1,7 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Map from "./map.jsx";
-import {cities, offers} from "../../mocks/forTest";
+import {offers} from "../../mocks/for-test/offers";
+import {cities} from "../../mocks/for-test/cities";
 import {MapType} from "../../constants";
 
 it(`should render Map`, function () {
