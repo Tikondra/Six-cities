@@ -1,10 +1,10 @@
-import {reducer, ActionType, ActionCreator} from "./reducer";
-import {PageType} from "../constants";
-import {extend, getOffersBySort} from "../utils";
-import offers from "../mocks/offers";
-import {SORT_TYPES, SortType} from "../mocks/for-test/const";
-import {offers as testOffers} from "../mocks/for-test/offers";
-import {cities} from "../mocks/for-test/cities";
+import {reducer, ActionType, ActionCreator} from "./app-state";
+import {PageType} from "../../constants";
+import {extend, getOffersBySort} from "../../utils";
+import offers from "../../mocks/offers";
+import {SORT_TYPES, SortType} from "../../mocks/for-test/const";
+import {offers as testOffers} from "../../mocks/for-test/offers";
+import {cities} from "../../mocks/for-test/cities";
 
 const someOffers = (activeCity) => offers.filter((offer) => offer.city === activeCity.title);
 const getCityList = (index) => cities.map((it) => {

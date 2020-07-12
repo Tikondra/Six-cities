@@ -6,9 +6,13 @@ import {PageType} from "../../constants";
 import PageMain from "../page-main/page-main.jsx";
 import Page from "../page/page.jsx";
 import Offer from "../offer/offer.jsx";
-import {ActionCreator} from "../../reducer/reducer.js";
+import {ActionCreator} from "../../reducer/app-state/app-state.js";
 import offers from "../../mocks/offers";
 import {Cities} from "../../mocks/const";
+import {getCity, getCities, getActiveOffer, getPage, getSortIsOpen, getSortType, getSortTypes} from "../../reducer/app-state/selectors";
+import {getPlacesForCity} from "../../reducer/data/selectors";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
 
 class App extends PureComponent {
   _renderScreen() {
@@ -89,17 +93,22 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activePage: state.page,
-  activeCity: state.city,
-  activeOffer: state.activeOffer,
-  sortTypes: state.sortTypes,
-  sortType: state.sortType,
-  sortIsOpen: state.sortIsOpen,
-  places: state.offers,
-  cities: state.cities,
+  authorizationStatus: getAuthorizationStatus(state),
+  activePage: getPage(state),
+  activeCity: getCity(state),
+  activeOffer: getActiveOffer(state),
+  sortTypes: getSortTypes(state),
+  sortType: getSortType(state),
+  sortIsOpen: getSortIsOpen(state),
+  places: getPlacesForCity(state),
+  cities: getCities(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
+
   onHoverPlace(offer) {
     dispatch(ActionCreator.changeActiveOffer(offer));
   },

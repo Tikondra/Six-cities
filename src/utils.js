@@ -20,3 +20,7 @@ const offersBySort = {
 };
 
 export const getOffersBySort = (offers, sortType) => offersBySort[sortType](offers);
+
+export const toNormalCase = (str) => {
+  return `${str[0].toUpperCase()}${str.slice(1)}`;
+};
