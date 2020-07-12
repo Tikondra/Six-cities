@@ -8,6 +8,7 @@ export const TypePlace = {
 export const PageType = {
   MAIN: `main`,
   PROPERTY: `property`,
+  SIGN_IN: `login`,
 };
 
 export const MapType = {

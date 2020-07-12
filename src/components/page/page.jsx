@@ -1,8 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {PageType} from "../../constants";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
-const Page = ({type, children}) => {
+const getSignInOrUserMail = (status, userLogin) => status === AuthorizationStatus.AUTH ?
+  <span className="header__user-name user__name">{userLogin}</span> :
+  <span className="header__login">Sign in</span>;
+
+const Page = ({type, status, userLogin, children}) => {
   return (
     <div className={`page page--gray page--${type}`}>
       <header className="header">
@@ -19,7 +24,7 @@ const Page = ({type, children}) => {
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    {getSignInOrUserMail(status, userLogin)}
                   </a>
                 </li>
               </ul>
@@ -39,6 +44,8 @@ Page.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired,
+  status: PropTypes.string.isRequired,
+  userLogin: PropTypes.string,
 };
 
 export default Page;
