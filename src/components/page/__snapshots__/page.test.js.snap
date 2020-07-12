@@ -80,6 +80,7 @@ exports[`Page component render correctly render with type PageType.PROPERTY 1`] 
         >
           <a
             className="header__logo-link header__logo-link--active"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -142,6 +143,7 @@ exports[`Page component render correctly render with type PageType.SIGN_IN 1`] =
         >
           <a
             className="header__logo-link header__logo-link--active"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"

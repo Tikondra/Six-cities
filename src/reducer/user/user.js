@@ -1,3 +1,5 @@
+import {ActionCreator as ActionCreatorApp} from "../app-state/app-state";
+
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
@@ -39,6 +41,7 @@ const Operation = {
     })
       .then((data) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, data.data.email));
+        dispatch(ActionCreatorApp.toHome());
       });
   },
 };

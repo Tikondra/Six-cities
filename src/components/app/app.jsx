@@ -19,59 +19,62 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 class App extends PureComponent {
   _renderScreen() {
     const {activePage, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, places, cities, onHoverPlace, onClickByHeader,
-      onChangeCity, onClickBySort, onClickBySortType, authorizationStatus, onLogin, userLogin} = this.props;
+      onChangeCity, onClickBySort, onClickBySortType, authorizationStatus, onLogin, userLogin, onClickByLogo, onClickBySignIn} = this.props;
 
     switch (activePage) {
       case PageType.MAIN:
-        if (authorizationStatus === AuthorizationStatus.AUTH) {
-          return (
-            <Page
-              type={activePage}
-              status={authorizationStatus}
-              userLogin={userLogin}
-            >
-              <PageMain
-                offers = {places}
-                cities = {cities}
-                activeOffer = {activeOffer}
-                activeCity = {activeCity}
-                sortTypes = {sortTypes}
-                sortType = {sortType}
-                sortIsOpen = {sortIsOpen}
-                onClickByHeader = {onClickByHeader}
-                onHoverPlace = {onHoverPlace}
-                onChangeCity = {onChangeCity}
-                onClickBySort = {onClickBySort}
-                onClickBySortType = {onClickBySortType}
-              />
-            </Page>
-          );
-        } else {
-          return (
-            <Page
-              type={PageType.SIGN_IN}
-              status={authorizationStatus}
-            >
-              <SignIn
-                onLogin = {onLogin}
-              />
-            </Page>
-          );
-        }
+        return (
+          <Page
+            type={activePage}
+            status={authorizationStatus}
+            userLogin={userLogin}
+            onClickBySignIn = {onClickBySignIn}
+          >
+            <PageMain
+              offers = {places}
+              cities = {cities}
+              activeOffer = {activeOffer}
+              activeCity = {activeCity}
+              sortTypes = {sortTypes}
+              sortType = {sortType}
+              sortIsOpen = {sortIsOpen}
+              onClickByHeader = {onClickByHeader}
+              onHoverPlace = {onHoverPlace}
+              onChangeCity = {onChangeCity}
+              onClickBySort = {onClickBySort}
+              onClickBySortType = {onClickBySortType}
+            />
+          </Page>
+        );
       case PageType.PROPERTY:
         return (
           <Page
             type={activePage}
             status={authorizationStatus}
             userLogin={userLogin}
+            onClickByLogo={onClickByLogo}
+            onClickBySignIn = {onClickBySignIn}
           >
             <Offer
+              status={authorizationStatus}
               offer = {activeOffer}
               offers = {places}
               activeCity = {activeCity}
               onClickByHeader = {onClickByHeader}
               onHoverPlace = {onHoverPlace}
             />;
+          </Page>
+        );
+      case PageType.SIGN_IN:
+        return (
+          <Page
+            type={PageType.SIGN_IN}
+            status={authorizationStatus}
+            onClickByLogo={onClickByLogo}
+          >
+            <SignIn
+              onLogin = {onLogin}
+            />
           </Page>
         );
       default:
@@ -87,6 +90,7 @@ class App extends PureComponent {
         </Route>
         <Route exact path="/dev-offer">
           <Offer
+            status={AuthorizationStatus.AUTH}
             offer = {offers[0]}
             offers = {offers}
             activeCity = {Cities[0]}
@@ -126,6 +130,8 @@ App.propTypes = {
   onChangeCity: PropTypes.func.isRequired,
   onClickBySort: PropTypes.func.isRequired,
   onClickBySortType: PropTypes.func.isRequired,
+  onClickByLogo: PropTypes.func.isRequired,
+  onClickBySignIn: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -151,7 +157,15 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   onClickByHeader() {
-    dispatch(ActionCreator.changePage());
+    dispatch(ActionCreator.toPlace());
+  },
+
+  onClickByLogo() {
+    dispatch(ActionCreator.toHome());
+  },
+
+  onClickBySignIn() {
+    dispatch(ActionCreator.toSignIn());
   },
 
   onChangeCity(index) {

@@ -14,6 +14,7 @@ describe(`Page component render correctly`, () => {
             type={PageType.MAIN}
             status={AuthorizationStatus.AUTH}
             userLogin={`Oliver.conner@gmail.com`}
+            onClickBySignIn = {jest.fn}
           >
             {children}
           </Page>
@@ -29,6 +30,8 @@ describe(`Page component render correctly`, () => {
             type={PageType.PROPERTY}
             status={AuthorizationStatus.AUTH}
             userLogin={`Oliver.conner@gmail.com`}
+            onClickBySignIn = {jest.fn}
+            onClickByLogo={jest.fn}
           >
             {children}
           </Page>
@@ -43,6 +46,7 @@ describe(`Page component render correctly`, () => {
           <Page
             type={PageType.SIGN_IN}
             status={AuthorizationStatus.NO_AUTH}
+            onClickByLogo={jest.fn}
           >
             {children}
           </Page>
