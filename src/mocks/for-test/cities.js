@@ -7,7 +7,7 @@ export const cities = [
   {
     title: `Cologne`,
     isActive: false,
-    coordinates: [47.010209, 2.320878]
+    coordinates: [50.938361, 6.959974]
   },
   {
     title: `Brussels`,
