@@ -1,3 +1,5 @@
+import {ActionCreator as ActionCreatorApp} from "../app-state/app-state";
+
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
@@ -5,6 +7,7 @@ const AuthorizationStatus = {
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  user: null,
 };
 
 const ActionType = {
@@ -12,10 +15,10 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  requireAuthorization: (status) => {
+  requireAuthorization: (status, user = null) => {
     return {
       type: ActionType.REQUIRED_AUTHORIZATION,
-      payload: status,
+      payload: {status, user},
     };
   },
 };
@@ -23,8 +26,8 @@ const ActionCreator = {
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      .then((data) => {
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, data.data.email));
       })
       .catch((err) => {
         throw err;
@@ -36,8 +39,9 @@ const Operation = {
       email: authData.login,
       password: authData.password,
     })
-      .then(() => {
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      .then((data) => {
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, data.data.email));
+        dispatch(ActionCreatorApp.toHome());
       });
   },
 };
@@ -45,7 +49,8 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   if (action.type === ActionType.REQUIRED_AUTHORIZATION) {
     return Object.assign({}, state, {
-      authorizationStatus: action.payload,
+      authorizationStatus: action.payload.status,
+      user: action.payload.user,
     });
   }
 

@@ -30,9 +30,11 @@ const initialState = {
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   CHANGE_OFFER: `CHANGE_OFFER`,
-  CHANGE_PAGE: `CHANGE_PAGE`,
   OPEN_SORT_LIST: `OPEN_SORT_LIST`,
-  CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`
+  CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
+  TO_PLACE: `TO_PLACE`,
+  TO_HOME: `TO_HOME`,
+  TO_SIGN_IN: `TO_SIGN_IN`
 };
 
 const ActionCreator = {
@@ -41,9 +43,19 @@ const ActionCreator = {
     payload: offer,
   }),
 
-  changePage: () => ({
-    type: ActionType.CHANGE_PAGE,
+  toPlace: () => ({
+    type: ActionType.TO_PLACE,
     payload: PageType.PROPERTY,
+  }),
+
+  toHome: () => ({
+    type: ActionType.TO_HOME,
+    payload: PageType.MAIN,
+  }),
+
+  toSignIn: () => ({
+    type: ActionType.TO_SIGN_IN,
+    payload: PageType.SIGN_IN,
   }),
 
   changeCity: (index) => ({
@@ -79,7 +91,17 @@ const reducer = (state = initialState, action) => {
         activeOffer: action.payload,
       });
 
-    case ActionType.CHANGE_PAGE:
+    case ActionType.TO_PLACE:
+      return extend(state, {
+        page: action.payload,
+      });
+
+    case ActionType.TO_HOME:
+      return extend(state, {
+        page: action.payload,
+      });
+
+    case ActionType.TO_SIGN_IN:
       return extend(state, {
         page: action.payload,
       });

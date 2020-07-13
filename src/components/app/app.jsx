@@ -6,23 +6,30 @@ import {PageType} from "../../constants";
 import PageMain from "../page-main/page-main.jsx";
 import Page from "../page/page.jsx";
 import Offer from "../offer/offer.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
 import {ActionCreator} from "../../reducer/app-state/app-state.js";
 import offers from "../../mocks/offers";
 import {Cities} from "../../mocks/const";
 import {getCity, getCities, getActiveOffer, getPage, getSortIsOpen, getSortType, getSortTypes} from "../../reducer/app-state/selectors";
 import {getPlacesForCity} from "../../reducer/data/selectors";
-import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {getAuthorizationStatus, getUserLogin} from "../../reducer/user/selectors";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
 class App extends PureComponent {
   _renderScreen() {
     const {activePage, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, places, cities, onHoverPlace, onClickByHeader,
-      onChangeCity, onClickBySort, onClickBySortType} = this.props;
+      onChangeCity, onClickBySort, onClickBySortType, authorizationStatus, onLogin, userLogin, onClickByLogo, onClickBySignIn} = this.props;
 
     switch (activePage) {
       case PageType.MAIN:
         return (
-          <Page type={activePage}>
+          <Page
+            type={activePage}
+            status={authorizationStatus}
+            userLogin={userLogin}
+            onClickBySignIn = {onClickBySignIn}
+          >
             <PageMain
               offers = {places}
               cities = {cities}
@@ -41,14 +48,33 @@ class App extends PureComponent {
         );
       case PageType.PROPERTY:
         return (
-          <Page type={activePage}>
+          <Page
+            type={activePage}
+            status={authorizationStatus}
+            userLogin={userLogin}
+            onClickByLogo={onClickByLogo}
+            onClickBySignIn = {onClickBySignIn}
+          >
             <Offer
+              status={authorizationStatus}
               offer = {activeOffer}
               offers = {places}
               activeCity = {activeCity}
               onClickByHeader = {onClickByHeader}
               onHoverPlace = {onHoverPlace}
             />;
+          </Page>
+        );
+      case PageType.SIGN_IN:
+        return (
+          <Page
+            type={PageType.SIGN_IN}
+            status={authorizationStatus}
+            onClickByLogo={onClickByLogo}
+          >
+            <SignIn
+              onLogin = {onLogin}
+            />
           </Page>
         );
       default:
@@ -64,6 +90,7 @@ class App extends PureComponent {
         </Route>
         <Route exact path="/dev-offer">
           <Offer
+            status={AuthorizationStatus.AUTH}
             offer = {offers[0]}
             offers = {offers}
             activeCity = {Cities[0]}
@@ -71,12 +98,25 @@ class App extends PureComponent {
             onHoverPlace = {() => {}}
           />
         </Route>
+        <Route exact path="/dev-sign-in">
+          <Page
+            type={PageType.SIGN_IN}
+            status={AuthorizationStatus.NO_AUTH}
+          >
+            <SignIn
+              onLogin={() => {}}
+            />
+          </Page>
+        </Route>
       </Switch>
     </BrowserRouter>;
   }
 }
 
 App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  onLogin: PropTypes.func.isRequired,
+  userLogin: PropTypes.string,
   activePage: PropTypes.string.isRequired,
   activeCity: PropTypes.object.isRequired,
   activeOffer: PropTypes.object,
@@ -90,10 +130,13 @@ App.propTypes = {
   onChangeCity: PropTypes.func.isRequired,
   onClickBySort: PropTypes.func.isRequired,
   onClickBySortType: PropTypes.func.isRequired,
+  onClickByLogo: PropTypes.func.isRequired,
+  onClickBySignIn: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
+  userLogin: getUserLogin(state),
   activePage: getPage(state),
   activeCity: getCity(state),
   activeOffer: getActiveOffer(state),
@@ -105,7 +148,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  login(authData) {
+  onLogin(authData) {
     dispatch(UserOperation.login(authData));
   },
 
@@ -114,7 +157,15 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   onClickByHeader() {
-    dispatch(ActionCreator.changePage());
+    dispatch(ActionCreator.toPlace());
+  },
+
+  onClickByLogo() {
+    dispatch(ActionCreator.toHome());
+  },
+
+  onClickBySignIn() {
+    dispatch(ActionCreator.toSignIn());
   },
 
   onChangeCity(index) {

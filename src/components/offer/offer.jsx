@@ -16,7 +16,7 @@ const getPremium = (isPremium) => isPremium ?
   ``;
 
 const Offer = ({offer, offer: {description, guests, host, isPremium, options, pictures, price, rating, room, title, type,
-  reviews}, offers, activeCity, onClickByHeader, onHoverPlace}) => {
+  reviews}, offers, activeCity, onClickByHeader, onHoverPlace, status}) => {
 
   const nearbyPlaces = offers.slice(0, 3); // временно, пока нет поиска поблизости
 
@@ -70,6 +70,7 @@ const Offer = ({offer, offer: {description, guests, host, isPremium, options, pi
             />
             <Reviews
               reviews={reviews}
+              status = {status}
             />
           </div>
         </div>
@@ -118,6 +119,7 @@ Offer.propTypes = {
   activeCity: PropTypes.object.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 export default Offer;

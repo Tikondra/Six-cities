@@ -45,7 +45,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
 
 it(`Reducer should change page`, () => {
   expect(reducer(initialState, {
-    type: ActionType.CHANGE_PAGE,
+    type: ActionType.TO_PLACE,
     payload: PageType.PROPERTY,
   })).toEqual({
     city: cities[0],
@@ -141,8 +141,8 @@ it(`Reducer should change sort type`, function () {
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for Change page`, function () {
-    expect(ActionCreator.changePage()).toEqual({
-      type: ActionType.CHANGE_PAGE,
+    expect(ActionCreator.toPlace()).toEqual({
+      type: ActionType.TO_PLACE,
       payload: PageType.PROPERTY,
     });
   });
