@@ -15,6 +15,7 @@ import {getPlacesForCity} from "../../reducer/data/selectors";
 import {getAuthorizationStatus, getUserLogin} from "../../reducer/user/selectors";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {Operation} from "../../reducer/data/data";
 
 class App extends PureComponent {
   _renderScreen() {
@@ -56,8 +57,6 @@ class App extends PureComponent {
             onClickBySignIn = {onClickBySignIn}
           >
             <Offer
-              status={authorizationStatus}
-              offer = {activeOffer}
               offers = {places}
               activeCity = {activeCity}
               onClickByHeader = {onClickByHeader}
@@ -90,8 +89,6 @@ class App extends PureComponent {
         </Route>
         <Route exact path="/dev-offer">
           <Offer
-            status={AuthorizationStatus.AUTH}
-            offer = {offers[0]}
             offers = {offers}
             activeCity = {Cities[0]}
             onClickByHeader = {() => {}}
@@ -158,6 +155,8 @@ const mapDispatchToProps = (dispatch) => ({
 
   onClickByHeader() {
     dispatch(ActionCreator.toPlace());
+    dispatch(Operation.loadReviews());
+    dispatch(Operation.loadNearbyPlaces());
   },
 
   onClickByLogo() {
