@@ -10,17 +10,23 @@ const api = createAPI(jest.fn);
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     places: [],
+    reviews: [],
+    nearbyPlaces: [],
   });
 });
 
 it(`Reducer should update places by load offers`, () => {
   expect(reducer({
     places: [],
+    reviews: [],
+    nearbyPlaces: [],
   }, {
     type: ActionType.LOAD_PLACES,
     payload: places,
   })).toEqual({
     places,
+    reviews: [],
+    nearbyPlaces: [],
   });
 });
 

@@ -1,9 +1,7 @@
-import offers from "../../mocks/offers";
 import {Cities} from "../../mocks/const";
-import {extend, getOffersBySort} from "../../utils";
+import {extend} from "../../utils";
 import {PageType, SORT_TYPES, SortType} from "../../constants";
 
-const someOffers = (activeCity) => offers.filter((offer) => offer.city === activeCity.title);
 const getCityList = (index) => Cities.map((city) => {
   if (city.title === Cities[index].title) {
     return extend(city, {
@@ -18,7 +16,6 @@ const getCityList = (index) => Cities.map((city) => {
 
 const initialState = {
   city: Cities[0],
-  offers: someOffers(Cities[0]),
   cities: getCityList(0),
   sortTypes: SORT_TYPES,
   page: PageType.MAIN,
@@ -81,7 +78,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         cities,
         city: cities[action.payload],
-        offers: someOffers(cities[action.payload]),
         sortType: SortType.POPULAR,
         sortIsOpen: false,
       });
@@ -115,7 +111,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         sortType: action.payload,
         sortIsOpen: false,
-        offers: getOffersBySort(someOffers(state.city), action.payload),
       });
   }
 
