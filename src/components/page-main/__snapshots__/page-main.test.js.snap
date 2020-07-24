@@ -272,7 +272,7 @@ exports[`should render Page-main 1`] = `
               </div>
               <h2
                 className="place-card__name"
-                onClick={[MockFunction]}
+                onClick={[Function]}
               >
                 <a
                   href="#"
@@ -371,7 +371,7 @@ exports[`should render Page-main 1`] = `
               </div>
               <h2
                 className="place-card__name"
-                onClick={[MockFunction]}
+                onClick={[Function]}
               >
                 <a
                   href="#"

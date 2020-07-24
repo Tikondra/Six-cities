@@ -10,8 +10,8 @@ it(`should render Offer`, function () {
   const tree = renderer
     .create(
         <Offer
-          status={AuthorizationStatus.AUTH}
-          offer={offers[0]}
+          status={AuthorizationStatus.NO_AUTH}
+          activePlace={offers[0]}
           offers = {offers}
           activeCity={cities[0]}
           onClickByHeader = {jest.fn()}

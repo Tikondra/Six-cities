@@ -9,7 +9,7 @@ it(`should render Reviews`, function () {
     .create(
         <Reviews
           reviews={reviews}
-          status={AuthorizationStatus.AUTH}
+          status={AuthorizationStatus.NO_AUTH}
         />
     ).toJSON();
 

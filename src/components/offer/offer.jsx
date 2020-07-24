@@ -10,7 +10,7 @@ import Reviews from "../reviews/reviews.jsx";
 import Map from "../map/map.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
-import {getActiveOffer} from "../../reducer/app-state/selectors";
+import {getActivePlace} from "../../reducer/app-state/selectors";
 import {getNearbyPlaces, getReviews} from "../../reducer/data/selectors";
 
 const getPremium = (isPremium) => isPremium ?
@@ -19,8 +19,8 @@ const getPremium = (isPremium) => isPremium ?
   </div> :
   ``;
 
-const Offer = ({offer, offer: {description, guests, host, isPremium, options, pictures, price, rating, room, title, type},
-  offers, activeCity, onClickByHeader, onHoverPlace, status, reviews, nearbyPlaces}) => {
+const Offer = ({activePlace, activePlace: {description, guests, host, isPremium, options, pictures, price, rating, room, title, type},
+  activeCity, onClickByHeader, onHoverPlace, status, reviews, nearbyPlaces}) => {
 
   return (
     <main className="page__main page__main--property">
@@ -78,8 +78,8 @@ const Offer = ({offer, offer: {description, guests, host, isPremium, options, pi
         </div>
         <Map
           type = {MapType.PROPERTY}
-          offers = {offers}
-          activeOffer={offer}
+          offers = {nearbyPlaces}
+          activeOffer={activePlace}
           city = {activeCity}
         />
       </section>
@@ -99,7 +99,7 @@ const Offer = ({offer, offer: {description, guests, host, isPremium, options, pi
 };
 
 Offer.propTypes = {
-  offer: PropTypes.shape({
+  activePlace: PropTypes.shape({
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -116,7 +116,6 @@ Offer.propTypes = {
       isSuper: PropTypes.bool.isRequired,
     }).isRequired,
   }),
-  offers: PropTypes.array.isRequired,
   activeCity: PropTypes.object.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
@@ -127,9 +126,9 @@ Offer.propTypes = {
 
 const mapStateToProps = (state) => ({
   status: getAuthorizationStatus(state),
-  offer: getActiveOffer(state),
-  reviews: getReviews(state),
-  nearbyPlaces: getNearbyPlaces(state),
+  activePlace: getActivePlace(state),
+  reviews: getReviews(state) || [],
+  nearbyPlaces: getNearbyPlaces(state) || [],
 });
 
 export {Offer};

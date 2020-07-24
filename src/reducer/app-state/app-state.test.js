@@ -23,6 +23,7 @@ const initialState = {
   sortTypes: SORT_TYPES,
   page: PageType.MAIN,
   activeOffer: null,
+  activePlace: null,
   sortType: SortType.POPULAR,
   sortIsOpen: false,
 };
@@ -34,6 +35,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     sortTypes: SORT_TYPES,
     page: PageType.MAIN,
     activeOffer: null,
+    activePlace: null,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
   });
@@ -42,12 +44,13 @@ it(`Reducer without additional parameters should return initial state`, () => {
 it(`Reducer should change page`, () => {
   expect(reducer(initialState, {
     type: ActionType.TO_PLACE,
-    payload: PageType.PROPERTY,
+    payload: offers[0],
   })).toEqual({
     city: cities[0],
     cities: getCityList(0),
     page: PageType.PROPERTY,
     activeOffer: null,
+    activePlace: offers[0],
     sortTypes: SORT_TYPES,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
@@ -63,6 +66,7 @@ it(`Reducer should change offer`, () => {
     cities: getCityList(0),
     page: PageType.MAIN,
     activeOffer: offers[0],
+    activePlace: null,
     sortTypes: SORT_TYPES,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
@@ -76,6 +80,7 @@ it(`Reducer should change offer`, () => {
     cities: getCityList(0),
     page: PageType.MAIN,
     activeOffer: offers[1],
+    activePlace: null,
     sortTypes: SORT_TYPES,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
@@ -94,6 +99,7 @@ it(`Reducer should change city`, () => {
     sortTypes: SORT_TYPES,
     page: PageType.MAIN,
     activeOffer: null,
+    activePlace: null,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
   });
@@ -109,6 +115,7 @@ it(`Reducer should open sort list`, function () {
     sortTypes: SORT_TYPES,
     page: PageType.MAIN,
     activeOffer: null,
+    activePlace: null,
     sortType: SortType.POPULAR,
     sortIsOpen: true,
   });
@@ -124,6 +131,7 @@ it(`Reducer should change sort type`, function () {
     sortTypes: SORT_TYPES,
     page: PageType.MAIN,
     activeOffer: null,
+    activePlace: null,
     sortType: SortType.PRICE_UP,
     sortIsOpen: false,
   });
@@ -131,9 +139,9 @@ it(`Reducer should change sort type`, function () {
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for Change page`, function () {
-    expect(ActionCreator.toPlace()).toEqual({
+    expect(ActionCreator.toPlace(offers[0])).toEqual({
       type: ActionType.TO_PLACE,
-      payload: PageType.PROPERTY,
+      payload: offers[0],
     });
   });
 

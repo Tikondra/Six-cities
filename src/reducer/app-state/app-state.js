@@ -20,6 +20,7 @@ const initialState = {
   sortTypes: SORT_TYPES,
   page: PageType.MAIN,
   activeOffer: null,
+  activePlace: null,
   sortType: SortType.POPULAR,
   sortIsOpen: false,
 };
@@ -40,9 +41,9 @@ const ActionCreator = {
     payload: offer,
   }),
 
-  toPlace: () => ({
+  toPlace: (offer) => ({
     type: ActionType.TO_PLACE,
-    payload: PageType.PROPERTY,
+    payload: offer,
   }),
 
   toHome: () => ({
@@ -89,7 +90,8 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.TO_PLACE:
       return extend(state, {
-        page: action.payload,
+        page: PageType.PROPERTY,
+        activePlace: action.payload
       });
 
     case ActionType.TO_HOME:

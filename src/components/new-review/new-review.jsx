@@ -1,60 +1,76 @@
 import React from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import FormRating from "../form-rating/form-rating.jsx";
+import FormComment from "../form-comment/form-comment.jsx";
+import FormSubmit from "../form-submit/form-submit.jsx";
+import FormError from "../form-error/form-error.jsx";
+import {getBntState, getComment, getError, getFormState, getRating} from "../../reducer/review/selectors";
+import {ActionCreator, Operation} from "../../reducer/review/review";
 
-const NewReview = () => {
+const NewReview = ({btnState, formState, rating, comment, error,
+  onChangeRating, onChangeComment, onSubmitReview}) => {
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={(evt) => {
+        evt.preventDefault();
+        onSubmitReview(comment, rating);
+      }}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <div className="reviews__rating-form form__rating">
-        <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
-        <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
-
-        <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars"
-          type="radio" />
-        <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
-
-        <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars"
-          type="radio" />
-        <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
-
-        <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars"
-          type="radio" />
-        <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
-
-        <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star"
-          type="radio" />
-        <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
-      </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review"
-        placeholder="Tell how was your stay, what you like and what can be improved"/>
-      <div className="reviews__button-wrapper">
-        <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe
-          your stay with at least <b className="reviews__text-amount">50 characters</b>.
-        </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
-      </div>
+      <FormRating
+        isBlocked={formState}
+        rating = {rating}
+        onChangeRating={onChangeRating}
+      />
+      <FormComment
+        isBlocked={formState}
+        comment = {comment}
+        onChangeComment = {onChangeComment}
+      />
+      <FormSubmit
+        isDisabled={btnState}
+        isBlocked={formState}
+      />
+      {error ? <FormError/> : ``}
     </form>
   );
 };
 
-export default NewReview;
+NewReview.propTypes = {
+  btnState: PropTypes.bool.isRequired,
+  formState: PropTypes.bool.isRequired,
+  rating: PropTypes.number.isRequired,
+  comment: PropTypes.string.isRequired,
+  error: PropTypes.bool.isRequired,
+  onChangeRating: PropTypes.func.isRequired,
+  onChangeComment: PropTypes.func.isRequired,
+  onSubmitReview: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  btnState: getBntState(state),
+  formState: getFormState(state),
+  rating: getRating(state),
+  comment: getComment(state),
+  error: getError(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeRating(rating) {
+    dispatch(ActionCreator.changeRating(rating));
+  },
+
+  onChangeComment(evt) {
+    dispatch(ActionCreator.changeComment(evt.target.value));
+  },
+
+  onSubmitReview(comment, rating) {
+    dispatch(Operation.postReview(comment, rating));
+  }
+});
+
+export {NewReview};
+export default connect(mapStateToProps, mapDispatchToProps)(NewReview);

@@ -5,8 +5,6 @@ import {createReviews} from "../../adapters/reviews";
 
 const initialState = {
   places: [],
-  reviews: [],
-  nearbyPlaces: [],
 };
 
 const ActionType = {
