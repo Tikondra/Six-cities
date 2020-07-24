@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render FormError 1`] = `
+<div>
+  <p
+    style={
+      Object {
+        "color": "red",
+        "position": "absolute",
+      }
+    }
+  >
+    Отзыв не отправлен. Попробуйте позднее.
+  </p>
+</div>
+`;

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render FormComment 1`] = `
+<textarea
+  className="reviews__textarea form__textarea"
+  disabled={false}
+  id="review"
+  maxLength={300}
+  minLength={50}
+  name="review"
+  onChange={[Function]}
+  placeholder="Tell how was your stay, what you like and what can be improved"
+  value=""
+/>
+`;

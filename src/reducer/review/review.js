@@ -3,7 +3,7 @@ import NameSpace from "../name-space";
 import {ActionCreator as dataActionCreator} from "../data/data";
 import {createReviews} from "../../adapters/reviews";
 
-const isDisabledSubmit = (stars, comment) => !(stars > 0 && comment.length > 50 && comment.length < 300);
+export const isDisabledSubmit = (stars, comment) => !(stars > 0 && comment.length > 50 && comment.length < 300);
 
 const initialState = {
   btnIsDisabled: true,
