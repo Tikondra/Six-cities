@@ -1,12 +1,10 @@
 import {reducer, ActionType, ActionCreator} from "./app-state";
 import {PageType} from "../../constants";
-import {extend, getOffersBySort} from "../../utils";
-import offers from "../../mocks/offers";
+import {extend} from "../../utils";
 import {SORT_TYPES, SortType} from "../../mocks/for-test/const";
-import {offers as testOffers} from "../../mocks/for-test/offers";
+import {offers} from "../../mocks/for-test/offers";
 import {cities} from "../../mocks/for-test/cities";
 
-const someOffers = (activeCity) => offers.filter((offer) => offer.city === activeCity.title);
 const getCityList = (index) => cities.map((it) => {
   if (it.title === cities[index].title) {
     return extend(it, {
@@ -21,11 +19,11 @@ const getCityList = (index) => cities.map((it) => {
 
 const initialState = {
   city: cities[0],
-  offers: someOffers(cities[0]),
   cities: getCityList(0),
   sortTypes: SORT_TYPES,
   page: PageType.MAIN,
   activeOffer: null,
+  activePlace: null,
   sortType: SortType.POPULAR,
   sortIsOpen: false,
 };
@@ -33,11 +31,11 @@ const initialState = {
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     city: cities[0],
-    offers: [offers[4]],
     cities: getCityList(0),
     sortTypes: SORT_TYPES,
     page: PageType.MAIN,
     activeOffer: null,
+    activePlace: null,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
   });
@@ -46,13 +44,13 @@ it(`Reducer without additional parameters should return initial state`, () => {
 it(`Reducer should change page`, () => {
   expect(reducer(initialState, {
     type: ActionType.TO_PLACE,
-    payload: PageType.PROPERTY,
+    payload: offers[0],
   })).toEqual({
     city: cities[0],
-    offers: someOffers(cities[0]),
     cities: getCityList(0),
     page: PageType.PROPERTY,
     activeOffer: null,
+    activePlace: offers[0],
     sortTypes: SORT_TYPES,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
@@ -65,10 +63,10 @@ it(`Reducer should change offer`, () => {
     payload: offers[0],
   })).toEqual({
     city: cities[0],
-    offers: someOffers(cities[0]),
     cities: getCityList(0),
     page: PageType.MAIN,
     activeOffer: offers[0],
+    activePlace: null,
     sortTypes: SORT_TYPES,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
@@ -79,10 +77,10 @@ it(`Reducer should change offer`, () => {
     payload: offers[1],
   })).toEqual({
     city: cities[0],
-    offers: someOffers(cities[0]),
     cities: getCityList(0),
     page: PageType.MAIN,
     activeOffer: offers[1],
+    activePlace: null,
     sortTypes: SORT_TYPES,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
@@ -97,11 +95,11 @@ it(`Reducer should change city`, () => {
     payload: 1,
   })).toEqual({
     city: citiesActive[1],
-    offers: someOffers(cities[1]),
     cities: getCityList(1),
     sortTypes: SORT_TYPES,
     page: PageType.MAIN,
     activeOffer: null,
+    activePlace: null,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
   });
@@ -113,11 +111,11 @@ it(`Reducer should open sort list`, function () {
     payload: true,
   })).toEqual({
     city: cities[0],
-    offers: someOffers(cities[0]),
     cities: getCityList(0),
     sortTypes: SORT_TYPES,
     page: PageType.MAIN,
     activeOffer: null,
+    activePlace: null,
     sortType: SortType.POPULAR,
     sortIsOpen: true,
   });
@@ -129,11 +127,11 @@ it(`Reducer should change sort type`, function () {
     payload: SortType.PRICE_UP,
   })).toEqual({
     city: cities[0],
-    offers: getOffersBySort(someOffers(cities[0]), SortType.PRICE_UP),
     cities: getCityList(0),
     sortTypes: SORT_TYPES,
     page: PageType.MAIN,
     activeOffer: null,
+    activePlace: null,
     sortType: SortType.PRICE_UP,
     sortIsOpen: false,
   });
@@ -141,16 +139,16 @@ it(`Reducer should change sort type`, function () {
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for Change page`, function () {
-    expect(ActionCreator.toPlace()).toEqual({
+    expect(ActionCreator.toPlace(offers[0])).toEqual({
       type: ActionType.TO_PLACE,
-      payload: PageType.PROPERTY,
+      payload: offers[0],
     });
   });
 
   it(`Action creator for Change active offer`, function () {
-    expect(ActionCreator.changeActiveOffer(testOffers[0])).toEqual({
+    expect(ActionCreator.changeActiveOffer(offers[0])).toEqual({
       type: ActionType.CHANGE_OFFER,
-      payload: testOffers[0],
+      payload: offers[0],
     });
   });
 

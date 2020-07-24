@@ -13,7 +13,7 @@ const OfferGallery = (props) => {
 
   return <div className="property__gallery-container container">
     <div className="property__gallery">
-      {getPicture(pictures.splice(0, 6), title)}
+      {getPicture(pictures.slice(0, 6), title)}
     </div>
   </div>;
 };

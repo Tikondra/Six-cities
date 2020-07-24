@@ -28,6 +28,7 @@ export const Format = {
   DATE_TIME: `YYYY-MM-DD`,
   REVIEW_DATE: `MMMM YYYY`,
   MAX_REVIEWS: 10,
+  STAR_COUNT: 5
 };
 
 export const PlacesListClass = {

@@ -10,11 +10,16 @@ import SignIn from "../sign-in/sign-in.jsx";
 import {ActionCreator} from "../../reducer/app-state/app-state.js";
 import offers from "../../mocks/offers";
 import {Cities} from "../../mocks/const";
-import {getCity, getCities, getActiveOffer, getPage, getSortIsOpen, getSortType, getSortTypes} from "../../reducer/app-state/selectors";
+import {
+  getCity, getCities, getActiveOffer,
+  getPage, getSortIsOpen, getSortType,
+  getSortTypes, getActivePlace
+} from "../../reducer/app-state/selectors";
 import {getPlacesForCity} from "../../reducer/data/selectors";
 import {getAuthorizationStatus, getUserLogin} from "../../reducer/user/selectors";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {Operation} from "../../reducer/data/data";
 
 class App extends PureComponent {
   _renderScreen() {
@@ -56,9 +61,6 @@ class App extends PureComponent {
             onClickBySignIn = {onClickBySignIn}
           >
             <Offer
-              status={authorizationStatus}
-              offer = {activeOffer}
-              offers = {places}
               activeCity = {activeCity}
               onClickByHeader = {onClickByHeader}
               onHoverPlace = {onHoverPlace}
@@ -90,8 +92,6 @@ class App extends PureComponent {
         </Route>
         <Route exact path="/dev-offer">
           <Offer
-            status={AuthorizationStatus.AUTH}
-            offer = {offers[0]}
             offers = {offers}
             activeCity = {Cities[0]}
             onClickByHeader = {() => {}}
@@ -140,6 +140,7 @@ const mapStateToProps = (state) => ({
   activePage: getPage(state),
   activeCity: getCity(state),
   activeOffer: getActiveOffer(state),
+  activePlace: getActivePlace(state),
   sortTypes: getSortTypes(state),
   sortType: getSortType(state),
   sortIsOpen: getSortIsOpen(state),
@@ -156,8 +157,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeActiveOffer(offer));
   },
 
-  onClickByHeader() {
-    dispatch(ActionCreator.toPlace());
+  onClickByHeader(offer) {
+    dispatch(ActionCreator.toPlace(offer));
+    dispatch(Operation.loadReviews());
+    dispatch(Operation.loadNearbyPlaces());
   },
 
   onClickByLogo() {

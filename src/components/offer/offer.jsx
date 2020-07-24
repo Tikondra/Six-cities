@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import {MapType, PlacesListClass, TypePlace} from "../../constants";
 import OfferGallery from "../offer-gallery/offer-gallery.jsx";
 import {getRating} from "../../utils";
@@ -8,6 +9,9 @@ import Host from "../host/host.jsx";
 import Reviews from "../reviews/reviews.jsx";
 import Map from "../map/map.jsx";
 import PlacesList from "../places-list/places-list.jsx";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {getActivePlace} from "../../reducer/app-state/selectors";
+import {getNearbyPlaces, getReviews} from "../../reducer/data/selectors";
 
 const getPremium = (isPremium) => isPremium ?
   <div className="property__mark">
@@ -15,10 +19,8 @@ const getPremium = (isPremium) => isPremium ?
   </div> :
   ``;
 
-const Offer = ({offer, offer: {description, guests, host, isPremium, options, pictures, price, rating, room, title, type,
-  reviews}, offers, activeCity, onClickByHeader, onHoverPlace, status}) => {
-
-  const nearbyPlaces = offers.slice(0, 3); // временно, пока нет поиска поблизости
+const Offer = ({activePlace, activePlace: {description, guests, host, isPremium, options, pictures, price, rating, room, title, type},
+  activeCity, onClickByHeader, onHoverPlace, status, reviews, nearbyPlaces}) => {
 
   return (
     <main className="page__main page__main--property">
@@ -76,8 +78,8 @@ const Offer = ({offer, offer: {description, guests, host, isPremium, options, pi
         </div>
         <Map
           type = {MapType.PROPERTY}
-          offers = {offers}
-          activeOffer={offer}
+          offers = {nearbyPlaces}
+          activeOffer={activePlace}
           city = {activeCity}
         />
       </section>
@@ -97,7 +99,7 @@ const Offer = ({offer, offer: {description, guests, host, isPremium, options, pi
 };
 
 Offer.propTypes = {
-  offer: PropTypes.shape({
+  activePlace: PropTypes.shape({
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -113,13 +115,21 @@ Offer.propTypes = {
       name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
     }).isRequired,
-    reviews: PropTypes.array,
   }),
-  offers: PropTypes.array.isRequired,
   activeCity: PropTypes.object.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
+  reviews: PropTypes.array,
+  nearbyPlaces: PropTypes.array,
 };
 
-export default Offer;
+const mapStateToProps = (state) => ({
+  status: getAuthorizationStatus(state),
+  activePlace: getActivePlace(state),
+  reviews: getReviews(state) || [],
+  nearbyPlaces: getNearbyPlaces(state) || [],
+});
+
+export {Offer};
+export default connect(mapStateToProps)(Offer);

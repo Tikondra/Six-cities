@@ -36,6 +36,8 @@ it(`should render App`, function () {
             cities={cities}
             onHoverPlace={jest.fn}
             onClickByHeader={jest.fn}
+            onClickByLogo={jest.fn}
+            onClickBySignIn={jest.fn}
             onChangeCity={jest.fn}
             onClickBySort={jest.fn()}
             onClickBySortType = {jest.fn()}

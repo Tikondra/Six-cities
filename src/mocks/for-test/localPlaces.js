@@ -25,15 +25,6 @@ export const localPlaces = [
       name: `Angelina`,
       isSuper: true,
       id: 25,
-    },
-    reviews: [
-      {
-        author: `Kenny`,
-        avatar: `img/avatar-max.jpg`,
-        rating: 4,
-        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-        date: new Date(2020, 0, 15),
-      },
-    ],
+    }
   }
 ];

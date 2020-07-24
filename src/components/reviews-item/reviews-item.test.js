@@ -1,13 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {offers} from "../../mocks/for-test/offers";
 import ReviewsItem from "./reviews-item";
+import {reviews} from "../../mocks/for-test/reviews";
 
 it(`should render Reviews`, function () {
   const tree = renderer
     .create(
         <ReviewsItem
-          review={offers[0].reviews[0]}
+          review={reviews[0]}
         />
     ).toJSON();
 

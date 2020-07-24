@@ -13,3 +13,11 @@ export const getPlacesForCity = createSelector(
       return places.filter((place) => place.city === activeCity.title);
     }
 );
+
+export const getReviews = (state) => {
+  return state[NameSpace.DATA].reviews;
+};
+
+export const getNearbyPlaces = (state) => {
+  return state[NameSpace.DATA].nearbyPlaces;
+};

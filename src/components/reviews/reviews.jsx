@@ -7,7 +7,7 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import NewReview from "../new-review/new-review.jsx";
 
 const Reviews = ({reviews, status}) => {
-  const sortingReviews = getSortingReviews(reviews).splice(0, Format.MAX_REVIEWS);
+  const sortingReviews = getSortingReviews(reviews).slice(0, Format.MAX_REVIEWS);
 
   return (
     <section className="property__reviews reviews">
