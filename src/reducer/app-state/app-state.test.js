@@ -21,7 +21,6 @@ const initialState = {
   cities: getCityList(0),
   sortTypes: SORT_TYPES,
   activeOffer: null,
-  activePlace: null,
   sortType: SortType.POPULAR,
   sortIsOpen: false,
 };
@@ -32,22 +31,6 @@ it(`Reducer without additional parameters should return initial state`, () => {
     cities: getCityList(0),
     sortTypes: SORT_TYPES,
     activeOffer: null,
-    activePlace: null,
-    sortType: SortType.POPULAR,
-    sortIsOpen: false,
-  });
-});
-
-it(`Reducer should change page`, () => {
-  expect(reducer(initialState, {
-    type: ActionType.TO_PLACE,
-    payload: offers[0],
-  })).toEqual({
-    city: cities[0],
-    cities: getCityList(0),
-    activeOffer: null,
-    activePlace: offers[0],
-    sortTypes: SORT_TYPES,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
   });
@@ -61,7 +44,6 @@ it(`Reducer should change offer`, () => {
     city: cities[0],
     cities: getCityList(0),
     activeOffer: offers[0],
-    activePlace: null,
     sortTypes: SORT_TYPES,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
@@ -74,7 +56,6 @@ it(`Reducer should change offer`, () => {
     city: cities[0],
     cities: getCityList(0),
     activeOffer: offers[1],
-    activePlace: null,
     sortTypes: SORT_TYPES,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
@@ -92,7 +73,6 @@ it(`Reducer should change city`, () => {
     cities: getCityList(1),
     sortTypes: SORT_TYPES,
     activeOffer: null,
-    activePlace: null,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
   });
@@ -107,7 +87,6 @@ it(`Reducer should open sort list`, function () {
     cities: getCityList(0),
     sortTypes: SORT_TYPES,
     activeOffer: null,
-    activePlace: null,
     sortType: SortType.POPULAR,
     sortIsOpen: true,
   });
@@ -122,20 +101,12 @@ it(`Reducer should change sort type`, function () {
     cities: getCityList(0),
     sortTypes: SORT_TYPES,
     activeOffer: null,
-    activePlace: null,
     sortType: SortType.PRICE_UP,
     sortIsOpen: false,
   });
 });
 
 describe(`Action creators work correctly`, () => {
-  it(`Action creator for Change page`, function () {
-    expect(ActionCreator.toPlace(offers[0])).toEqual({
-      type: ActionType.TO_PLACE,
-      payload: offers[0],
-    });
-  });
-
   it(`Action creator for Change active offer`, function () {
     expect(ActionCreator.changeActiveOffer(offers[0])).toEqual({
       type: ActionType.CHANGE_OFFER,

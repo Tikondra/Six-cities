@@ -54,12 +54,13 @@ exports[`should render PlacesList 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button"
+          onClick={[Function]}
           type="button"
         >
           <svg
             className="place-card__bookmark-icon"
-            height="19"
-            width="18"
+            height={19}
+            width={18}
           >
             <use
               xlinkHref="#icon-bookmark"
@@ -153,13 +154,14 @@ exports[`should render PlacesList 1`] = `
           </span>
         </div>
         <button
-          className="place-card__bookmark-button button"
+          className="place-card__bookmark-button button place-card__bookmark-button--active"
+          onClick={[Function]}
           type="button"
         >
           <svg
             className="place-card__bookmark-icon"
-            height="19"
-            width="18"
+            height={19}
+            width={18}
           >
             <use
               xlinkHref="#icon-bookmark"

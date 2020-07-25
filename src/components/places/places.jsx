@@ -6,8 +6,8 @@ import {PlacesListClass, MapType} from "../../constants";
 import Sorting from "../sorting/sorting.jsx";
 
 const Places = ({
-  offers, activeCity, activeOffer, sortTypes, sortType, sortIsOpen,
-  onClickByHeader, onHoverPlace, onClickBySort, onClickBySortType}) => {
+  offers, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, status,
+  onClickByHeader, onHoverPlace, onClickBySort, onClickBySortType, onClickByFavorite}) => {
 
   return (
     <div className="cities__places-container container">
@@ -22,10 +22,12 @@ const Places = ({
           onClickBySortType = {onClickBySortType}
         />
         <PlacesList
+          status={status}
           className = {PlacesListClass.MAIN}
           offers={offers}
           onClickByHeader={onClickByHeader}
           onHoverPlace = {onHoverPlace}
+          onClickByFavorite = {onClickByFavorite}
         />
       </section>
       <div className="cities__right-section">
@@ -49,10 +51,12 @@ Places.propTypes = {
     title: PropTypes.string.isRequired,
   }).isRequired,
   activeOffer: PropTypes.object,
+  status: PropTypes.string.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
   onClickBySort: PropTypes.func.isRequired,
   onClickBySortType: PropTypes.func.isRequired,
+  onClickByFavorite: PropTypes.func.isRequired,
 };
 
 export default Places;

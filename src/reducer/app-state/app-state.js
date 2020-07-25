@@ -19,7 +19,6 @@ const initialState = {
   cities: getCityList(0),
   sortTypes: SORT_TYPES,
   activeOffer: null,
-  activePlace: null,
   sortType: SortType.POPULAR,
   sortIsOpen: false,
 };
@@ -29,17 +28,11 @@ const ActionType = {
   CHANGE_OFFER: `CHANGE_OFFER`,
   OPEN_SORT_LIST: `OPEN_SORT_LIST`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
-  TO_PLACE: `TO_PLACE`,
 };
 
 const ActionCreator = {
   changeActiveOffer: (offer) => ({
     type: ActionType.CHANGE_OFFER,
-    payload: offer,
-  }),
-
-  toPlace: (offer) => ({
-    type: ActionType.TO_PLACE,
     payload: offer,
   }),
 
@@ -73,11 +66,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_OFFER:
       return extend(state, {
         activeOffer: action.payload,
-      });
-
-    case ActionType.TO_PLACE:
-      return extend(state, {
-        activePlace: action.payload
       });
 
     case ActionType.OPEN_SORT_LIST:

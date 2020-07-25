@@ -5,25 +5,18 @@ import history from '../../history.js';
 import PropTypes from "prop-types";
 import {AppRoute} from "../../constants";
 import PageMain from "../page-main/page-main.jsx";
+import Favorite from "../favorite/favorite.jsx";
 import Offer from "../offer/offer.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import {ActionCreator} from "../../reducer/app-state/app-state.js";
-import {
-  getCity, getCities, getActiveOffer,
-  getSortIsOpen, getSortType,
-  getSortTypes
-} from "../../reducer/app-state/selectors";
-import {getPlacesForCity} from "../../reducer/data/selectors";
+import {getCity} from "../../reducer/app-state/selectors";
 import {getAuthorizationStatus, getUserLogin} from "../../reducer/user/selectors";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {Operation} from "../../reducer/data/data";
 import {AuthorizationStatus} from "../../reducer/user/user";
 
 const App = (props) => {
-  const {
-    activeCity, activeOffer, sortTypes, sortType, sortIsOpen, places, cities, authorizationStatus, userLogin,
-    onHoverPlace, onClickByHeader, onChangeCity, onClickBySort, onClickBySortType, onLogin
-  } = props;
+  const {activeCity, authorizationStatus, userLogin, onHoverPlace, onClickByHeader, onLogin, onClickByFavorite} = props;
 
   return <Router history={history}>
     <Switch>
@@ -31,18 +24,9 @@ const App = (props) => {
         <PageMain
           status={authorizationStatus}
           userLogin={userLogin}
-          offers = {places}
-          cities = {cities}
-          activeOffer = {activeOffer}
-          activeCity = {activeCity}
-          sortTypes = {sortTypes}
-          sortType = {sortType}
-          sortIsOpen = {sortIsOpen}
           onClickByHeader = {onClickByHeader}
           onHoverPlace = {onHoverPlace}
-          onChangeCity = {onChangeCity}
-          onClickBySort = {onClickBySort}
-          onClickBySortType = {onClickBySortType}
+          onClickByFavorite = {onClickByFavorite}
         />
       </Route>
       <Route exact path={AppRoute.OFFER}>
@@ -52,6 +36,7 @@ const App = (props) => {
           activeCity = {activeCity}
           onClickByHeader = {onClickByHeader}
           onHoverPlace = {onHoverPlace}
+          onClickByFavorite = {onClickByFavorite}
         />;
       </Route>
       <Route exact path={AppRoute.LOGIN}>
@@ -63,9 +48,10 @@ const App = (props) => {
       </Route>
       <Route exact path={AppRoute.FAVORITES}>
         {authorizationStatus !== AuthorizationStatus.AUTH && <Redirect to={AppRoute.LOGIN} />}
-        <SignIn
+        <Favorite
           status={authorizationStatus}
-          onLogin = {onLogin}
+          userLogin={userLogin}
+          onClickByFavorite = {onClickByFavorite}
         />
       </Route>
     </Switch>
@@ -74,32 +60,18 @@ const App = (props) => {
 
 App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  onLogin: PropTypes.func.isRequired,
   userLogin: PropTypes.string,
   activeCity: PropTypes.object.isRequired,
-  activeOffer: PropTypes.object,
-  sortTypes: PropTypes.array.isRequired,
-  sortType: PropTypes.string.isRequired,
-  sortIsOpen: PropTypes.bool.isRequired,
-  places: PropTypes.array.isRequired,
-  cities: PropTypes.array.isRequired,
+  onLogin: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
-  onChangeCity: PropTypes.func.isRequired,
-  onClickBySort: PropTypes.func.isRequired,
-  onClickBySortType: PropTypes.func.isRequired,
+  onClickByFavorite: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
   userLogin: getUserLogin(state),
   activeCity: getCity(state),
-  activeOffer: getActiveOffer(state),
-  sortTypes: getSortTypes(state),
-  sortType: getSortType(state),
-  sortIsOpen: getSortIsOpen(state),
-  places: getPlacesForCity(state),
-  cities: getCities(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -116,17 +88,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(Operation.loadNearbyPlaces(id));
   },
 
-  onChangeCity(index) {
-    dispatch(ActionCreator.changeCity(index));
-  },
-
-  onClickBySort() {
-    dispatch(ActionCreator.openSortList());
-  },
-
-  onClickBySortType(sortType) {
-    dispatch(ActionCreator.changeSortType(sortType));
-  },
+  onClickByFavorite() {
+    dispatch(Operation.postFavorite());
+  }
 });
 
 export {App};

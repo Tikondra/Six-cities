@@ -24,6 +24,7 @@ it(`should render Offer`, function () {
               activeCity={cities[0]}
               onClickByHeader = {jest.fn()}
               onHoverPlace = {jest.fn()}
+              onClickByFavorite = {jest.fn()}
               reviews={reviews}
               nearbyPlaces={offers}
             />

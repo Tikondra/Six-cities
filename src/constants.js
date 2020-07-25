@@ -23,7 +23,21 @@ export const Format = {
   REVIEW_DATE: `MMMM YYYY`,
   MAX_REVIEWS: 10,
   STAR_COUNT: 5,
-  STAR_VALUE: [5, 4, 3, 2, 1]
+  STAR_VALUE: [5, 4, 3, 2, 1],
+  BOOKMARK_SIZE: {
+    NORMAL: {
+      width: 18,
+      height: 19,
+    },
+    BIG: {
+      width: 31,
+      height: 33,
+    }
+  },
+  BOOKMARK_TYPE: {
+    PLACE: `place-card`,
+    OFFER: `property`
+  }
 };
 
 export const PlacesListClass = {

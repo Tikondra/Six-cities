@@ -1,23 +1,17 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
 import {SORT_TYPES, SortType} from "../../mocks/for-test/const";
 import {offers} from "../../mocks/for-test/offers";
 import {cities} from "../../mocks/for-test/cities";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {createStore} from "redux";
+import reducer from "../../reducer/reducer";
 
-const mockStore = configureStore([]);
+const store = createStore(reducer);
 
 it(`should render App`, function () {
-  const store = mockStore({
-    city: cities[0],
-    offers,
-    cities,
-    activeOffer: offers[0],
-  });
-
   const tree = renderer
     .create(
         <Provider store={store}>
@@ -38,6 +32,7 @@ it(`should render App`, function () {
             onChangeCity={jest.fn}
             onClickBySort={jest.fn()}
             onClickBySortType = {jest.fn()}
+            onClickByFavorite = {jest.fn}
             onLogin={jest.fn}
           />
         </Provider>,

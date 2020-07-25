@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {TypePlace} from "../../constants";
+import {Format, TypePlace} from "../../constants";
 import {getRating} from "../../utils";
 import {Link} from "react-router-dom";
+import FavoriteBtn from "../favorite-btn/favorite-btn.jsx";
 
 const getPremium = (isPremium) => isPremium ?
   <div className="place-card__mark">
@@ -11,8 +12,8 @@ const getPremium = (isPremium) => isPremium ?
   ``;
 
 const Place = (props) => {
-  const {offer, onClickByHeader, onHoverPlace} = props;
-  const {id, isPremium, price, title, type, rating, picture} = offer;
+  const {offer, status, onClickByHeader, onHoverPlace, onClickByFavorite} = props;
+  const {id, isPremium, isFavorite, price, title, type, rating, picture} = offer;
 
   return <article
     className="cities__place-card place-card"
@@ -34,12 +35,13 @@ const Place = (props) => {
           <b className="place-card__price-value">&euro;{price}</b>
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
-        <button className="place-card__bookmark-button button" type="button">
-          <svg className="place-card__bookmark-icon" width="18" height="19">
-            <use xlinkHref="#icon-bookmark"/>
-          </svg>
-          <span className="visually-hidden">To bookmarks</span>
-        </button>
+        <FavoriteBtn
+          status={status}
+          size={Format.BOOKMARK_SIZE.NORMAL}
+          type={Format.BOOKMARK_TYPE.PLACE}
+          isActive={isFavorite}
+          onClickByFavorite = {onClickByFavorite}
+        />
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
@@ -64,14 +66,17 @@ Place.propTypes = {
   offer: PropTypes.shape({
     id: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf(Object.values(TypePlace)).isRequired,
     rating: PropTypes.number.isRequired,
     picture: PropTypes.string.isRequired,
   }),
+  status: PropTypes.string.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
+  onClickByFavorite: PropTypes.func.isRequired,
 };
 
 export default Place;

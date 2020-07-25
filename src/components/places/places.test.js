@@ -5,12 +5,14 @@ import {SORT_TYPES, SortType} from "../../mocks/for-test/const";
 import {offers} from "../../mocks/for-test/offers";
 import {cities} from "../../mocks/for-test/cities";
 import {BrowserRouter} from "react-router-dom";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
 it(`should render Places`, function () {
   const tree = renderer
     .create(
         <BrowserRouter>
           <Places
+            status={AuthorizationStatus.AUTH}
             offers={offers}
             activeCity={cities[3]}
             sortTypes = {SORT_TYPES}
@@ -20,6 +22,7 @@ it(`should render Places`, function () {
             onClickByHeader={jest.fn()}
             onClickBySort={jest.fn()}
             onClickBySortType = {jest.fn()}
+            onClickByFavorite = {jest.fn}
           />
         </BrowserRouter>,
         {createNodeMock: () => {

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {withRouter, Redirect} from 'react-router-dom';
-import {MapType, PlacesListClass, TypePlace} from "../../constants";
+import {Format, MapType, PlacesListClass, TypePlace} from "../../constants";
 import OfferGallery from "../offer-gallery/offer-gallery.jsx";
 import {getRating} from "../../utils";
 import Options from "../options/options.jsx";
@@ -13,6 +13,7 @@ import PlacesList from "../places-list/places-list.jsx";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {getNearbyPlaces, getPlaceForId, getReviews} from "../../reducer/data/selectors";
 import Header from "../header/header.jsx";
+import FavoriteBtn from "../favorite-btn/favorite-btn.jsx";
 
 const getPremium = (isPremium) => isPremium ?
   <div className="property__mark">
@@ -20,13 +21,15 @@ const getPremium = (isPremium) => isPremium ?
   </div> :
   ``;
 
-const Offer = ({offer, activeCity, onClickByHeader, onHoverPlace, status, userLogin, reviews = [], nearbyPlaces = []}) => {
+const Offer = ({
+  offer, activeCity, status, userLogin, reviews = [], nearbyPlaces = [],
+  onClickByHeader, onHoverPlace, onClickByFavorite}) => {
 
   if (!offer) {
     return <Redirect to="/" />;
   }
 
-  const {description, guests, host, isPremium, options, pictures, price, rating, room, title, type} = offer;
+  const {description, guests, host, isPremium, isFavorite, options, pictures, price, rating, room, title, type} = offer;
 
   return (
     <div className="page page--gray page--property">
@@ -47,12 +50,13 @@ const Offer = ({offer, activeCity, onClickByHeader, onHoverPlace, status, userLo
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"/>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <FavoriteBtn
+                  status={status}
+                  size={Format.BOOKMARK_SIZE.BIG}
+                  type={Format.BOOKMARK_TYPE.OFFER}
+                  isActive={isFavorite}
+                  onClickByFavorite = {onClickByFavorite}
+                />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -113,6 +117,7 @@ const Offer = ({offer, activeCity, onClickByHeader, onHoverPlace, status, userLo
 Offer.propTypes = {
   offer: PropTypes.shape({
     isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf(Object.values(TypePlace)).isRequired,
@@ -131,6 +136,7 @@ Offer.propTypes = {
   activeCity: PropTypes.object.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
+  onClickByFavorite: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
   userLogin: PropTypes.string,
   reviews: PropTypes.array,
