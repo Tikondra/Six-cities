@@ -21,7 +21,7 @@ export const localPlaces = [
     guests: 8,
     options: [`Air conditioning`, `Laptop friendly workspace`],
     host: {
-      avatar: `img/avatar-angelina.jpg`,
+      avatar: `/img/avatar-angelina.jpg`,
       name: `Angelina`,
       isSuper: true,
       id: 25,

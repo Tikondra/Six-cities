@@ -9,35 +9,33 @@ import {getBntState, getComment, getError, getFormState, getRating} from "../../
 import {ActionCreator, Operation} from "../../reducer/review/review";
 
 const NewReview = ({btnState, formState, rating, comment, error,
-  onChangeRating, onChangeComment, onSubmitReview}) => {
-  return (
-    <form
-      className="reviews__form form"
-      action="#"
-      method="post"
-      onSubmit={(evt) => {
-        evt.preventDefault();
-        onSubmitReview(comment, rating);
-      }}>
-      <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <FormRating
-        isBlocked={formState}
-        rating = {rating}
-        onChangeRating={onChangeRating}
-      />
-      <FormComment
-        isBlocked={formState}
-        comment = {comment}
-        onChangeComment = {onChangeComment}
-      />
-      <FormSubmit
-        isDisabled={btnState}
-        isBlocked={formState}
-      />
-      {error ? <FormError/> : ``}
-    </form>
-  );
-};
+  onChangeRating, onChangeComment, onSubmitReview}) => (
+  <form
+    className="reviews__form form"
+    action="#"
+    method="post"
+    onSubmit={(evt) => {
+      evt.preventDefault();
+      onSubmitReview(comment, rating);
+    }}>
+    <label className="reviews__label form__label" htmlFor="review">Your review</label>
+    <FormRating
+      isBlocked={formState}
+      rating = {rating}
+      onChangeRating={onChangeRating}
+    />
+    <FormComment
+      isBlocked={formState}
+      comment = {comment}
+      onChangeComment = {onChangeComment}
+    />
+    <FormSubmit
+      isDisabled={btnState}
+      isBlocked={formState}
+    />
+    {error ? <FormError/> : ``}
+  </form>
+);
 
 NewReview.propTypes = {
   btnState: PropTypes.bool.isRequired,

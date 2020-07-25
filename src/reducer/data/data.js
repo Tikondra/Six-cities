@@ -1,6 +1,5 @@
 import {extend} from "../../utils";
 import {createPlaces} from "../../adapters/places";
-import NameSpace from "../name-space";
 import {createReviews} from "../../adapters/reviews";
 
 const initialState = {
@@ -14,56 +13,43 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  loadPlaces: (places) => {
-    return {
+  loadPlaces: (places) => (
+    {
       type: ActionType.LOAD_PLACES,
       payload: places,
-    };
-  },
+    }
+  ),
 
-  loadReviews: (reviews) => {
-    return {
+  loadReviews: (reviews) => (
+    {
       type: ActionType.LOAD_REVIEWS,
       payload: reviews,
-    };
-  },
+    }
+  ),
 
-  loadNearbyPlaces: (places) => {
-    return {
+  loadNearbyPlaces: (places) => (
+    {
       type: ActionType.LOAD_NEARBY,
       payload: places,
-    };
-  },
+    }
+  ),
 };
 
 const Operation = {
-  loadPlaces: () => (dispatch, getState, api) => {
-    return api.get(`/hotels`)
-      .then((response) => createPlaces(response.data))
-      .then((places) => {
-        dispatch(ActionCreator.loadPlaces(places));
-      });
-  },
+  loadPlaces: () => (dispatch, getState, api) => (
+    api.get(`/hotels`)
+      .then((response) => dispatch(ActionCreator.loadPlaces(createPlaces(response.data))))
+  ),
 
-  loadReviews: () => (dispatch, getState, api) => {
-    const id = getState()[NameSpace.APP_STATE].activeOffer.id;
+  loadReviews: (id) => (dispatch, getState, api) => (
+    api.get(`/comments/${id}`)
+      .then((response) => dispatch(ActionCreator.loadReviews(createReviews(response.data))))
+  ),
 
-    return api.get(`/comments/${id}`)
-      .then((response) => createReviews(response.data))
-      .then((reviews) => {
-        dispatch(ActionCreator.loadReviews(reviews));
-      });
-  },
-
-  loadNearbyPlaces: () => (dispatch, getState, api) => {
-    const id = getState()[NameSpace.APP_STATE].activeOffer.id;
-
-    return api.get(`/hotels/${id}/nearby`)
-      .then((response) => createPlaces(response.data))
-      .then((places) => {
-        dispatch(ActionCreator.loadNearbyPlaces(places));
-      });
-  }
+  loadNearbyPlaces: (id) => (dispatch, getState, api) => (
+    api.get(`/hotels/${id}/nearby`)
+      .then((response) => dispatch(ActionCreator.loadNearbyPlaces(createPlaces(response.data))))
+  )
 };
 
 const reducer = (state = initialState, action) => {

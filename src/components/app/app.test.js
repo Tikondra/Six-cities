@@ -6,7 +6,6 @@ import {App} from "./app.jsx";
 import {SORT_TYPES, SortType} from "../../mocks/for-test/const";
 import {offers} from "../../mocks/for-test/offers";
 import {cities} from "../../mocks/for-test/cities";
-import {PageType} from "../../constants";
 import {AuthorizationStatus} from "../../reducer/user/user";
 
 const mockStore = configureStore([]);
@@ -16,7 +15,6 @@ it(`should render App`, function () {
     city: cities[0],
     offers,
     cities,
-    page: PageType.MAIN,
     activeOffer: offers[0],
   });
 
@@ -25,7 +23,6 @@ it(`should render App`, function () {
         <Provider store={store}>
           <App
             authorizationStatus={AuthorizationStatus.AUTH}
-            activePage={PageType.MAIN}
             activeCity={cities[0]}
             activeOffer={offers[0]}
             sortTypes = {SORT_TYPES}

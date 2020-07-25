@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {TypePlace} from "../../constants";
 import {getRating} from "../../utils";
+import {Link} from "react-router-dom";
 
 const getPremium = (isPremium) => isPremium ?
   <div className="place-card__mark">
@@ -47,10 +48,12 @@ const Place = (props) => {
         </div>
       </div>
       <h2
-        onClick={() => onClickByHeader(offer)}
+        onClick={() => onClickByHeader(id)}
         className="place-card__name"
       >
-        <a href="#">{title}</a>
+        <Link to={{pathname: `/offer/${id}`}}>
+          {title}
+        </Link>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>

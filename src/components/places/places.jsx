@@ -5,8 +5,9 @@ import Map from "../map/map.jsx";
 import {PlacesListClass, MapType} from "../../constants";
 import Sorting from "../sorting/sorting.jsx";
 
-const Places = ({offers, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, onClickByHeader, onHoverPlace, onClickBySort,
-  onClickBySortType}) => {
+const Places = ({
+  offers, activeCity, activeOffer, sortTypes, sortType, sortIsOpen,
+  onClickByHeader, onHoverPlace, onClickBySort, onClickBySortType}) => {
 
   return (
     <div className="cities__places-container container">

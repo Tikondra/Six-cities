@@ -5,12 +5,6 @@ export const TypePlace = {
   HOTEL: `Hotel`
 };
 
-export const PageType = {
-  MAIN: `main`,
-  PROPERTY: `property`,
-  SIGN_IN: `login`,
-};
-
 export const MapType = {
   MAIN: `cities`,
   PROPERTY: `property`
@@ -19,8 +13,8 @@ export const MapType = {
 export const MapOption = {
   START_COORDINATE: [52.38333, 4.9],
   ICON_SIZE: [30, 30],
-  ICON_SRC: `img/pin.svg`,
-  ICON_ACTIVE_SRC: `img/pin-active.svg`,
+  ICON_SRC: `/img/pin.svg`,
+  ICON_ACTIVE_SRC: `/img/pin-active.svg`,
   ZOOM: 12,
 };
 
@@ -28,7 +22,8 @@ export const Format = {
   DATE_TIME: `YYYY-MM-DD`,
   REVIEW_DATE: `MMMM YYYY`,
   MAX_REVIEWS: 10,
-  STAR_COUNT: 5
+  STAR_COUNT: 5,
+  STAR_VALUE: [5, 4, 3, 2, 1]
 };
 
 export const PlacesListClass = {
@@ -44,3 +39,10 @@ export const SortType = {
 };
 
 export const SORT_TYPES = Object.values(SortType);
+
+export const AppRoute = {
+  ROOT: `/`,
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  OFFER: `/offer/:id`,
+};

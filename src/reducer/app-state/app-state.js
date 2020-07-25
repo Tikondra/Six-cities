@@ -1,6 +1,6 @@
 import {Cities} from "../../mocks/const";
 import {extend} from "../../utils";
-import {PageType, SORT_TYPES, SortType} from "../../constants";
+import {SORT_TYPES, SortType} from "../../constants";
 
 const getCityList = (index) => Cities.map((city) => {
   if (city.title === Cities[index].title) {
@@ -18,7 +18,6 @@ const initialState = {
   city: Cities[0],
   cities: getCityList(0),
   sortTypes: SORT_TYPES,
-  page: PageType.MAIN,
   activeOffer: null,
   activePlace: null,
   sortType: SortType.POPULAR,
@@ -31,8 +30,6 @@ const ActionType = {
   OPEN_SORT_LIST: `OPEN_SORT_LIST`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   TO_PLACE: `TO_PLACE`,
-  TO_HOME: `TO_HOME`,
-  TO_SIGN_IN: `TO_SIGN_IN`
 };
 
 const ActionCreator = {
@@ -44,16 +41,6 @@ const ActionCreator = {
   toPlace: (offer) => ({
     type: ActionType.TO_PLACE,
     payload: offer,
-  }),
-
-  toHome: () => ({
-    type: ActionType.TO_HOME,
-    payload: PageType.MAIN,
-  }),
-
-  toSignIn: () => ({
-    type: ActionType.TO_SIGN_IN,
-    payload: PageType.SIGN_IN,
   }),
 
   changeCity: (index) => ({
@@ -90,18 +77,7 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.TO_PLACE:
       return extend(state, {
-        page: PageType.PROPERTY,
         activePlace: action.payload
-      });
-
-    case ActionType.TO_HOME:
-      return extend(state, {
-        page: action.payload,
-      });
-
-    case ActionType.TO_SIGN_IN:
-      return extend(state, {
-        page: action.payload,
       });
 
     case ActionType.OPEN_SORT_LIST:

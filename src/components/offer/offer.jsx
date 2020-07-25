@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {withRouter, Redirect} from 'react-router-dom';
 import {MapType, PlacesListClass, TypePlace} from "../../constants";
 import OfferGallery from "../offer-gallery/offer-gallery.jsx";
 import {getRating} from "../../utils";
@@ -10,8 +11,8 @@ import Reviews from "../reviews/reviews.jsx";
 import Map from "../map/map.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
-import {getActivePlace} from "../../reducer/app-state/selectors";
-import {getNearbyPlaces, getReviews} from "../../reducer/data/selectors";
+import {getNearbyPlaces, getPlaceForId, getReviews} from "../../reducer/data/selectors";
+import Header from "../header/header.jsx";
 
 const getPremium = (isPremium) => isPremium ?
   <div className="property__mark">
@@ -19,87 +20,98 @@ const getPremium = (isPremium) => isPremium ?
   </div> :
   ``;
 
-const Offer = ({activePlace, activePlace: {description, guests, host, isPremium, options, pictures, price, rating, room, title, type},
-  activeCity, onClickByHeader, onHoverPlace, status, reviews, nearbyPlaces}) => {
+const Offer = ({offer, activeCity, onClickByHeader, onHoverPlace, status, userLogin, reviews = [], nearbyPlaces = []}) => {
+
+  if (!offer) {
+    return <Redirect to="/" />;
+  }
+
+  const {description, guests, host, isPremium, options, pictures, price, rating, room, title, type} = offer;
 
   return (
-    <main className="page__main page__main--property">
-      <section className="property">
-        <OfferGallery
-          pictures = {pictures}
-          title = {title}
-        />
-        <div className="property__container container">
-          <div className="property__wrapper">
-            {getPremium(isPremium)}
-            <div className="property__name-wrapper">
-              <h1 className="property__name">
-                {title}
-              </h1>
-              <button className="property__bookmark-button button" type="button">
-                <svg className="property__bookmark-icon" width="31" height="33">
-                  <use xlinkHref="#icon-bookmark"/>
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button>
-            </div>
-            <div className="property__rating rating">
-              <div className="property__stars rating__stars">
-                <span style={{width: getRating(rating)}}/>
-                <span className="visually-hidden">Rating</span>
+    <div className="page page--gray page--property">
+      <Header
+        status={status}
+        userLogin={userLogin}
+      />
+      <main className="page__main page__main--property">
+        <section className="property">
+          <OfferGallery
+            pictures = {pictures}
+            title = {title}
+          />
+          <div className="property__container container">
+            <div className="property__wrapper">
+              {getPremium(isPremium)}
+              <div className="property__name-wrapper">
+                <h1 className="property__name">
+                  {title}
+                </h1>
+                <button className="property__bookmark-button button" type="button">
+                  <svg className="property__bookmark-icon" width="31" height="33">
+                    <use xlinkHref="#icon-bookmark"/>
+                  </svg>
+                  <span className="visually-hidden">To bookmarks</span>
+                </button>
               </div>
-              <span className="property__rating-value rating__value">{rating}</span>
-            </div>
-            <ul className="property__features">
-              <li className="property__feature property__feature--entire">
-                {type}
-              </li>
-              <li className="property__feature property__feature--bedrooms">
-                {room} Bedrooms
-              </li>
-              <li className="property__feature property__feature--adults">
+              <div className="property__rating rating">
+                <div className="property__stars rating__stars">
+                  <span style={{width: getRating(rating)}}/>
+                  <span className="visually-hidden">Rating</span>
+                </div>
+                <span className="property__rating-value rating__value">{rating}</span>
+              </div>
+              <ul className="property__features">
+                <li className="property__feature property__feature--entire">
+                  {type}
+                </li>
+                <li className="property__feature property__feature--bedrooms">
+                  {room} Bedrooms
+                </li>
+                <li className="property__feature property__feature--adults">
                 Max {guests} adults
-              </li>
-            </ul>
-            <div className="property__price">
-              <b className="property__price-value">&euro;{price}</b>
-              <span className="property__price-text">&nbsp;night</span>
+                </li>
+              </ul>
+              <div className="property__price">
+                <b className="property__price-value">&euro;{price}</b>
+                <span className="property__price-text">&nbsp;night</span>
+              </div>
+              <Options options={options}/>
+              <Host
+                host = {host}
+                description = {description}
+              />
+              <Reviews
+                reviews={reviews}
+                status = {status}
+              />
             </div>
-            <Options options={options}/>
-            <Host
-              host = {host}
-              description = {description}
-            />
-            <Reviews
-              reviews={reviews}
-              status = {status}
-            />
           </div>
-        </div>
-        <Map
-          type = {MapType.PROPERTY}
-          offers = {nearbyPlaces}
-          activeOffer={activePlace}
-          city = {activeCity}
-        />
-      </section>
-      <div className="container">
-        <section className="near-places places">
-          <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <PlacesList
-            className = {PlacesListClass.PROPERTY}
-            offers={nearbyPlaces}
-            onClickByHeader={onClickByHeader}
-            onHoverPlace={onHoverPlace}
+          <Map
+            type = {MapType.PROPERTY}
+            offers = {nearbyPlaces}
+            activeOffer={offer}
+            city = {activeCity}
           />
         </section>
-      </div>
-    </main>
+        <div className="container">
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <PlacesList
+              className = {PlacesListClass.PROPERTY}
+              offers={nearbyPlaces}
+              onClickByHeader={onClickByHeader}
+              onHoverPlace={onHoverPlace}
+            />
+          </section>
+        </div>
+      </main>
+    </div>
   );
 };
 
 Offer.propTypes = {
-  activePlace: PropTypes.shape({
+  offer: PropTypes.shape({
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -120,16 +132,17 @@ Offer.propTypes = {
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
+  userLogin: PropTypes.string,
   reviews: PropTypes.array,
   nearbyPlaces: PropTypes.array,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, {match}) => ({
   status: getAuthorizationStatus(state),
-  activePlace: getActivePlace(state),
-  reviews: getReviews(state) || [],
-  nearbyPlaces: getNearbyPlaces(state) || [],
+  offer: getPlaceForId(state, match.params.id),
+  reviews: getReviews(state),
+  nearbyPlaces: getNearbyPlaces(state),
 });
 
 export {Offer};
-export default connect(mapStateToProps)(Offer);
+export default withRouter(connect(mapStateToProps)(Offer));

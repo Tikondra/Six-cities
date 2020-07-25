@@ -18,12 +18,14 @@ exports[`should render App 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
               className="header__logo"
               height="41"
-              src="img/logo.svg"
+              src="/img/logo.svg"
               width="81"
             />
           </a>
@@ -39,7 +41,8 @@ exports[`should render App 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/favorites"
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
@@ -330,7 +333,8 @@ exports[`should render App 1`] = `
                   onClick={[Function]}
                 >
                   <a
-                    href="#"
+                    href="/offer/bkjnlkmlkms"
+                    onClick={[Function]}
                   >
                     Beautiful & luxurious apartment at great location
                   </a>
@@ -429,7 +433,8 @@ exports[`should render App 1`] = `
                   onClick={[Function]}
                 >
                   <a
-                    href="#"
+                    href="/offer/jkbsdkjsjldk"
+                    onClick={[Function]}
                   >
                     Wood and stone place
                   </a>

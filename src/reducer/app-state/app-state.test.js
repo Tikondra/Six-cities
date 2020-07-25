@@ -1,5 +1,4 @@
 import {reducer, ActionType, ActionCreator} from "./app-state";
-import {PageType} from "../../constants";
 import {extend} from "../../utils";
 import {SORT_TYPES, SortType} from "../../mocks/for-test/const";
 import {offers} from "../../mocks/for-test/offers";
@@ -21,7 +20,6 @@ const initialState = {
   city: cities[0],
   cities: getCityList(0),
   sortTypes: SORT_TYPES,
-  page: PageType.MAIN,
   activeOffer: null,
   activePlace: null,
   sortType: SortType.POPULAR,
@@ -33,7 +31,6 @@ it(`Reducer without additional parameters should return initial state`, () => {
     city: cities[0],
     cities: getCityList(0),
     sortTypes: SORT_TYPES,
-    page: PageType.MAIN,
     activeOffer: null,
     activePlace: null,
     sortType: SortType.POPULAR,
@@ -48,7 +45,6 @@ it(`Reducer should change page`, () => {
   })).toEqual({
     city: cities[0],
     cities: getCityList(0),
-    page: PageType.PROPERTY,
     activeOffer: null,
     activePlace: offers[0],
     sortTypes: SORT_TYPES,
@@ -64,7 +60,6 @@ it(`Reducer should change offer`, () => {
   })).toEqual({
     city: cities[0],
     cities: getCityList(0),
-    page: PageType.MAIN,
     activeOffer: offers[0],
     activePlace: null,
     sortTypes: SORT_TYPES,
@@ -78,7 +73,6 @@ it(`Reducer should change offer`, () => {
   })).toEqual({
     city: cities[0],
     cities: getCityList(0),
-    page: PageType.MAIN,
     activeOffer: offers[1],
     activePlace: null,
     sortTypes: SORT_TYPES,
@@ -97,7 +91,6 @@ it(`Reducer should change city`, () => {
     city: citiesActive[1],
     cities: getCityList(1),
     sortTypes: SORT_TYPES,
-    page: PageType.MAIN,
     activeOffer: null,
     activePlace: null,
     sortType: SortType.POPULAR,
@@ -113,7 +106,6 @@ it(`Reducer should open sort list`, function () {
     city: cities[0],
     cities: getCityList(0),
     sortTypes: SORT_TYPES,
-    page: PageType.MAIN,
     activeOffer: null,
     activePlace: null,
     sortType: SortType.POPULAR,
@@ -129,7 +121,6 @@ it(`Reducer should change sort type`, function () {
     city: cities[0],
     cities: getCityList(0),
     sortTypes: SORT_TYPES,
-    page: PageType.MAIN,
     activeOffer: null,
     activePlace: null,
     sortType: SortType.PRICE_UP,

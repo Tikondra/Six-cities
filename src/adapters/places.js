@@ -18,7 +18,7 @@ export const createPlaces = (data) => data.map((place) => {
     guests: place.max_adults,
     options: place.goods,
     host: {
-      avatar: place.host.avatar_url,
+      avatar: `/${place.host.avatar_url}`,
       name: place.host.name,
       isSuper: place.host.is_pro,
       id: place.host.id
