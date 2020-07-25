@@ -2,21 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import Place from "../place/place.jsx";
 
-const getPlaces = (places, onClickByHeader, onHoverPlace) => places.map((it) => {
+const getPlaces = (status, places, onClickByHeader, onHoverPlace, onClickByFavorite) => places.map((it) => {
   return <Place
     onClickByHeader={onClickByHeader}
     onHoverPlace = {onHoverPlace}
+    onClickByFavorite = {onClickByFavorite}
     offer = {it}
+    status={status}
     key = {it.id}
   />;
 });
 
-const PlacesList = (props) => {
-  const {offers, onClickByHeader, onHoverPlace, className} = props;
-
+const PlacesList = ({status, offers, onClickByHeader, onHoverPlace, className, onClickByFavorite}) => {
   return (
     <div className={className}>
-      {getPlaces(offers, onClickByHeader, onHoverPlace)}
+      {getPlaces(status, offers, onClickByHeader, onHoverPlace, onClickByFavorite)}
     </div>
   );
 };
@@ -24,8 +24,10 @@ const PlacesList = (props) => {
 PlacesList.propTypes = {
   className: PropTypes.string.isRequired,
   offers: PropTypes.array.isRequired,
+  status: PropTypes.string.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
+  onClickByFavorite: PropTypes.func.isRequired,
 };
 
 export default PlacesList;

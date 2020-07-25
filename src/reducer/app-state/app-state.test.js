@@ -1,5 +1,4 @@
 import {reducer, ActionType, ActionCreator} from "./app-state";
-import {PageType} from "../../constants";
 import {extend} from "../../utils";
 import {SORT_TYPES, SortType} from "../../mocks/for-test/const";
 import {offers} from "../../mocks/for-test/offers";
@@ -21,9 +20,7 @@ const initialState = {
   city: cities[0],
   cities: getCityList(0),
   sortTypes: SORT_TYPES,
-  page: PageType.MAIN,
   activeOffer: null,
-  activePlace: null,
   sortType: SortType.POPULAR,
   sortIsOpen: false,
 };
@@ -33,25 +30,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     city: cities[0],
     cities: getCityList(0),
     sortTypes: SORT_TYPES,
-    page: PageType.MAIN,
     activeOffer: null,
-    activePlace: null,
-    sortType: SortType.POPULAR,
-    sortIsOpen: false,
-  });
-});
-
-it(`Reducer should change page`, () => {
-  expect(reducer(initialState, {
-    type: ActionType.TO_PLACE,
-    payload: offers[0],
-  })).toEqual({
-    city: cities[0],
-    cities: getCityList(0),
-    page: PageType.PROPERTY,
-    activeOffer: null,
-    activePlace: offers[0],
-    sortTypes: SORT_TYPES,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
   });
@@ -64,9 +43,7 @@ it(`Reducer should change offer`, () => {
   })).toEqual({
     city: cities[0],
     cities: getCityList(0),
-    page: PageType.MAIN,
     activeOffer: offers[0],
-    activePlace: null,
     sortTypes: SORT_TYPES,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
@@ -78,9 +55,7 @@ it(`Reducer should change offer`, () => {
   })).toEqual({
     city: cities[0],
     cities: getCityList(0),
-    page: PageType.MAIN,
     activeOffer: offers[1],
-    activePlace: null,
     sortTypes: SORT_TYPES,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
@@ -97,9 +72,7 @@ it(`Reducer should change city`, () => {
     city: citiesActive[1],
     cities: getCityList(1),
     sortTypes: SORT_TYPES,
-    page: PageType.MAIN,
     activeOffer: null,
-    activePlace: null,
     sortType: SortType.POPULAR,
     sortIsOpen: false,
   });
@@ -113,9 +86,7 @@ it(`Reducer should open sort list`, function () {
     city: cities[0],
     cities: getCityList(0),
     sortTypes: SORT_TYPES,
-    page: PageType.MAIN,
     activeOffer: null,
-    activePlace: null,
     sortType: SortType.POPULAR,
     sortIsOpen: true,
   });
@@ -129,22 +100,13 @@ it(`Reducer should change sort type`, function () {
     city: cities[0],
     cities: getCityList(0),
     sortTypes: SORT_TYPES,
-    page: PageType.MAIN,
     activeOffer: null,
-    activePlace: null,
     sortType: SortType.PRICE_UP,
     sortIsOpen: false,
   });
 });
 
 describe(`Action creators work correctly`, () => {
-  it(`Action creator for Change page`, function () {
-    expect(ActionCreator.toPlace(offers[0])).toEqual({
-      type: ActionType.TO_PLACE,
-      payload: offers[0],
-    });
-  });
-
   it(`Action creator for Change active offer`, function () {
     expect(ActionCreator.changeActiveOffer(offers[0])).toEqual({
       type: ActionType.CHANGE_OFFER,

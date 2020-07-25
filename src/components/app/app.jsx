@@ -1,151 +1,77 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import {connect} from "react-redux";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router, Redirect} from "react-router-dom";
+import history from '../../history.js';
 import PropTypes from "prop-types";
-import {PageType} from "../../constants";
+import {AppRoute} from "../../constants";
 import PageMain from "../page-main/page-main.jsx";
-import Page from "../page/page.jsx";
+import Favorite from "../favorite/favorite.jsx";
 import Offer from "../offer/offer.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import {ActionCreator} from "../../reducer/app-state/app-state.js";
-import offers from "../../mocks/offers";
-import {Cities} from "../../mocks/const";
-import {
-  getCity, getCities, getActiveOffer,
-  getPage, getSortIsOpen, getSortType,
-  getSortTypes, getActivePlace
-} from "../../reducer/app-state/selectors";
-import {getPlacesForCity} from "../../reducer/data/selectors";
+import {getCity} from "../../reducer/app-state/selectors";
 import {getAuthorizationStatus, getUserLogin} from "../../reducer/user/selectors";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
-import {AuthorizationStatus} from "../../reducer/user/user";
 import {Operation} from "../../reducer/data/data";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
-class App extends PureComponent {
-  _renderScreen() {
-    const {activePage, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, places, cities, onHoverPlace, onClickByHeader,
-      onChangeCity, onClickBySort, onClickBySortType, authorizationStatus, onLogin, userLogin, onClickByLogo, onClickBySignIn} = this.props;
+const App = (props) => {
+  const {activeCity, authorizationStatus, userLogin, onHoverPlace, onClickByHeader, onLogin, onClickByFavorite} = props;
 
-    switch (activePage) {
-      case PageType.MAIN:
-        return (
-          <Page
-            type={activePage}
-            status={authorizationStatus}
-            userLogin={userLogin}
-            onClickBySignIn = {onClickBySignIn}
-          >
-            <PageMain
-              offers = {places}
-              cities = {cities}
-              activeOffer = {activeOffer}
-              activeCity = {activeCity}
-              sortTypes = {sortTypes}
-              sortType = {sortType}
-              sortIsOpen = {sortIsOpen}
-              onClickByHeader = {onClickByHeader}
-              onHoverPlace = {onHoverPlace}
-              onChangeCity = {onChangeCity}
-              onClickBySort = {onClickBySort}
-              onClickBySortType = {onClickBySortType}
-            />
-          </Page>
-        );
-      case PageType.PROPERTY:
-        return (
-          <Page
-            type={activePage}
-            status={authorizationStatus}
-            userLogin={userLogin}
-            onClickByLogo={onClickByLogo}
-            onClickBySignIn = {onClickBySignIn}
-          >
-            <Offer
-              activeCity = {activeCity}
-              onClickByHeader = {onClickByHeader}
-              onHoverPlace = {onHoverPlace}
-            />;
-          </Page>
-        );
-      case PageType.SIGN_IN:
-        return (
-          <Page
-            type={PageType.SIGN_IN}
-            status={authorizationStatus}
-            onClickByLogo={onClickByLogo}
-          >
-            <SignIn
-              onLogin = {onLogin}
-            />
-          </Page>
-        );
-      default:
-        return null;
-    }
-  }
-
-  render() {
-    return <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          {this._renderScreen()}
-        </Route>
-        <Route exact path="/dev-offer">
-          <Offer
-            offers = {offers}
-            activeCity = {Cities[0]}
-            onClickByHeader = {() => {}}
-            onHoverPlace = {() => {}}
-          />
-        </Route>
-        <Route exact path="/dev-sign-in">
-          <Page
-            type={PageType.SIGN_IN}
-            status={AuthorizationStatus.NO_AUTH}
-          >
-            <SignIn
-              onLogin={() => {}}
-            />
-          </Page>
-        </Route>
-      </Switch>
-    </BrowserRouter>;
-  }
-}
+  return <Router history={history}>
+    <Switch>
+      <Route exact path={AppRoute.ROOT}>
+        <PageMain
+          status={authorizationStatus}
+          userLogin={userLogin}
+          onClickByHeader = {onClickByHeader}
+          onHoverPlace = {onHoverPlace}
+          onClickByFavorite = {onClickByFavorite}
+        />
+      </Route>
+      <Route exact path={AppRoute.OFFER}>
+        <Offer
+          status={authorizationStatus}
+          userLogin={userLogin}
+          activeCity = {activeCity}
+          onClickByHeader = {onClickByHeader}
+          onHoverPlace = {onHoverPlace}
+          onClickByFavorite = {onClickByFavorite}
+        />;
+      </Route>
+      <Route exact path={AppRoute.LOGIN}>
+        {authorizationStatus === AuthorizationStatus.AUTH && <Redirect to={AppRoute.ROOT} />}
+        <SignIn
+          status={authorizationStatus}
+          onLogin = {onLogin}
+        />
+      </Route>
+      <Route exact path={AppRoute.FAVORITES}>
+        {authorizationStatus !== AuthorizationStatus.AUTH && <Redirect to={AppRoute.LOGIN} />}
+        <Favorite
+          status={authorizationStatus}
+          userLogin={userLogin}
+          onClickByFavorite = {onClickByFavorite}
+        />
+      </Route>
+    </Switch>
+  </Router>;
+};
 
 App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  onLogin: PropTypes.func.isRequired,
   userLogin: PropTypes.string,
-  activePage: PropTypes.string.isRequired,
   activeCity: PropTypes.object.isRequired,
-  activeOffer: PropTypes.object,
-  sortTypes: PropTypes.array.isRequired,
-  sortType: PropTypes.string.isRequired,
-  sortIsOpen: PropTypes.bool.isRequired,
-  places: PropTypes.array.isRequired,
-  cities: PropTypes.array.isRequired,
+  onLogin: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
-  onChangeCity: PropTypes.func.isRequired,
-  onClickBySort: PropTypes.func.isRequired,
-  onClickBySortType: PropTypes.func.isRequired,
-  onClickByLogo: PropTypes.func.isRequired,
-  onClickBySignIn: PropTypes.func.isRequired,
+  onClickByFavorite: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
   userLogin: getUserLogin(state),
-  activePage: getPage(state),
   activeCity: getCity(state),
-  activeOffer: getActiveOffer(state),
-  activePlace: getActivePlace(state),
-  sortTypes: getSortTypes(state),
-  sortType: getSortType(state),
-  sortIsOpen: getSortIsOpen(state),
-  places: getPlacesForCity(state),
-  cities: getCities(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -157,31 +83,14 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeActiveOffer(offer));
   },
 
-  onClickByHeader(offer) {
-    dispatch(ActionCreator.toPlace(offer));
-    dispatch(Operation.loadReviews());
-    dispatch(Operation.loadNearbyPlaces());
+  onClickByHeader(id) {
+    dispatch(Operation.loadReviews(id));
+    dispatch(Operation.loadNearbyPlaces(id));
   },
 
-  onClickByLogo() {
-    dispatch(ActionCreator.toHome());
-  },
-
-  onClickBySignIn() {
-    dispatch(ActionCreator.toSignIn());
-  },
-
-  onChangeCity(index) {
-    dispatch(ActionCreator.changeCity(index));
-  },
-
-  onClickBySort() {
-    dispatch(ActionCreator.openSortList());
-  },
-
-  onClickBySortType(sortType) {
-    dispatch(ActionCreator.changeSortType(sortType));
-  },
+  onClickByFavorite() {
+    dispatch(Operation.postFavorite());
+  }
 });
 
 export {App};

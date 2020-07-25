@@ -1,7 +1,8 @@
 import {extend} from "../../utils";
 import {createPlaces} from "../../adapters/places";
-import NameSpace from "../name-space";
 import {createReviews} from "../../adapters/reviews";
+import {ActionCreator as AppActionCreator} from "../app-state/app-state";
+import NameSpace from "../name-space";
 
 const initialState = {
   places: [],
@@ -14,55 +15,62 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  loadPlaces: (places) => {
-    return {
+  loadPlaces: (places) => (
+    {
       type: ActionType.LOAD_PLACES,
       payload: places,
-    };
-  },
+    }
+  ),
 
-  loadReviews: (reviews) => {
-    return {
+  loadReviews: (reviews) => (
+    {
       type: ActionType.LOAD_REVIEWS,
       payload: reviews,
-    };
-  },
+    }
+  ),
 
-  loadNearbyPlaces: (places) => {
-    return {
+  loadNearbyPlaces: (places) => (
+    {
       type: ActionType.LOAD_NEARBY,
       payload: places,
-    };
-  },
+    }
+  ),
 };
 
 const Operation = {
-  loadPlaces: () => (dispatch, getState, api) => {
-    return api.get(`/hotels`)
-      .then((response) => createPlaces(response.data))
-      .then((places) => {
-        dispatch(ActionCreator.loadPlaces(places));
-      });
-  },
+  loadPlaces: () => (dispatch, getState, api) => (
+    api.get(`/hotels`)
+      .then((response) => dispatch(ActionCreator.loadPlaces(createPlaces(response.data))))
+  ),
 
-  loadReviews: () => (dispatch, getState, api) => {
+  loadReviews: (id) => (dispatch, getState, api) => (
+    api.get(`/comments/${id}`)
+      .then((response) => dispatch(ActionCreator.loadReviews(createReviews(response.data))))
+  ),
+
+  loadNearbyPlaces: (id) => (dispatch, getState, api) => (
+    api.get(`/hotels/${id}/nearby`)
+      .then((response) => dispatch(ActionCreator.loadNearbyPlaces(createPlaces(response.data))))
+  ),
+
+  postFavorite: () => (dispatch, getState, api) => {
+    const places = getState()[NameSpace.DATA].places;
     const id = getState()[NameSpace.APP_STATE].activeOffer.id;
+    const isFavorite = getState()[NameSpace.APP_STATE].activeOffer.isFavorite;
+    const status = isFavorite ? 0 : 1;
 
-    return api.get(`/comments/${id}`)
-      .then((response) => createReviews(response.data))
-      .then((reviews) => {
-        dispatch(ActionCreator.loadReviews(reviews));
-      });
-  },
+    return api.post(`/favorite/${id}/${status}`)
+      .then((response) => dispatch(AppActionCreator.changeActiveOffer(createPlaces([response.data])[0])))
+      .then(() => places.map((place) => {
+        if (place.id === id) {
+          return extend(place, {
+            isFavorite: !isFavorite
+          });
+        }
 
-  loadNearbyPlaces: () => (dispatch, getState, api) => {
-    const id = getState()[NameSpace.APP_STATE].activeOffer.id;
-
-    return api.get(`/hotels/${id}/nearby`)
-      .then((response) => createPlaces(response.data))
-      .then((places) => {
-        dispatch(ActionCreator.loadNearbyPlaces(places));
-      });
+        return place;
+      }))
+      .then((updatePlaces) => dispatch(ActionCreator.loadPlaces(updatePlaces)));
   }
 };
 

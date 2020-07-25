@@ -1,4 +1,5 @@
-import {ActionCreator as ActionCreatorApp} from "../app-state/app-state";
+import history from "../../history";
+import {AppRoute} from "../../constants";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -41,7 +42,7 @@ const Operation = {
     })
       .then((data) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH, data.data.email));
-        dispatch(ActionCreatorApp.toHome());
+        history.push(`${AppRoute.ROOT}`);
       });
   },
 };

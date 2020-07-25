@@ -22,40 +22,40 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  changeRating: (rating) => {
-    return {
+  changeRating: (rating) => (
+    {
       type: ActionType.CHANGE_RATING,
       payload: rating,
-    };
-  },
+    }
+  ),
 
-  changeComment: (comment) => {
-    return {
+  changeComment: (comment) => (
+    {
       type: ActionType.CHANGE_COMMENT,
       payload: comment,
-    };
-  },
+    }
+  ),
 
-  blockedForm: (state) => {
-    return {
+  blockedForm: (state) => (
+    {
       type: ActionType.BLOCKED_FORM,
       payload: state
-    };
-  },
+    }
+  ),
 
-  resetForm: () => {
-    return {
+  resetForm: () => (
+    {
       type: ActionType.RESET_FORM,
       payload: initialState
-    };
-  },
+    }
+  ),
 
-  showError: (state) => {
-    return {
+  showError: (state) => (
+    {
       type: ActionType.SHOW_ERROR,
       payload: state
-    };
-  }
+    }
+  )
 };
 
 const Operation = {
@@ -65,7 +65,7 @@ const Operation = {
 
     return api.post(`/comments/${id}`,
         {
-          "comwement": comment,
+          "comment": comment,
           "rating": rating,
         }
     )
