@@ -2,27 +2,36 @@ import React from "react";
 import PropTypes from "prop-types";
 import Place from "../place/place.jsx";
 
-const getPlaces = (status, places, onClickByHeader, onHoverPlace, onClickByFavorite) => places.map((it) => {
-  return <Place
-    onClickByHeader={onClickByHeader}
-    onHoverPlace = {onHoverPlace}
-    onClickByFavorite = {onClickByFavorite}
-    offer = {it}
-    status={status}
-    key = {it.id}
-  />;
-});
+const PlacesList = (props) => {
+  const {
+    status, offers, className, classNameCard, classCard, imgSize,
+    onClickByHeader, onHoverPlace, onClickByFavorite
+  } = props;
 
-const PlacesList = ({status, offers, onClickByHeader, onHoverPlace, className, onClickByFavorite}) => {
   return (
     <div className={className}>
-      {getPlaces(status, offers, onClickByHeader, onHoverPlace, onClickByFavorite)}
+      {offers.map((it) => {
+        return <Place
+          className={classNameCard}
+          classCard = {classCard}
+          imgSize = {imgSize}
+          onClickByHeader={onClickByHeader}
+          onHoverPlace = {onHoverPlace}
+          onClickByFavorite = {onClickByFavorite}
+          offer = {it}
+          status={status}
+          key = {it.id}
+        />;
+      })}
     </div>
   );
 };
 
 PlacesList.propTypes = {
   className: PropTypes.string.isRequired,
+  classNameCard: PropTypes.string.isRequired,
+  classCard: PropTypes.string.isRequired,
+  imgSize: PropTypes.object.isRequired,
   offers: PropTypes.array.isRequired,
   status: PropTypes.string.isRequired,
   onClickByHeader: PropTypes.func.isRequired,

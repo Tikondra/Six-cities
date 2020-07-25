@@ -3,8 +3,12 @@ import PropTypes from "prop-types";
 import {AppRoute} from "../../constants";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {Link} from "react-router-dom";
+import {Operation} from "../../reducer/data/data";
+import {connect} from "react-redux";
+import {getAuthorizationStatus, getUserLogin} from "../../reducer/user/selectors";
 
-const Header = ({status, userLogin}) => (
+
+const Header = ({status, userLogin, onLoadFavorites}) => (
   <header className="header">
     <div className="container">
       <div className="header__wrapper">
@@ -17,7 +21,11 @@ const Header = ({status, userLogin}) => (
           <ul className="header__nav-list">
             <li className="header__nav-item user">
               {status === AuthorizationStatus.AUTH ?
-                <Link to={AppRoute.FAVORITES} className="header__nav-link header__nav-link--profile">
+                <Link
+                  to={AppRoute.FAVORITES}
+                  className="header__nav-link header__nav-link--profile"
+                  onClick={onLoadFavorites}
+                >
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
                   <span className="header__user-name user__name">{userLogin}</span>
@@ -39,6 +47,19 @@ const Header = ({status, userLogin}) => (
 Header.propTypes = {
   status: PropTypes.string.isRequired,
   userLogin: PropTypes.string,
+  onLoadFavorites: PropTypes.func.isRequired,
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  status: getAuthorizationStatus(state),
+  userLogin: getUserLogin(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadFavorites() {
+    dispatch(Operation.loadFavorites());
+  }
+});
+
+export {Header};
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

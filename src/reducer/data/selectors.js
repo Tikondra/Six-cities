@@ -15,3 +15,5 @@ export const getPlaceForId = (state, id) => getPlaces(state).find((place) => pla
 export const getReviews = (state) => state[NameSpace.DATA].reviews;
 
 export const getNearbyPlaces = (state) => state[NameSpace.DATA].nearbyPlaces;
+
+export const getFavorites = (state) => state[NameSpace.DATA].favorites;

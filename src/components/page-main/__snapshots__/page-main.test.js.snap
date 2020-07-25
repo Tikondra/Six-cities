@@ -41,16 +41,16 @@ exports[`should render Page-main 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="/favorites"
+                href="/login"
                 onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
                 <span
-                  className="header__user-name user__name"
+                  className="header__login"
                 >
-                  Riki
+                  Sign in
                 </span>
               </a>
             </li>
