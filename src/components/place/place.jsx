@@ -12,24 +12,24 @@ const getPremium = (isPremium) => isPremium ?
   ``;
 
 const Place = (props) => {
-  const {offer, status, onClickByHeader, onHoverPlace, onClickByFavorite} = props;
+  const {offer, status, className, classCard, imgSize, onClickByHeader, onHoverPlace, onClickByFavorite} = props;
   const {id, isPremium, isFavorite, price, title, type, rating, picture} = offer;
 
   return <article
-    className="cities__place-card place-card"
+    className={`${className} place-card`}
     onMouseOver={() => onHoverPlace(offer)}
     id={id}>
     {getPremium(isPremium)}
-    <div className="cities__image-wrapper place-card__image-wrapper">
+    <div className={`${classCard}__image-wrapper place-card__image-wrapper`}>
       <a href="#">
         <img className="place-card__image"
           src={picture}
-          width="260"
-          height="200"
+          width={imgSize.width}
+          height={imgSize.height}
           alt={title} />
       </a>
     </div>
-    <div className="place-card__info">
+    <div className={`${classCard}__card-info place-card__info`}>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{price}</b>
@@ -63,6 +63,8 @@ const Place = (props) => {
 };
 
 Place.propTypes = {
+  className: PropTypes.string.isRequired,
+  classCard: PropTypes.string.isRequired,
   offer: PropTypes.shape({
     id: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
@@ -73,6 +75,10 @@ Place.propTypes = {
     rating: PropTypes.number.isRequired,
     picture: PropTypes.string.isRequired,
   }),
+  imgSize: PropTypes.shape({
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+  }).isRequired,
   status: PropTypes.string.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,

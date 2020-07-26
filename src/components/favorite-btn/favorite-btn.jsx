@@ -6,15 +6,20 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 const FavoriteBtn = ({status, type, size: {width, height}, isActive, onClickByFavorite}) => {
   const activeClass = isActive ? ` ${type}__bookmark-button--active` : ``;
 
-  return status === AuthorizationStatus.NO_AUTH ?
-    <Link to={{pathname: `/login`}}>
-      <button className={`${type}__bookmark-button button`} type="button">
-        <svg className={`place-card__bookmark-icon`} width={width} height={height}>
-          <use xlinkHref="#icon-bookmark"/>
-        </svg>
-        <span className="visually-hidden">To bookmarks</span>
-      </button>
-    </Link> :
+  if (status === AuthorizationStatus.NO_AUTH) {
+    return (
+      <Link to={{pathname: `/login`}}>
+        <button className={`${type}__bookmark-button button`} type="button">
+          <svg className={`place-card__bookmark-icon`} width={width} height={height}>
+            <use xlinkHref="#icon-bookmark"/>
+          </svg>
+          <span className="visually-hidden">To bookmarks</span>
+        </button>
+      </Link>
+    );
+  }
+
+  return (
     <button
       className={`${type}__bookmark-button button${activeClass}`}
       type="button"
@@ -24,7 +29,8 @@ const FavoriteBtn = ({status, type, size: {width, height}, isActive, onClickByFa
         <use xlinkHref="#icon-bookmark"/>
       </svg>
       <span className="visually-hidden">To bookmarks</span>
-    </button>;
+    </button>
+  );
 };
 
 FavoriteBtn.propTypes = {

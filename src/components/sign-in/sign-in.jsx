@@ -26,9 +26,7 @@ class SignIn extends PureComponent {
   render() {
     return (
       <div className="page page--gray page--login">
-        <Header
-          status={this.props.status}
-        />
+        <Header/>
         <main className="page__main page__main--login">
           <div className="page__login-container container">
             <section className="login">
@@ -62,7 +60,6 @@ class SignIn extends PureComponent {
 
 SignIn.propTypes = {
   onLogin: PropTypes.func.isRequired,
-  status: PropTypes.string.isRequired,
 };
 
 export default SignIn;

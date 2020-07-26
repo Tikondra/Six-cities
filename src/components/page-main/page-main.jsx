@@ -18,17 +18,14 @@ import {connect} from "react-redux";
 
 const PageMain = (props) => {
   const {
-    offers, cities, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, status, userLogin,
+    offers, cities, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, status,
     onClickByHeader, onHoverPlace, onChangeCity, onClickBySort, onClickBySortType, onClickByFavorite
   } = props;
   const emptyClass = offers.length === 0 ? `page__main--index-empty` : ``;
 
   return (
     <div className="page page--gray page--main">
-      <Header
-        status={status}
-        userLogin={userLogin}
-      />
+      <Header/>
       <main className={`page__main page__main--index ${emptyClass}`}>
         <h1 className="visually-hidden">Cities</h1>
         <CityList
@@ -67,7 +64,6 @@ PageMain.propTypes = {
   offers: PropTypes.array.isRequired,
   cities: PropTypes.array.isRequired,
   status: PropTypes.string.isRequired,
-  userLogin: PropTypes.string,
   onClickByHeader: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
   onChangeCity: PropTypes.func.isRequired,

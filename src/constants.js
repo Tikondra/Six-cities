@@ -37,12 +37,29 @@ export const Format = {
   BOOKMARK_TYPE: {
     PLACE: `place-card`,
     OFFER: `property`
+  },
+  PLACE_IMG_SIZE: {
+    NORMAL: {
+      width: 260,
+      height: 210,
+    },
+    SMALL: {
+      width: 150,
+      height: 110,
+    }
   }
 };
 
 export const PlacesListClass = {
   PROPERTY: `near-places__list places__list`,
   MAIN: `cities__places-list places__list tabs__content`,
+  FAVORITE: `favorites__places`,
+  MAIN_ARTICLE_NAME: `cities__place-card`,
+  PROPERTY_ARTICLE_NAME: `near-places__card`,
+  FAVORITE_ARTICLE_NAME: `favorites__card`,
+  PROPERTY_CARD: `near-places`,
+  MAIN_CARD: `cities`,
+  FAVORITE_CARD: `favorites`
 };
 
 export const SortType = {

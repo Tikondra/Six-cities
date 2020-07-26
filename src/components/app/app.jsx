@@ -10,20 +10,22 @@ import Offer from "../offer/offer.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import {ActionCreator} from "../../reducer/app-state/app-state.js";
 import {getCity} from "../../reducer/app-state/selectors";
-import {getAuthorizationStatus, getUserLogin} from "../../reducer/user/selectors";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {Operation} from "../../reducer/data/data";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {getFavorites} from "../../reducer/data/selectors";
 
 const App = (props) => {
-  const {activeCity, authorizationStatus, userLogin, onHoverPlace, onClickByHeader, onLogin, onClickByFavorite} = props;
+  const {
+    activeCity, authorizationStatus, favorites = [],
+    onHoverPlace, onClickByHeader, onLogin, onClickByFavorite} = props;
 
   return <Router history={history}>
     <Switch>
       <Route exact path={AppRoute.ROOT}>
         <PageMain
           status={authorizationStatus}
-          userLogin={userLogin}
           onClickByHeader = {onClickByHeader}
           onHoverPlace = {onHoverPlace}
           onClickByFavorite = {onClickByFavorite}
@@ -32,7 +34,6 @@ const App = (props) => {
       <Route exact path={AppRoute.OFFER}>
         <Offer
           status={authorizationStatus}
-          userLogin={userLogin}
           activeCity = {activeCity}
           onClickByHeader = {onClickByHeader}
           onHoverPlace = {onHoverPlace}
@@ -49,8 +50,10 @@ const App = (props) => {
       <Route exact path={AppRoute.FAVORITES}>
         {authorizationStatus !== AuthorizationStatus.AUTH && <Redirect to={AppRoute.LOGIN} />}
         <Favorite
+          favorites={favorites}
           status={authorizationStatus}
-          userLogin={userLogin}
+          onClickByHeader = {onClickByHeader}
+          onHoverPlace = {onHoverPlace}
           onClickByFavorite = {onClickByFavorite}
         />
       </Route>
@@ -60,8 +63,8 @@ const App = (props) => {
 
 App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  userLogin: PropTypes.string,
   activeCity: PropTypes.object.isRequired,
+  favorites: PropTypes.array,
   onLogin: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
   onClickByHeader: PropTypes.func.isRequired,
@@ -70,8 +73,8 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
-  userLogin: getUserLogin(state),
   activeCity: getCity(state),
+  favorites: getFavorites(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

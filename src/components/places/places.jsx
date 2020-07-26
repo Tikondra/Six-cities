@@ -2,12 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
-import {PlacesListClass, MapType} from "../../constants";
+import {PlacesListClass, MapType, Format} from "../../constants";
 import Sorting from "../sorting/sorting.jsx";
 
-const Places = ({
-  offers, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, status,
-  onClickByHeader, onHoverPlace, onClickBySort, onClickBySortType, onClickByFavorite}) => {
+const Places = (props) => {
+  const {
+    offers, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, status,
+    onClickByHeader, onHoverPlace, onClickBySort, onClickBySortType, onClickByFavorite
+  } = props;
 
   return (
     <div className="cities__places-container container">
@@ -24,6 +26,9 @@ const Places = ({
         <PlacesList
           status={status}
           className = {PlacesListClass.MAIN}
+          classNameCard={PlacesListClass.MAIN_ARTICLE_NAME}
+          classCard = {PlacesListClass.MAIN_CARD}
+          imgSize = {Format.PLACE_IMG_SIZE.NORMAL}
           offers={offers}
           onClickByHeader={onClickByHeader}
           onHoverPlace = {onHoverPlace}

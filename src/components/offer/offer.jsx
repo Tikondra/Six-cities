@@ -22,7 +22,7 @@ const getPremium = (isPremium) => isPremium ?
   ``;
 
 const Offer = ({
-  offer, activeCity, status, userLogin, reviews = [], nearbyPlaces = [],
+  offer, activeCity, status, reviews = [], nearbyPlaces = [],
   onClickByHeader, onHoverPlace, onClickByFavorite}) => {
 
   if (!offer) {
@@ -33,10 +33,7 @@ const Offer = ({
 
   return (
     <div className="page page--gray page--property">
-      <Header
-        status={status}
-        userLogin={userLogin}
-      />
+      <Header/>
       <main className="page__main page__main--property">
         <section className="property">
           <OfferGallery
@@ -102,10 +99,15 @@ const Offer = ({
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <PlacesList
+              status={status}
               className = {PlacesListClass.PROPERTY}
+              classNameCard={PlacesListClass.PROPERTY_ARTICLE_NAME}
+              classCard = {PlacesListClass.PROPERTY_CARD}
+              imgSize = {Format.PLACE_IMG_SIZE.NORMAL}
               offers={nearbyPlaces}
               onClickByHeader={onClickByHeader}
               onHoverPlace={onHoverPlace}
+              onClickByFavorite = {onClickByFavorite}
             />
           </section>
         </div>
@@ -138,7 +140,6 @@ Offer.propTypes = {
   onHoverPlace: PropTypes.func.isRequired,
   onClickByFavorite: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
-  userLogin: PropTypes.string,
   reviews: PropTypes.array,
   nearbyPlaces: PropTypes.array,
 };

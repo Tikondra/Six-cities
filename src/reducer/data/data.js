@@ -11,7 +11,8 @@ const initialState = {
 const ActionType = {
   LOAD_PLACES: `LOAD_PLACES`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
-  LOAD_NEARBY: `LOAD_NEARBY`
+  LOAD_NEARBY: `LOAD_NEARBY`,
+  LOAD_FAVORITE: `LOAD_FAVORITE`,
 };
 
 const ActionCreator = {
@@ -35,6 +36,13 @@ const ActionCreator = {
       payload: places,
     }
   ),
+
+  loadFavorites: (favorites) => (
+    {
+      type: ActionType.LOAD_FAVORITE,
+      payload: favorites,
+    }
+  )
 };
 
 const Operation = {
@@ -51,6 +59,11 @@ const Operation = {
   loadNearbyPlaces: (id) => (dispatch, getState, api) => (
     api.get(`/hotels/${id}/nearby`)
       .then((response) => dispatch(ActionCreator.loadNearbyPlaces(createPlaces(response.data))))
+  ),
+
+  loadFavorites: () => (dispatch, getState, api) => (
+    api.get(`/favorite`)
+      .then((response) => dispatch(ActionCreator.loadFavorites(createPlaces(response.data))))
   ),
 
   postFavorite: () => (dispatch, getState, api) => {
@@ -70,7 +83,10 @@ const Operation = {
 
         return place;
       }))
-      .then((updatePlaces) => dispatch(ActionCreator.loadPlaces(updatePlaces)));
+      .then((updatePlaces) => {
+        dispatch(ActionCreator.loadPlaces(updatePlaces));
+        dispatch(Operation.loadFavorites());
+      });
   }
 };
 
@@ -89,6 +105,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_NEARBY:
       return extend(state, {
         nearbyPlaces: action.payload,
+      });
+
+    case ActionType.LOAD_FAVORITE:
+      return extend(state, {
+        favorites: action.payload,
       });
   }
 
