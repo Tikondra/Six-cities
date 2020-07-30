@@ -5,7 +5,6 @@ import {AuthStatus, Offer} from "../../types";
 interface Props {
   favorites: Offer[];
   status: AuthStatus.AUTH | AuthStatus.NO_AUTH;
-  places: Offer[];
   onClickByFavorite: () => void;
   onHoverPlace: (offer: Offer) => void;
   onClickByHeader: (id: number) => void;

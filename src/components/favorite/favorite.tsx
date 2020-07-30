@@ -2,11 +2,11 @@ import * as React from "react";
 import Header from "../header/header";
 import FavoriteList from "../favorite-list/favorite-list";
 import NoFavorite from "../no-favorite/no-favorite";
-import {Offer} from "../../types";
+import {AuthStatus, Offer} from "../../types";
 
 interface Props {
-  favorites: [];
-  status: string;
+  favorites: Offer[];
+  status: AuthStatus.AUTH | AuthStatus.NO_AUTH;
   onClickByFavorite: () => void;
   onHoverPlace: (offer: Offer) => void;
   onClickByHeader: (id: number) => void;
