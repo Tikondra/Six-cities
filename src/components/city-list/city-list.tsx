@@ -7,7 +7,7 @@ interface Props {
   onChangeCity: () => void;
 }
 
-const CityList: React.FC<Props> = ({cities, onChangeCity}) => {
+const CityList: React.FC<Props> = ({cities, onChangeCity}: Props) => {
   return (
     <div className="tabs">
       <section className="locations container">

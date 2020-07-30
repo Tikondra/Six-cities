@@ -15,7 +15,7 @@ const getReview = (reviews) => reviews.map((reviewItem) => {
   );
 });
 
-const ReviewsList: React.FC<Props> = ({reviews}) => {
+const ReviewsList: React.FC<Props> = ({reviews}: Props) => {
   return (
     <ul className="reviews__list">
       {getReview(reviews)}

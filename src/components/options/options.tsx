@@ -2,7 +2,7 @@ import * as React from "react";
 import {nanoid} from "nanoid";
 
 interface Props {
-  options: [];
+  options: string[];
 }
 
 const getOption = (options) => options.map((it) => {
@@ -11,7 +11,7 @@ const getOption = (options) => options.map((it) => {
   </li>;
 });
 
-const Options: React.FC<Props> = ({options}) => {
+const Options: React.FC<Props> = ({options}: Props) => {
 
   return <div className="property__inside">
     <h2 className="property__inside-title">What&apos;s inside</h2>

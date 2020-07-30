@@ -17,7 +17,7 @@ interface Props {
   onClickByFavorite: () => void;
 }
 
-const PlacesList: React.FC<Props> = (props) => {
+const PlacesList: React.FC<Props> = (props: Props) => {
   const {
     status, offers, className, classNameCard, classCard, imgSize,
     onClickByHeader, onHoverPlace, onClickByFavorite

@@ -19,7 +19,7 @@ interface Props {
 }
 
 const NewReview: React.FC<Props> = ({btnState, formState, rating, comment, error,
-  onChangeRating, onChangeComment, onSubmitReview}) => (
+  onChangeRating, onChangeComment, onSubmitReview}: Props) => (
   <form
     className="reviews__form form"
     action="#"

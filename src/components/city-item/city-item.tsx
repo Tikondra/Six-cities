@@ -9,7 +9,7 @@ interface Props {
   onChangeCity: (index: number) => void;
 }
 
-const CityItem: React.FC<Props> = ({city: {title, isActive}, index, onChangeCity}) => {
+const CityItem: React.FC<Props> = ({city: {title, isActive}, index, onChangeCity}: Props) => {
   const activeClass = isActive ? `tabs__item--active` : ``;
 
   return (

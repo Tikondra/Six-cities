@@ -25,7 +25,7 @@ interface Props {
   onClickByFavorite: () => void;
 }
 
-const App: React.FC<Props> = (props) => {
+const App: React.FC<Props> = (props: Props) => {
   const {
     authorizationStatus, favorites = [],
     onHoverPlace, onClickByHeader, onLogin, onClickByFavorite} = props;

@@ -39,7 +39,7 @@ const getPremium = (isPremium) => isPremium ?
 
 const Offer: React.FC<Props> = ({
   offer, activeCity, status, reviews = [], nearbyPlaces = [],
-  onClickByHeader, onHoverPlace, onClickByFavorite}) => {
+  onClickByHeader, onHoverPlace, onClickByFavorite}: Props) => {
 
   if (!offer) {
     return <Redirect to="/" />;

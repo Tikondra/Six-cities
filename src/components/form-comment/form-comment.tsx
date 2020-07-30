@@ -6,7 +6,7 @@ interface Props {
   onChangeComment: () => void;
 }
 
-const FormComment: React.FC<Props> = ({isBlocked, comment, onChangeComment}) => {
+const FormComment: React.FC<Props> = ({isBlocked, comment, onChangeComment}: Props) => {
   return (
     <textarea
       className="reviews__textarea form__textarea"

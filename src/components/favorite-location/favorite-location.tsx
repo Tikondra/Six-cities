@@ -1,17 +1,18 @@
 import * as React from "react";
 import PlacesList from "../places-list/places-list";
 import {Format, PlacesListClass} from "../../constants";
+import {AuthStatus, Offer} from "../../types";
 
 interface Props {
   city: string;
-  places: [];
-  status: string;
+  places: Offer[];
+  status: AuthStatus.AUTH | AuthStatus.NO_AUTH;
   onClickByFavorite: () => void;
-  onHoverPlace: () => void;
-  onClickByHeader: () => void;
+  onHoverPlace: (offer: Offer) => void;
+  onClickByHeader: (id: number) => void;
 }
 
-const FavoriteLocation = ({city, places, status, onClickByHeader, onHoverPlace, onClickByFavorite}) => {
+const FavoriteLocation: React.FC<Props> = ({city, places, status, onClickByHeader, onHoverPlace, onClickByFavorite}: Props) => {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">

@@ -12,7 +12,7 @@ interface Props {
   onLoadFavorites: () => void;
 }
 
-const Header: React.FC<Props> = ({status, userLogin, onLoadFavorites}) => (
+const Header: React.FC<Props> = ({status, userLogin, onLoadFavorites}: Props) => (
   <header className="header">
     <div className="container">
       <div className="header__wrapper">

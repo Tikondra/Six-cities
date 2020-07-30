@@ -11,7 +11,7 @@ interface Props {
   status: AuthStatus.AUTH | AuthStatus.NO_AUTH;
 }
 
-const Reviews: React.FC<Props> = ({reviews, status}) => {
+const Reviews: React.FC<Props> = ({reviews, status}: Props) => {
   const sortingReviews = getSortingReviews(reviews).slice(0, Format.MAX_REVIEWS);
 
   return (

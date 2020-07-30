@@ -20,7 +20,7 @@ const getSortItem = (sortTypes, activeType, onClickBySortType) => sortTypes.map(
   );
 });
 
-const Sorting: React.FC<Props> = ({sortTypes, sortType, isOpen, onClickBySort, onClickBySortType}) => {
+const Sorting: React.FC<Props> = ({sortTypes, sortType, isOpen, onClickBySort, onClickBySortType}: Props) => {
   const isOpenClass = isOpen ? ` places__options--opened` : ``;
 
   return (

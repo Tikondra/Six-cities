@@ -1,16 +1,17 @@
 import * as React from "react";
 import FavoriteLocation from "../favorite-location/favorite-location";
-import {Offer} from "../../types";
+import {AuthStatus, Offer} from "../../types";
 
 interface Props {
   favorites: Offer[];
-  status: string;
+  status: AuthStatus.AUTH | AuthStatus.NO_AUTH;
+  places: Offer[];
   onClickByFavorite: () => void;
   onHoverPlace: (offer: Offer) => void;
   onClickByHeader: (id: number) => void;
 }
 
-const FavoriteList: React.FC<Props> = ({favorites, status, onClickByFavorite, onHoverPlace, onClickByHeader}) => {
+const FavoriteList: React.FC<Props> = ({favorites, status, onClickByFavorite, onHoverPlace, onClickByHeader}: Props) => {
   const locationList = [];
 
   favorites.map((favorite) => {

@@ -13,7 +13,7 @@ interface Props {
   };
 }
 
-const ReviewsItem: React.FC<Props> = ({review: {author, avatar, rating, text, date}}) => {
+const ReviewsItem: React.FC<Props> = ({review: {author, avatar, rating, text, date}}: Props) => {
   const reviewDate = moment(date).format(Format.REVIEW_DATE);
   const dateTime = moment(date).format(Format.DATE_TIME);
 

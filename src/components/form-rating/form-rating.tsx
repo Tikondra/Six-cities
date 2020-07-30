@@ -7,7 +7,7 @@ interface Props {
   onChangeRating: (value: number) => void;
 }
 
-const FormRating: React.FC<Props> = ({isBlocked, rating, onChangeRating}) => (
+const FormRating: React.FC<Props> = ({isBlocked, rating, onChangeRating}: Props) => (
   <div className="reviews__rating-form form__rating">
     {
       Format.STAR_VALUE.map((value) => (

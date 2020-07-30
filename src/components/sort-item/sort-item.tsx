@@ -6,7 +6,7 @@ interface Props {
   onClickBySortType: (sortType: string) => void;
 }
 
-const SortItem: React.FC<Props> = ({sortType, activeType, onClickBySortType}) => {
+const SortItem: React.FC<Props> = ({sortType, activeType, onClickBySortType}: Props) => {
   const isActive = activeType === sortType ? ` places__option--active` : ``;
 
   return (

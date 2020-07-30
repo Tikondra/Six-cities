@@ -5,7 +5,7 @@ interface Props {
   isBlocked: boolean;
 }
 
-const FormSubmit: React.FC<Props> = ({isDisabled, isBlocked}) => {
+const FormSubmit: React.FC<Props> = ({isDisabled, isBlocked}: Props) => {
   return (
     <div className="reviews__button-wrapper">
       <p className="reviews__help">

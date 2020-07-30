@@ -25,7 +25,7 @@ const getPremium = (isPremium) => isPremium ?
   </div> :
   ``;
 
-const Place: React.FC<Props> = (props) => {
+const Place: React.FC<Props> = (props: Props) => {
   const {offer, status, className, classCard, imgSize, onClickByHeader, onHoverPlace, onClickByFavorite} = props;
   const {id, isPremium, isFavorite, price, title, type, rating, picture} = offer;
 

@@ -14,7 +14,7 @@ interface Props {
   onClickByFavorite: () => void;
 }
 
-const FavoriteBtn: React.FC<Props> = ({status, type, size: {width, height}, isActive, onClickByFavorite}) => {
+const FavoriteBtn: React.FC<Props> = ({status, type, size: {width, height}, isActive, onClickByFavorite}: Props) => {
   const activeClass = isActive ? ` ${type}__bookmark-button--active` : ``;
 
   if (status === AuthorizationStatus.NO_AUTH) {

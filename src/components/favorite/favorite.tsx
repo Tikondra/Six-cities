@@ -12,7 +12,7 @@ interface Props {
   onClickByHeader: (id: number) => void;
 }
 
-const Favorite: React.FC<Props> = ({favorites, status, onClickByFavorite, onHoverPlace, onClickByHeader}) => {
+const Favorite: React.FC<Props> = ({favorites, status, onClickByFavorite, onHoverPlace, onClickByHeader}: Props) => {
   const emptyList = 0;
   const emptyClass = Number(favorites.length) === emptyList ? `page--favorites-empty` : ``;
 
