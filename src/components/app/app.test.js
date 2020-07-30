@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
-import {App} from "./app.jsx";
+import {App} from "./app";
 import {SORT_TYPES, SortType} from "../../mocks/for-test/const";
 import {offers} from "../../mocks/for-test/offers";
 import {cities} from "../../mocks/for-test/cities";

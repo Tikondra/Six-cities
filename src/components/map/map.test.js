@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Map from "./map.jsx";
+import Map from "./map";
 import {offers} from "../../mocks/for-test/offers";
 import {cities} from "../../mocks/for-test/cities";
 import {MapType} from "../../constants";
