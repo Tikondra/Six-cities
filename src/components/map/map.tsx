@@ -44,6 +44,12 @@ class Map extends React.PureComponent<Props, {}> {
   }
 
   _addMarker() {
+    if (this.activeOffer) {
+      const marker = leaflet
+        .marker(this.activeOffer.coordinates, this._getIcon(this.activeOffer))
+        .addTo(this.map);
+      this.markers.push(marker);
+    }
     this.offers.map((offer: Offer) => {
       const marker = leaflet
       .marker(offer.coordinates, this._getIcon(offer))
@@ -96,6 +102,12 @@ class Map extends React.PureComponent<Props, {}> {
 
     if (prevProps.activeOffer !== activeOffer) {
       this.activeOffer = activeOffer;
+      this.markers.forEach((marker) => this.map.removeLayer(marker));
+      this._addMarker();
+    }
+
+    if (prevProps.offers !== offers) {
+      this.offers = offers;
       this.markers.forEach((marker) => this.map.removeLayer(marker));
       this._addMarker();
     }
