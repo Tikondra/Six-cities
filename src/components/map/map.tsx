@@ -3,7 +3,7 @@ import * as React from "react";
 import {MapOption} from "../../constants";
 import {Offer} from "../../types";
 
-interface IMapProps {
+interface Props {
   offers: Offer[];
   type: string;
   city: {
@@ -12,7 +12,7 @@ interface IMapProps {
   activeOffer: Offer;
 }
 
-class Map extends React.PureComponent<IMapProps, {}> {
+class Map extends React.PureComponent<Props, {}> {
   private divRef: React.RefObject<HTMLInputElement>;
   private className: string;
   private map: any;

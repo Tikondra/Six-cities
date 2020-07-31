@@ -1,7 +1,7 @@
 import * as React from "react";
 import SortItem from "../sort-item/sort-item";
 
-interface ISortingProps {
+interface Props {
   sortTypes: [];
   sortType: string;
   isOpen: boolean;
@@ -10,16 +10,15 @@ interface ISortingProps {
 }
 
 const getSortItem = (sortTypes, activeType, onClickBySortType) => sortTypes.map((sortType) => (
-    <SortItem
-      key = {sortType}
-      sortType={sortType}
-      activeType={activeType}
-      onClickBySortType = {onClickBySortType}
-    />
-  )
-);
+  <SortItem
+    key = {sortType}
+    sortType={sortType}
+    activeType={activeType}
+    onClickBySortType = {onClickBySortType}
+  />
+));
 
-const Sorting: React.FC<ISortingProps> = ({sortTypes, sortType, isOpen, onClickBySort, onClickBySortType}: ISortingProps) => {
+const Sorting: React.FC<Props> = ({sortTypes, sortType, isOpen, onClickBySort, onClickBySortType}: Props) => {
   const isOpenClass: string = isOpen ? ` places__options--opened` : ``;
 
   return (

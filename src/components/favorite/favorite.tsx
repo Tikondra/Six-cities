@@ -4,7 +4,7 @@ import FavoriteList from "../favorite-list/favorite-list";
 import NoFavorite from "../no-favorite/no-favorite";
 import {AuthStatus, Offer} from "../../types";
 
-interface IFavoriteProps {
+interface Props {
   favorites: Offer[];
   status: AuthStatus.AUTH | AuthStatus.NO_AUTH;
   onClickByFavorite: () => void;
@@ -12,8 +12,8 @@ interface IFavoriteProps {
   onClickByHeader: (id: number) => void;
 }
 
-const Favorite: React.FC<IFavoriteProps> = ({favorites, status, onClickByFavorite, onHoverPlace, onClickByHeader}: IFavoriteProps) => {
-  const emptyList: number = 0;
+const Favorite: React.FC<Props> = ({favorites, status, onClickByFavorite, onHoverPlace, onClickByHeader}: Props) => {
+  const emptyList = 0;
   const emptyClass: string = Number(favorites.length) === emptyList ? `page--favorites-empty` : ``;
 
   return (

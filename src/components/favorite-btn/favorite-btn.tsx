@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {AuthStatus} from "../../types";
 
-interface IFavoriteBtnProps {
+interface Props {
   size: {
     width: number;
     height: number;
@@ -14,7 +14,7 @@ interface IFavoriteBtnProps {
   onClickByFavorite: () => void;
 }
 
-const FavoriteBtn: React.FC<IFavoriteBtnProps> = ({status, type, size: {width, height}, isActive, onClickByFavorite}: IFavoriteBtnProps) => {
+const FavoriteBtn: React.FC<Props> = ({status, type, size: {width, height}, isActive, onClickByFavorite}: Props) => {
   const activeClass: string = isActive ? ` ${type}__bookmark-button--active` : ``;
 
   if (status === AuthorizationStatus.NO_AUTH) {

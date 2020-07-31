@@ -1,12 +1,12 @@
 import * as React from "react";
 
-interface ISortItemProps {
+interface Props {
   sortType: string;
   activeType: string;
   onClickBySortType: (sortType: string) => void;
 }
 
-const SortItem: React.FC<ISortItemProps> = ({sortType, activeType, onClickBySortType}: ISortItemProps) => {
+const SortItem: React.FC<Props> = ({sortType, activeType, onClickBySortType}: Props) => {
   const isActive: string = activeType === sortType ? ` places__option--active` : ``;
 
   return (

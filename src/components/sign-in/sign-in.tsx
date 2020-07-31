@@ -1,11 +1,11 @@
 import * as React from "react";
 import Header from "../header/header";
 
-interface ISignInProps {
+interface Props {
   onLogin: ({login, password}: {login: string; password: string}) => void;
 }
 
-class SignIn extends React.PureComponent<ISignInProps, {}> {
+class SignIn extends React.PureComponent<Props, {}> {
   private loginRef: React.RefObject<HTMLInputElement>;
   private passwordRef: React.RefObject<HTMLInputElement>;
 

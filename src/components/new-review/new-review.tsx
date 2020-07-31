@@ -7,7 +7,7 @@ import FormError from "../form-error/form-error";
 import {getBntState, getComment, getError, getFormState, getRating} from "../../reducer/review/selectors";
 import {ActionCreator, Operation} from "../../reducer/review/review";
 
-interface INewRewievProps {
+interface Props {
   btnState: boolean;
   formState: boolean;
   rating: number;
@@ -18,8 +18,8 @@ interface INewRewievProps {
   onSubmitReview: (comment: string, rating: number) => void;
 }
 
-const NewReview: React.FC<INewRewievProps> = ({btnState, formState, rating, comment, error,
-  onChangeRating, onChangeComment, onSubmitReview}: INewRewievProps) => (
+const NewReview: React.FC<Props> = ({btnState, formState, rating, comment, error,
+  onChangeRating, onChangeComment, onSubmitReview}: Props) => (
   <form
     className="reviews__form form"
     action="#"

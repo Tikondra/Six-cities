@@ -1,6 +1,6 @@
 import * as React from "react";
 
-interface ICityItemProps {
+interface Props {
   city: {
     title: string;
     isActive: boolean;
@@ -9,7 +9,7 @@ interface ICityItemProps {
   onChangeCity: (index: number) => void;
 }
 
-const CityItem: React.FC<ICityItemProps> = ({city: {title, isActive}, index, onChangeCity}: ICityItemProps) => {
+const CityItem: React.FC<Props> = ({city: {title, isActive}, index, onChangeCity}: Props) => {
   const activeClass: string = isActive ? `tabs__item--active` : ``;
 
   return (

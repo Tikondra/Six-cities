@@ -2,7 +2,7 @@ import * as React from "react";
 import FavoriteLocation from "../favorite-location/favorite-location";
 import {AuthStatus, Offer} from "../../types";
 
-interface IFavoriteListProps {
+interface Props {
   favorites: Offer[];
   status: AuthStatus.AUTH | AuthStatus.NO_AUTH;
   onClickByFavorite: () => void;
@@ -10,7 +10,7 @@ interface IFavoriteListProps {
   onClickByHeader: (id: number) => void;
 }
 
-const FavoriteList: React.FC<IFavoriteListProps> = ({favorites, status, onClickByFavorite, onHoverPlace, onClickByHeader}: IFavoriteListProps) => {
+const FavoriteList: React.FC<Props> = ({favorites, status, onClickByFavorite, onHoverPlace, onClickByHeader}: Props) => {
   const locationList: string[] = [];
 
   favorites.map((favorite) => {

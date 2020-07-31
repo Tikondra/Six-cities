@@ -5,7 +5,7 @@ import {PlacesListClass, MapType, Format} from "../../constants";
 import Sorting from "../sorting/sorting";
 import {AuthStatus, Offer} from "../../types";
 
-interface IPlacesProps {
+interface Props {
   sortTypes: [];
   sortType: string;
   sortIsOpen: boolean;
@@ -23,7 +23,7 @@ interface IPlacesProps {
   onClickByFavorite: () => void;
 }
 
-const Places: React.FC<IPlacesProps> = (props: IPlacesProps) => {
+const Places: React.FC<Props> = (props: Props) => {
   const {
     offers, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, status,
     onClickByHeader, onHoverPlace, onClickBySort, onClickBySortType, onClickByFavorite
