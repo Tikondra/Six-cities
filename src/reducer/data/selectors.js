@@ -1,13 +1,19 @@
 import NameSpace from "../name-space.js";
 import {createSelector} from "reselect";
-import {getCity} from "../app-state/selectors";
+import {getCity, getSortType} from "../app-state/selectors";
+import {getOffersBySort} from "../../utils";
 
 export const getPlaces = (state) => state[NameSpace.DATA].places;
 
 export const getPlacesForCity = createSelector(
     getPlaces,
     getCity,
-    (places, activeCity) => places.filter((place) => place.city === activeCity.title)
+    getSortType,
+    (places, activeCity, sortType) => {
+      const somePlaces = places.filter((place) => place.city === activeCity.title);
+
+      return getOffersBySort(somePlaces, sortType);
+    }
 );
 
 export const getPlaceForId = (state, id) => getPlaces(state).find((place) => place.id === id);
