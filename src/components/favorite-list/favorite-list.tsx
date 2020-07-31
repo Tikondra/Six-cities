@@ -11,7 +11,7 @@ interface IFavoriteListProps {
 }
 
 const FavoriteList: React.FC<IFavoriteListProps> = ({favorites, status, onClickByFavorite, onHoverPlace, onClickByHeader}: IFavoriteListProps) => {
-  const locationList = [];
+  const locationList: string[] = [];
 
   favorites.map((favorite) => {
     if (!locationList.includes(favorite.city)) {

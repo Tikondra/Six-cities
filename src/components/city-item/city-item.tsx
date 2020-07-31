@@ -10,7 +10,7 @@ interface ICityItemProps {
 }
 
 const CityItem: React.FC<ICityItemProps> = ({city: {title, isActive}, index, onChangeCity}: ICityItemProps) => {
-  const activeClass = isActive ? `tabs__item--active` : ``;
+  const activeClass: string = isActive ? `tabs__item--active` : ``;
 
   return (
     <li className="locations__item">

@@ -6,8 +6,7 @@ interface IFormCommentProps {
   onChangeComment: () => void;
 }
 
-const FormComment: React.FC<IFormCommentProps> = ({isBlocked, comment, onChangeComment}: IFormCommentProps) => {
-  return (
+const FormComment: React.FC<IFormCommentProps> = ({isBlocked, comment, onChangeComment}: IFormCommentProps) => (
     <textarea
       className="reviews__textarea form__textarea"
       id="review"
@@ -20,6 +19,5 @@ const FormComment: React.FC<IFormCommentProps> = ({isBlocked, comment, onChangeC
       onChange={onChangeComment}
     />
   );
-};
 
 export default FormComment;

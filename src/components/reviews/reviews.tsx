@@ -12,7 +12,7 @@ interface IReviewsProps {
 }
 
 const Reviews: React.FC<IReviewsProps> = ({reviews, status}: IReviewsProps) => {
-  const sortingReviews = getSortingReviews(reviews).slice(0, Format.MAX_REVIEWS);
+  const sortingReviews: [] = getSortingReviews(reviews).slice(0, Format.MAX_REVIEWS);
 
   return (
     <section className="property__reviews reviews">

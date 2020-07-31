@@ -42,7 +42,7 @@ const PageMain: React.FC<IPageMainProps> = (props: IPageMainProps) => {
     onClickByHeader, onHoverPlace, onChangeCity, onClickBySort, onClickBySortType, onClickByFavorite
   } = props;
 
-  const emptyClass = Number(offers.length) === 0 ? `page__main--index-empty` : ``;
+  const emptyClass: string = Number(offers.length) === 0 ? `page__main--index-empty` : ``;
 
   return (
     <div className="page page--gray page--main">

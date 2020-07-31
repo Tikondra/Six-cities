@@ -7,8 +7,7 @@ interface ICityListProps {
   onChangeCity: () => void;
 }
 
-const CityList: React.FC<ICityListProps> = ({cities, onChangeCity}: ICityListProps) => {
-  return (
+const CityList: React.FC<ICityListProps> = ({cities, onChangeCity}: ICityListProps) => (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
@@ -24,6 +23,5 @@ const CityList: React.FC<ICityListProps> = ({cities, onChangeCity}: ICityListPro
       </section>
     </div>
   );
-};
 
 export default CityList;

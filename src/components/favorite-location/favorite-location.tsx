@@ -12,7 +12,9 @@ interface IFavoriteLocationProps {
   onClickByHeader: (id: number) => void;
 }
 
-const FavoriteLocation: React.FC<IFavoriteLocationProps> = ({city, places, status, onClickByHeader, onHoverPlace, onClickByFavorite}: IFavoriteLocationProps) => {
+const FavoriteLocation: React.FC<IFavoriteLocationProps> = (props: IFavoriteLocationProps) => {
+  const {city, places, status, onClickByHeader, onHoverPlace, onClickByFavorite} = props;
+
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">

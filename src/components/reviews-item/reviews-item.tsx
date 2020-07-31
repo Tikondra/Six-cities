@@ -14,8 +14,8 @@ interface IReviewsItemProps {
 }
 
 const ReviewsItem: React.FC<IReviewsItemProps> = ({review: {author, avatar, rating, text, date}}: IReviewsItemProps) => {
-  const reviewDate = moment(date).format(Format.REVIEW_DATE);
-  const dateTime = moment(date).format(Format.DATE_TIME);
+  const reviewDate: string = moment(date).format(Format.REVIEW_DATE);
+  const dateTime: string = moment(date).format(Format.DATE_TIME);
 
   return (
     <li className="reviews__item">

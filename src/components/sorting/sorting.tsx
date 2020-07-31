@@ -9,19 +9,18 @@ interface ISortingProps {
   onClickBySortType: () => void;
 }
 
-const getSortItem = (sortTypes, activeType, onClickBySortType) => sortTypes.map((sortType) => {
-  return (
+const getSortItem = (sortTypes, activeType, onClickBySortType) => sortTypes.map((sortType) => (
     <SortItem
       key = {sortType}
       sortType={sortType}
       activeType={activeType}
       onClickBySortType = {onClickBySortType}
     />
-  );
-});
+  )
+);
 
 const Sorting: React.FC<ISortingProps> = ({sortTypes, sortType, isOpen, onClickBySort, onClickBySortType}: ISortingProps) => {
-  const isOpenClass = isOpen ? ` places__options--opened` : ``;
+  const isOpenClass: string = isOpen ? ` places__options--opened` : ``;
 
   return (
     <form className="places__sorting" action="#" method="get">

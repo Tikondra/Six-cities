@@ -13,8 +13,8 @@ interface IFavoriteProps {
 }
 
 const Favorite: React.FC<IFavoriteProps> = ({favorites, status, onClickByFavorite, onHoverPlace, onClickByHeader}: IFavoriteProps) => {
-  const emptyList = 0;
-  const emptyClass = Number(favorites.length) === emptyList ? `page--favorites-empty` : ``;
+  const emptyList: number = 0;
+  const emptyClass: string = Number(favorites.length) === emptyList ? `page--favorites-empty` : ``;
 
   return (
     <div className={`page ${emptyClass}`}>

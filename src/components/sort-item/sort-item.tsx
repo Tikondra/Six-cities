@@ -7,7 +7,7 @@ interface ISortItemProps {
 }
 
 const SortItem: React.FC<ISortItemProps> = ({sortType, activeType, onClickBySortType}: ISortItemProps) => {
-  const isActive = activeType === sortType ? ` places__option--active` : ``;
+  const isActive: string = activeType === sortType ? ` places__option--active` : ``;
 
   return (
     <li

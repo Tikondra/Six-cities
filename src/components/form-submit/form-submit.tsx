@@ -5,8 +5,7 @@ interface IFormSubmitProps {
   isBlocked: boolean;
 }
 
-const FormSubmit: React.FC<IFormSubmitProps> = ({isDisabled, isBlocked}: IFormSubmitProps) => {
-  return (
+const FormSubmit: React.FC<IFormSubmitProps> = ({isDisabled, isBlocked}: IFormSubmitProps) => (
     <div className="reviews__button-wrapper">
       <p className="reviews__help">
         To submit review please make sure to set <span className="reviews__star">rating</span> and describe
@@ -19,6 +18,5 @@ const FormSubmit: React.FC<IFormSubmitProps> = ({isDisabled, isBlocked}: IFormSu
       >Submit</button>
     </div>
   );
-};
 
 export default FormSubmit;

@@ -15,7 +15,7 @@ interface IFavoriteBtnProps {
 }
 
 const FavoriteBtn: React.FC<IFavoriteBtnProps> = ({status, type, size: {width, height}, isActive, onClickByFavorite}: IFavoriteBtnProps) => {
-  const activeClass = isActive ? ` ${type}__bookmark-button--active` : ``;
+  const activeClass: string = isActive ? ` ${type}__bookmark-button--active` : ``;
 
   if (status === AuthorizationStatus.NO_AUTH) {
     return (

@@ -17,7 +17,7 @@ const getDescription = (description) => description.map((it) => {
 const Host: React.FC<IHostProps> = (props: IHostProps) => {
   const {host: {name, isSuper, avatar}, description} = props;
 
-  const isPro = isSuper ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` :
+  const isPro: string = isSuper ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` :
     `property__avatar-wrapper user__avatar-wrapper`;
 
   return <div className="property__host">
