@@ -1,12 +1,12 @@
 import * as React from "react";
 
-interface Props {
+interface IFormCommentProps {
   isBlocked: boolean;
   comment: string;
   onChangeComment: () => void;
 }
 
-const FormComment: React.FC<Props> = ({isBlocked, comment, onChangeComment}: Props) => {
+const FormComment: React.FC<IFormCommentProps> = ({isBlocked, comment, onChangeComment}: IFormCommentProps) => {
   return (
     <textarea
       className="reviews__textarea form__textarea"

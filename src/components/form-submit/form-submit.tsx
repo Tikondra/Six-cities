@@ -1,11 +1,11 @@
 import * as React from "react";
 
-interface Props {
+interface IFormSubmitProps {
   isDisabled: boolean;
   isBlocked: boolean;
 }
 
-const FormSubmit: React.FC<Props> = ({isDisabled, isBlocked}: Props) => {
+const FormSubmit: React.FC<IFormSubmitProps> = ({isDisabled, isBlocked}: IFormSubmitProps) => {
   return (
     <div className="reviews__button-wrapper">
       <p className="reviews__help">

@@ -3,7 +3,7 @@ import * as moment from "moment";
 import {getRating} from "../../utils";
 import {Format} from "../../constants";
 
-interface Props {
+interface IReviewsItemProps {
   review: {
     author: string;
     avatar: string;
@@ -13,7 +13,7 @@ interface Props {
   };
 }
 
-const ReviewsItem: React.FC<Props> = ({review: {author, avatar, rating, text, date}}: Props) => {
+const ReviewsItem: React.FC<IReviewsItemProps> = ({review: {author, avatar, rating, text, date}}: IReviewsItemProps) => {
   const reviewDate = moment(date).format(Format.REVIEW_DATE);
   const dateTime = moment(date).format(Format.DATE_TIME);
 

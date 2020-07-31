@@ -1,7 +1,7 @@
 import * as React from "react";
 import {nanoid} from "nanoid";
 
-interface Props {
+interface IOfferGalleryProps {
   pictures: string[];
   title: string;
 }
@@ -12,7 +12,7 @@ const getPicture = (pictures, title) => pictures.map((it) => {
   </div>;
 });
 
-const OfferGallery: React.FC<Props> = (props: Props) => {
+const OfferGallery: React.FC<IOfferGalleryProps> = (props: IOfferGalleryProps) => {
   const {pictures, title} = props;
 
   return <div className="property__gallery-container container">

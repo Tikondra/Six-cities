@@ -18,7 +18,7 @@ import {AuthStatus, Offer as TypeOffer} from "../../types";
 import {Operation} from "../../reducer/data/data";
 import {ActionCreator} from "../../reducer/app-state/app-state";
 
-interface Props {
+interface IOfferProps {
   offer: TypeOffer;
   activeCity: {
     coordinates: [];
@@ -37,9 +37,9 @@ const getPremium = (isPremium) => isPremium ?
   </div> :
   ``;
 
-const Offer: React.FC<Props> = ({
+const Offer: React.FC<IOfferProps> = ({
   offer, activeCity, status, reviews = [], nearbyPlaces = [],
-  onClickByHeader, onHoverPlace, onClickByFavorite}: Props) => {
+  onClickByHeader, onHoverPlace, onClickByFavorite}: IOfferProps) => {
 
   if (!offer) {
     return <Redirect to="/" />;

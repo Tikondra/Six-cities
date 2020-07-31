@@ -2,7 +2,7 @@ import * as React from "react";
 import ReviewsItem from "../reviews-item/reviews-item";
 import {nanoid} from "nanoid";
 
-interface Props {
+interface IReviewsListProps {
   reviews: [];
 }
 
@@ -15,7 +15,7 @@ const getReview = (reviews) => reviews.map((reviewItem) => {
   );
 });
 
-const ReviewsList: React.FC<Props> = ({reviews}: Props) => {
+const ReviewsList: React.FC<IReviewsListProps> = ({reviews}: IReviewsListProps) => {
   return (
     <ul className="reviews__list">
       {getReview(reviews)}

@@ -2,12 +2,12 @@ import * as React from "react";
 import CityItem from "../city-item/city-item";
 import {nanoid} from "nanoid";
 
-interface Props {
+interface ICityListProps {
   cities: [];
   onChangeCity: () => void;
 }
 
-const CityList: React.FC<Props> = ({cities, onChangeCity}: Props) => {
+const CityList: React.FC<ICityListProps> = ({cities, onChangeCity}: ICityListProps) => {
   return (
     <div className="tabs">
       <section className="locations container">

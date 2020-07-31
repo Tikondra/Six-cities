@@ -16,7 +16,7 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import {getFavorites} from "../../reducer/data/selectors";
 import {Offer as OfferType, AuthStatus} from "../../types";
 
-interface Props {
+interface IAppProps {
   authorizationStatus: AuthStatus.AUTH | AuthStatus.NO_AUTH;
   favorites: [];
   onLogin: ({login, password}: {login: string; password: string}) => void;
@@ -25,7 +25,7 @@ interface Props {
   onClickByFavorite: () => void;
 }
 
-const App: React.FC<Props> = (props: Props) => {
+const App: React.FC<IAppProps> = (props: IAppProps) => {
   const {
     authorizationStatus, favorites = [],
     onHoverPlace, onClickByHeader, onLogin, onClickByFavorite} = props;

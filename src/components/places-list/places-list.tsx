@@ -2,7 +2,7 @@ import * as React from "react";
 import Place from "../place/place";
 import {AuthStatus, Offer} from "../../types";
 
-interface Props {
+interface IPlacesListProps {
   className: string;
   classNameCard: string;
   classCard: string;
@@ -17,7 +17,7 @@ interface Props {
   onClickByFavorite: () => void;
 }
 
-const PlacesList: React.FC<Props> = (props: Props) => {
+const PlacesList: React.FC<IPlacesListProps> = (props: IPlacesListProps) => {
   const {
     status, offers, className, classNameCard, classCard, imgSize,
     onClickByHeader, onHoverPlace, onClickByFavorite

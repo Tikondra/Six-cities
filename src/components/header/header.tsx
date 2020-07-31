@@ -6,13 +6,13 @@ import {Operation} from "../../reducer/data/data";
 import {connect} from "react-redux";
 import {getAuthorizationStatus, getUserLogin} from "../../reducer/user/selectors";
 
-interface Props {
+interface IHeaderProps {
   status: string;
   userLogin: string;
   onLoadFavorites: () => void;
 }
 
-const Header: React.FC<Props> = ({status, userLogin, onLoadFavorites}: Props) => (
+const Header: React.FC<IHeaderProps> = ({status, userLogin, onLoadFavorites}: IHeaderProps) => (
   <header className="header">
     <div className="container">
       <div className="header__wrapper">

@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import FavoriteBtn from "../favorite-btn/favorite-btn";
 import {AuthStatus, Offer} from "../../types";
 
-interface Props {
+interface IPlaceProps {
   className: string;
   classCard: string;
   offer: Offer;
@@ -25,7 +25,7 @@ const getPremium = (isPremium) => isPremium ?
   </div> :
   ``;
 
-const Place: React.FC<Props> = (props: Props) => {
+const Place: React.FC<IPlaceProps> = (props: IPlaceProps) => {
   const {offer, status, className, classCard, imgSize, onClickByHeader, onHoverPlace, onClickByFavorite} = props;
   const {id, isPremium, isFavorite, price, title, type, rating, picture} = offer;
 

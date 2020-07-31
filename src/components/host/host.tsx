@@ -1,7 +1,7 @@
 import * as React from "react";
 import {nanoid} from "nanoid";
 
-interface Props {
+interface IHostProps {
   host: {
     avatar: string;
     name: string;
@@ -14,7 +14,7 @@ const getDescription = (description) => description.map((it) => {
   return <p key={nanoid()} className="property__text">{it}</p>;
 });
 
-const Host: React.FC<Props> = (props: Props) => {
+const Host: React.FC<IHostProps> = (props: IHostProps) => {
   const {host: {name, isSuper, avatar}, description} = props;
 
   const isPro = isSuper ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` :

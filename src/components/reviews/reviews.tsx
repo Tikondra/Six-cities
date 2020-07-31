@@ -6,12 +6,12 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import NewReview from "../new-review/new-review";
 import {AuthStatus} from "../../types";
 
-interface Props {
+interface IReviewsProps {
   reviews: [];
   status: AuthStatus.AUTH | AuthStatus.NO_AUTH;
 }
 
-const Reviews: React.FC<Props> = ({reviews, status}: Props) => {
+const Reviews: React.FC<IReviewsProps> = ({reviews, status}: IReviewsProps) => {
   const sortingReviews = getSortingReviews(reviews).slice(0, Format.MAX_REVIEWS);
 
   return (

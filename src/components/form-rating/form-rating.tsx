@@ -1,13 +1,13 @@
 import * as React from "react";
 import {Format} from "../../constants";
 
-interface Props {
+interface IFormRatingProps {
   isBlocked: boolean;
   rating: number;
   onChangeRating: (value: number) => void;
 }
 
-const FormRating: React.FC<Props> = ({isBlocked, rating, onChangeRating}: Props) => (
+const FormRating: React.FC<IFormRatingProps> = ({isBlocked, rating, onChangeRating}: IFormRatingProps) => (
   <div className="reviews__rating-form form__rating">
     {
       Format.STAR_VALUE.map((value) => (

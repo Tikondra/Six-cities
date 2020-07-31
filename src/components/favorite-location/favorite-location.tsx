@@ -3,7 +3,7 @@ import PlacesList from "../places-list/places-list";
 import {Format, PlacesListClass} from "../../constants";
 import {AuthStatus, Offer} from "../../types";
 
-interface Props {
+interface IFavoriteLocationProps {
   city: string;
   places: Offer[];
   status: AuthStatus.AUTH | AuthStatus.NO_AUTH;
@@ -12,7 +12,7 @@ interface Props {
   onClickByHeader: (id: number) => void;
 }
 
-const FavoriteLocation: React.FC<Props> = ({city, places, status, onClickByHeader, onHoverPlace, onClickByFavorite}: Props) => {
+const FavoriteLocation: React.FC<IFavoriteLocationProps> = ({city, places, status, onClickByHeader, onHoverPlace, onClickByFavorite}: IFavoriteLocationProps) => {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">

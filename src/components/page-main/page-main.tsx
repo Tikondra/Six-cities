@@ -16,7 +16,7 @@ import {ActionCreator} from "../../reducer/app-state/app-state";
 import {connect} from "react-redux";
 import {AuthStatus, Offer} from "../../types";
 
-interface Props {
+interface IPageMainProps {
   activeCity: {
     title: string;
     coordinates: [];
@@ -36,7 +36,7 @@ interface Props {
   onClickByFavorite: () => void;
 }
 
-const PageMain: React.FC<Props> = (props: Props) => {
+const PageMain: React.FC<IPageMainProps> = (props: IPageMainProps) => {
   const {
     offers, cities, activeCity, activeOffer, sortTypes, sortType, sortIsOpen, status,
     onClickByHeader, onHoverPlace, onChangeCity, onClickBySort, onClickBySortType, onClickByFavorite
