@@ -39,25 +39,6 @@ class Map extends React.PureComponent<Props, {}> {
     this.activeOffer = this.props.activeOffer;
   }
 
-  _getIcon(offer) {
-    return this.activeOffer && offer.id === this.activeOffer.id ? {icon: this.iconActive} : {icon: this.icon};
-  }
-
-  _addMarker() {
-    if (this.activeOffer) {
-      const marker = leaflet
-        .marker(this.activeOffer.coordinates, this._getIcon(this.activeOffer))
-        .addTo(this.map);
-      this.markers.push(marker);
-    }
-    this.offers.map((offer: Offer) => {
-      const marker = leaflet
-      .marker(offer.coordinates, this._getIcon(offer))
-      .addTo(this.map);
-      this.markers.push(marker);
-    });
-  }
-
   componentDidMount() {
     const mapContainer = this.divRef.current;
     const cityCoordinate = this.city.coordinates;
@@ -116,6 +97,25 @@ class Map extends React.PureComponent<Props, {}> {
   componentWillUnmount() {
     const mapContainer = this.divRef.current;
     mapContainer.remove();
+  }
+
+  _getIcon(offer) {
+    return this.activeOffer && offer.id === this.activeOffer.id ? {icon: this.iconActive} : {icon: this.icon};
+  }
+
+  _addMarker() {
+    if (this.activeOffer) {
+      const marker = leaflet
+        .marker(this.activeOffer.coordinates, this._getIcon(this.activeOffer))
+        .addTo(this.map);
+      this.markers.push(marker);
+    }
+    this.offers.map((offer: Offer) => {
+      const marker = leaflet
+        .marker(offer.coordinates, this._getIcon(offer))
+        .addTo(this.map);
+      this.markers.push(marker);
+    });
   }
 
   render() {

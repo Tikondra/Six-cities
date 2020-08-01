@@ -1,5 +1,6 @@
 import * as React from "react";
 import {nanoid} from "nanoid";
+import {OfferImg} from "../../types";
 
 interface Props {
   pictures: string[];
@@ -17,7 +18,7 @@ const OfferGallery: React.FC<Props> = (props: Props) => {
 
   return <div className="property__gallery-container container">
     <div className="property__gallery">
-      {getPicture(pictures.slice(0, 6), title)}
+      {getPicture(pictures.slice(OfferImg.MIN_COUNT, OfferImg.MAX_COUNT), title)}
     </div>
   </div>;
 };

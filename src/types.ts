@@ -10,6 +10,11 @@ export enum AuthStatus {
   NO_AUTH = `NO_AUTH`,
 }
 
+export enum OfferImg {
+  MIN_COUNT = 0,
+  MAX_COUNT = 6,
+}
+
 export interface Offer {
   id: number,
   isPremium: boolean,
